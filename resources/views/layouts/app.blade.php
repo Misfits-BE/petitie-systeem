@@ -80,37 +80,29 @@
             <div class="row">
                 <div class="col-sm-3">
                     <h5>Get started</h5>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Sign up</a></li>
-                        <li><a href="#">Downloads</a></li>
-                    </ul>
                 </div>
                 <div class="col-sm-3">
                     <h5>About us</h5>
-                    <ul>
-                        <li><a href="#">Company Information</a></li>
-                        <li><a href="#">Contact us</a></li>
-                        <li><a href="#">Reviews</a></li>
-                    </ul>
                 </div>
                 <div class="col-sm-3">
-                    <h5>Support</h5>
+                    <h5>Connect with us</h5>
                     <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Help desk</a></li>
-                        <li><a href="#">Forums</a></li>
+                        <li><a href="#"><i class="fa fa-fw fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fa fa-fw fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fa fa-fw fa-github"></i> GitHub</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3 info">
                     <h5>Information</h5>
-                    <p> Lorem ipsum dolor amet, consectetur adipiscing elit. Etiam consectetur aliquet aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
+                    <p> 
+                        A small open-source petition system. Build and maintained by Activisme_BE. Because we want change in our society. It deserves it.
+                    </p>
                 </div>
             </div>
         </div>
         <div class="second-bar">
            <div class="container">
-                <span>Copyright</span>
+                <span>&copy; {{ date('Y') }} {{ config('app.name') }}, All rights reserved </span>
             </div>
         </div>
     </footer>
