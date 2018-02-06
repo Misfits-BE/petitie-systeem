@@ -87,9 +87,9 @@
                 <div class="col-sm-3">
                     <h5>Connect with us</h5>
                     <ul>
-                        <li><a href="#"><i class="fa fa-fw fa-facebook"></i> Facebook</a></li>
-                        <li><a href="#"><i class="fa fa-fw fa-twitter"></i> Twitter</a></li>
-                        <li><a href="#"><i class="fa fa-fw fa-github"></i> GitHub</a></li>
+                        <li><a href="https://www.facebook.com/ActivismeBE/"><i class="fa fa-fw fa-facebook"></i> Facebook</a></li>
+                        <li><a href="https://twitter.com/Activisme_be"><i class="fa fa-fw fa-twitter"></i> Twitter</a></li>
+                        <li><a href="https://github.com/Misfits-BE/petitie-systeem"><i class="fa fa-fw fa-github"></i> GitHub</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3 info">
