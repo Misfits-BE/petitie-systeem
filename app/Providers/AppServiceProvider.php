@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Misfits\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('*', function ($view) { // Set the authencated user to a variable.
+            $view->with('user', auth()->user());
+        });
     }
 
     /**
