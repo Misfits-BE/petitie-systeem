@@ -39,6 +39,8 @@ class CategoryController extends Controller
      */
     public function index(): View
     {
-        return view('admin.helpdesk.categories.index', ['categories' => $this->categories->all()]);
+        return view('admin.helpdesk.categories.index', [
+            'categories' => $this->categories->getHelpdeskCategories(15)
+        ]);
     }
 }

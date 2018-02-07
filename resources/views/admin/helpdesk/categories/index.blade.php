@@ -47,6 +47,8 @@
                             </tbody>
                         </table>
                     </div>
+
+                    {{-- TODO: Pagination view. --}}
                 </div>
             </div> {{-- /// Content --}}
 
