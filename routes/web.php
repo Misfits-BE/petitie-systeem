@@ -27,3 +27,4 @@ Route::get('/account-settings', 'Auth\AccountSettingsController@index')->name('a
 
 // Helpdesk routes
 Route::get('helpdesk/nieuw', 'Frontend\HelpdeskController@create')->name('helpdesk.create');
+Route::post('helpdesk/store', 'Frontend\helpdeskController@store')->name('helpdesk.store');

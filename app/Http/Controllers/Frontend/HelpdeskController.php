@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Misfits\Http\Controllers\Controller;
+use Misfits\Http\Requests\Frontend\HelpdeskValidator;
 
 /**
  * Controller for letting user creating support tickets. 
@@ -39,11 +40,12 @@ class HelpdeskController extends Controller
     /**
      * Store method for the user his helpdesk ticket.  
      *
+     * @param  HelpdeskValidator $input     The user given input (validated).
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(): RedirectResponse 
+    public function store(HelpdeskValidator $input): RedirectResponse 
     {
-    	$input->merge(['create_id' => $input->user()->id]);
+    	$input->merge(['creator_id' => $input->user()->id, 'is_open' => 1]);
 
     	if ($ticket = $this->helpdesk->create($input->all())) {
     		flash('Your helpdesk ticket has been created.')->success();
