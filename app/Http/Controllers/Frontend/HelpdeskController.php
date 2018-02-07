@@ -40,7 +40,9 @@ class HelpdeskController extends Controller
      */
     public function create(): View 
     {
-    	return view('frontend.helpdesk.create');
+    	return view('frontend.helpdesk.create', [
+            'categories' => $this->categories->whereIn('module', ['helpdesk'], ['id', 'name'])
+        ]);
     }
 
     /**
