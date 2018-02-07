@@ -53,7 +53,7 @@ class HelpdeskController extends Controller
      */
     public function store(HelpdeskValidator $input): RedirectResponse 
     {
-    	$input->merge(['creator_id' => $input->user()->id, 'is_open' => 1]);
+    	$input->merge(['author_id' => $input->user()->id, 'is_open' => 1]);
 
     	if ($ticket = $this->helpdesk->create($input->all())) {
     		flash('Your helpdesk ticket has been created.')->success();
