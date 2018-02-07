@@ -53,5 +53,4 @@ class HelpdeskController extends Controller
 
     	return redirect()->route('helpdesk.show', $ticket);
     }
-
 }
