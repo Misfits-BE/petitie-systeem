@@ -3,6 +3,7 @@
 namespace Misfits\Repositories;
 
 use Misfits\User;
+use Spatie\Permission\Models\Role;
 use ActivismeBE\DatabaseLayering\Repositories\Contracts\RepositoryInterface;
 use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
 
@@ -21,5 +22,24 @@ class UserRepository extends Repository
     public function model(): string
     {
         return User::class;
+    }
+
+    /**
+     * Creer een nieuwe gebruiker per toegangs rol. (seeder)
+     *
+     * @param  Role     $role       De naam van de gebruikers rol.
+     * @param  mixed    $commandBus Mapping voor $this->command in de seeder
+     * @return void
+     */
+    public function seedCreateUser(Role $role, $commandBus): void
+    {
+        $user = factory(User::class)->create();
+        $user->assignRole($role->name);
+
+        if ($role->name == 'admin') {
+            $commandBus->info('Here is your admin details to login:');
+            $commandBus->warn($user->email);
+            $commandBus->warn('Password is "secret"');
+        }
     }
 }
