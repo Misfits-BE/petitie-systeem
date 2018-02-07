@@ -41,6 +41,18 @@
                             <a href="">
                                 <i class="fa fa-file-text-o"></i> Petitions
                             </a>
+
+                            @if (auth()->check())
+                                @if($user->hasRole('admin'))
+                                    <a href="">
+                                        <i class="fa fa-users"></i> Users
+                                    </a>
+
+                                    <a href="">
+                                        <i class="fa fa-bug"></i> Helpdesk
+                                    </a>
+                                @endif
+                            @endif
                         </li>
                     </ul>
 
@@ -58,7 +70,7 @@
 
                                 <ul class="dropdown-menu">
                                     <li><a href=""><i class="fa fa-fw fa-plus"></i> New petition</a></li>
-                                    <li><a href=""><i class="fa fa-fw fa-plus"></i> New support ticket</a></li>
+                                    <li><a href="{{ route('helpdesk.create') }}"><i class="fa fa-fw fa-plus"></i> New support ticket</a></li>
                                 </ul>
                             </li>
 

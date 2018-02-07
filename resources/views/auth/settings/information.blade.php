@@ -12,6 +12,24 @@
                 <label class="col-md-3 control-label">
                     Username: <span class="text-danger">*</span>
                 </label>
+
+                <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Your username">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">
+                    Your name: <span class="text-danger">*</span>
+                </label>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" placeholder="Firstname">
+                </div> 
+
+                <div class="col-md-5">
+                    <input type="text" class="form-control" placeholder="Lastname">
+                </div>
             </div>
 
             <div class="form-group">

@@ -24,3 +24,6 @@ Route::get('/disclaimer', 'Frontend\PolicyController@disclaimer')->name('policy.
 
 // Account settings 
 Route::get('/account-settings', 'Auth\AccountSettingsController@index')->name('account.settings');
+
+// Helpdesk routes
+Route::get('helpdesk/nieuw', 'Frontend\HelpdeskController@create')->name('helpdesk.create');
