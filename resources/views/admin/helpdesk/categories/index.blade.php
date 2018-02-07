@@ -2,6 +2,8 @@
 
 @section('content')
     <div class="container">
+        @include('flash::message')
+
         <div class="row">
 
             <div class="col-md-12"> {{-- Helpdesk navigation --}}
@@ -53,15 +55,7 @@
             </div> {{-- /// Content --}}
 
             <div class="col-md-3">
-                <div class="list-group">
-                    <a href="" class="list-group-item">
-                        <i class="fa fa-fw fa-search"></i> Search category
-                    </a>
-
-                    <a href="" class="list-group-item">
-                        <i class="fa fa-fw fa-plus"></i> Create category
-                    </a>
-                </div>
+                @include('shared.helpdesk.category-sidebar')
             </div>
 
         </div>

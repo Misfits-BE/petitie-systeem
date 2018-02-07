@@ -34,3 +34,4 @@ Route::get('admin/helpdesk', 'Admin\Helpdesk\IndexController@index')->name('admi
 
 // Admin helpdesk routes (categories)
 Route::get('admin/helpdesk/categories', 'Admin\Helpdesk\CategoryController@index')->name('admin.helpdesk.categories.index');
+Route::get('admin/helpdesk/categories/create', 'Admin\Helpdesk\CategoryController@create')->name('admin.helpdesk.categories.create');

@@ -43,4 +43,14 @@ class CategoryController extends Controller
             'categories' => $this->categories->getHelpdeskCategories(15)
         ]);
     }
+
+    /**
+     * Get the create page for a new helpdesk category
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create(): view
+    {
+        return view('admin.helpdesk.categories.create');
+    }
 }
