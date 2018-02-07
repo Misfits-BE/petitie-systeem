@@ -30,4 +30,4 @@ Route::get('helpdesk/nieuw', 'Frontend\HelpdeskController@create')->name('helpde
 Route::post('helpdesk/store', 'Frontend\HelpdeskController@store')->name('helpdesk.store');
 
 // Admin helpdesk routes
-Route::get('admin/helpdesk', 'Admin\HelpdeskController@index')->name('admin.helpdesk.index');
+Route::get('admin/helpdesk', 'Admin\Helpdesk\IndexController@index')->name('admin.helpdesk.index');

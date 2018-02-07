@@ -1,6 +1,6 @@
 <?php
 
-namespace Misfits\Http\Controllers\Admin;
+namespace Misfits\Http\Controllers\Admin\Helpdesk;
 
 use Illuminate\View\View;
 use Misfits\Http\Controllers\Controller;
@@ -14,7 +14,7 @@ use Misfits\Http\Controllers\Controller;
  * @copyright   2018 Tim Joosten and his contributors
  * @package     Misfits\Http\Controllers\Admin
  */
-class HelpdeskController extends Controller
+class IndexController extends Controller
 {
     /**
      * HelpdeskController constructor.
