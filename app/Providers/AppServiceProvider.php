@@ -2,7 +2,6 @@
 
 namespace Misfits\Providers;
 
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,8 +14,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Shared view composers
-        View::composer('*', \Misfits\Http\ViewComposers\GlobalComposer::class);
-        View::composer('layouts.app', \Misfits\Http\ViewComposers\AppLayoutComposer::class);
+        view()->composer('*', \Misfits\Http\ViewComposers\GlobalComposer::class);
+        view()->composer('layouts.app', \Misfits\Http\ViewComposers\AppLayoutComposer::class);
     }
 
     /**
