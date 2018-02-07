@@ -47,6 +47,7 @@ class CategoryController extends Controller
     /**
      * Get the create page for a new helpdesk category
      *
+     * @todo   Implement resize css to the textarea. (goo.gl/W6FZs8)
      * @return \Illuminate\View\View
      */
     public function create(): view
