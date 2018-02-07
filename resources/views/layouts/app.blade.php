@@ -51,7 +51,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="">
+                                    <a href="{{ $helpdeskUrl  }}">
                                         <i class="fa fa-bug"></i> Helpdesk
                                     </a>
                                 </li>
