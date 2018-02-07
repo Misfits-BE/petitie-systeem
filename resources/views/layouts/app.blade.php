@@ -41,19 +41,23 @@
                             <a href="">
                                 <i class="fa fa-file-text-o"></i> Petitions
                             </a>
+                        </li>
 
-                            @if (auth()->check())
-                                @if($user->hasRole('admin'))
+                        @if (auth()->check())
+                            @if($user->hasRole('admin'))
+                                <li>
                                     <a href="">
                                         <i class="fa fa-users"></i> Users
                                     </a>
+                                </li>
 
+                                <li>
                                     <a href="">
                                         <i class="fa fa-bug"></i> Helpdesk
                                     </a>
-                                @endif
-                            @endif
-                        </li>
+                                </li>
+                            @endif {{-- // END admin permission check --}}         
+                        @endif {{-- // END auth check --}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
