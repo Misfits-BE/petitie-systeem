@@ -13,13 +13,12 @@ use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
  */
 class CategoryRepository extends Repository
 {
-
     /**
      * Set the eloquent model class for the repository.
      *
      * @return string
      */
-    public function model()
+    public function model(): string
     {
         return Category::class;
     }
