@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Misfits\Http\Controllers\Controller;
 use Misfits\Http\Requests\Frontend\HelpdeskValidator;
+use Misfits\Repositories\CategoryRepository;
 
 /**
  * Controller for letting user creating support tickets. 
@@ -17,14 +18,19 @@ use Misfits\Http\Requests\Frontend\HelpdeskValidator;
  */
 class HelpdeskController extends Controller
 {
+    /** @var \Misfits\Repositories\CategoryRepository $categories */
+    private $categories; 
+
 	/**
 	 * HelpdeskController constructor
 	 *
+     * @param  CategoryRepository $categories   Abstraction layer between controller, logic, database
 	 * @return void
 	 */
-    public function __construct() 
+    public function __construct(CategoryRepository $categories) 
     {
-    	$this->middleware('auth');
+        $this->middleware('auth');
+        $this->categories = $categories;
     }
 
     /**
