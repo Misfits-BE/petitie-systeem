@@ -4,18 +4,17 @@ namespace Misfits\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class HelperServiceProvider
+ * ---
+ * Registration for the helper methods;
+ *
+ * @author      Tim Joosten <tim@ctivisme.be>
+ * @copyright   2018 Tim Joosten and his contributors
+ * @package     Misfits\Providers
+ */
 class HelperServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
-    public function boot(): void
-    {
-        //
-    }
-
     /**
      * Register the application services.
      *
