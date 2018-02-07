@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Misfits\Http\Controllers\Controller;
 use Misfits\Http\Requests\Frontend\HelpdeskValidator;
+use Misfits\Repositories\CategoryRepository;
 
 /**
  * Controller for letting user creating support tickets. 
@@ -17,14 +18,19 @@ use Misfits\Http\Requests\Frontend\HelpdeskValidator;
  */
 class HelpdeskController extends Controller
 {
+    /** @var \Misfits\Repositories\CategoryRepository $categories */
+    private $categories; 
+
 	/**
 	 * HelpdeskController constructor
 	 *
+     * @param  CategoryRepository $categories   Abstraction layer between controller, logic, database
 	 * @return void
 	 */
-    public function __construct() 
+    public function __construct(CategoryRepository $categories) 
     {
-    	$this->middleware('auth');
+        $this->middleware('auth');
+        $this->categories = $categories;
     }
 
     /**
@@ -34,7 +40,9 @@ class HelpdeskController extends Controller
      */
     public function create(): View 
     {
-    	return view('frontend.helpdesk.create');
+    	return view('frontend.helpdesk.create', [
+            'categories' => $this->categories->whereIn('module', ['helpdesk'], ['id', 'name'])
+        ]);
     }
 
     /**
@@ -45,7 +53,7 @@ class HelpdeskController extends Controller
      */
     public function store(HelpdeskValidator $input): RedirectResponse 
     {
-    	$input->merge(['creator_id' => $input->user()->id, 'is_open' => 1]);
+    	$input->merge(['author_id' => $input->user()->id, 'is_open' => 1]);
 
     	if ($ticket = $this->helpdesk->create($input->all())) {
     		flash('Your helpdesk ticket has been created.')->success();
