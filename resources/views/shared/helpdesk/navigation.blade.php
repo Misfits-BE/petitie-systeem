@@ -1,6 +1,6 @@
 <div class="panel panel-default panel-body">
     <ul class="nav nav-pills">
-        <li role="presentation" class="active">
+        <li role="presentation" class="{{ isActive('admin.helpdesk.index') }}">
             <a href="#">Dashboard</a>
         </li>
         <li role="presentation">
