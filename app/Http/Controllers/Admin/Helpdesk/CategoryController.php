@@ -77,19 +77,18 @@ class CategoryController extends Controller
     }
 
     /**
-     * Edit view for an helpdesk category
-     *
-     * @param  int $category    The unique identifier in the datababse storage
+     * Function for editing a helpdesk category in the database storage
+     * 
      * @return \Illuminate\View\View
      */
-    public function edit(): View 
+    public function edit(int $category): View 
     {
-        return redirect()->route('admin.helpdesk.categories.index');
+        
     }
 
     public function update(): RedirectResponse 
     {
-        
+
     }
 
     /**
