@@ -23,7 +23,7 @@
                                 <label class="control-label col-md-3">Category title <span class="text-danger">*</span></label>
 
                                 <div class="col-md-9">
-                                    <input type="text" @input('name') placeholder="Category title" class="form-control">
+                                    <input type="text" placeholder="Category title" class="form-control" @input('name')/>
                                     @error('name')
                                 </div>
                             </div>
@@ -32,7 +32,7 @@
                                 <label class="control-label col-md-3">Category color <span class="text-danger">*</span></label>
 
                                 <div class="col-md-9">
-                                    <input type="color" @input('color') class="form-control">
+                                    <input type="color" @input('color') class="form-control"/>
                                     @error('color')
                                 </div>
                             </div>

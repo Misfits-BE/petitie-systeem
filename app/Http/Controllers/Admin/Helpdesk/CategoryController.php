@@ -5,6 +5,7 @@ namespace Misfits\Http\Controllers\Admin\Helpdesk;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Misfits\Http\Controllers\Controller;
+use Misfits\Http\Requests\Admin\Helpdesk\CategoryEditValidator;
 use Misfits\Http\Requests\Admin\Helpdesk\CategoryValidator;
 use Misfits\Repositories\CategoryRepository;
 
@@ -78,17 +79,35 @@ class CategoryController extends Controller
 
     /**
      * Function for editing a helpdesk category in the database storage
-     * 
+     *
+     * @param  int $category    The unique identifier in the database storage
      * @return \Illuminate\View\View
      */
     public function edit(int $category): View 
     {
-        
+        return view('admin.helpdesk.categories.edit', [
+            'category' => $this->categories->findOrFail($category)
+        ]);
     }
 
-    public function update(): RedirectResponse 
+    /**
+     * Update an helpdesk category in the database storage.
+     *
+     * @todo GI #23: Implement activity logger µ
+     *
+     * @param  CategoryEditValidator $input     The user given input. (Validated)
+     * @param  int                   $category  The uniqie identifier in the database storage
+     * @return RedirectResponse
+     */
+    public function update(CategoryEditValidator $input, int $category): RedirectResponse
     {
+        $category = $this->categories->findOrFail($category);
 
+        if ($category->update($input->all())) {
+            flash('The category has been updated.')->success();
+        }
+
+        return redirect()->route(route('admin.helpdesk.categories.edit', $category));
     }
 
     /**
