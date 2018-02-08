@@ -35,3 +35,5 @@ Route::get('admin/helpdesk', 'Admin\Helpdesk\IndexController@index')->name('admi
 // Admin helpdesk routes (categories)
 Route::get('admin/helpdesk/categories', 'Admin\Helpdesk\CategoryController@index')->name('admin.helpdesk.categories.index');
 Route::get('admin/helpdesk/categories/create', 'Admin\Helpdesk\CategoryController@create')->name('admin.helpdesk.categories.create');
+Route::get('admîn/helpdesk/categories/delete/{id}', 'Admin\Helpdesk\CategoryController@destroy')->name('admin.helpdesk.categories.delete');
+Route::post('admin/helpdesk/categories/store', 'Admin\Helpdesk\CategoryController@store')->name('admin.helpdesk.categories.store');

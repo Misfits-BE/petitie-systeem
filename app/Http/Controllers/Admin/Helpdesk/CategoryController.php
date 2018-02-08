@@ -2,8 +2,10 @@
 
 namespace Misfits\Http\Controllers\Admin\Helpdesk;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Misfits\Http\Controllers\Controller;
+use Misfits\Http\Requests\Admin\Helpdesk\CategoryValidator;
 use Misfits\Repositories\CategoryRepository;
 
 /**
@@ -53,5 +55,59 @@ class CategoryController extends Controller
     public function create(): view
     {
         return view('admin.helpdesk.categories.create');
+    }
+
+    /**
+     * Store the new helpdesk category in the system.
+     * 
+     * @todo GI #23: Implement activity logger
+     * 
+     * @param  CategoryValidator $input     The user given input. (Validated)
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(CategoryValidator $input): RedirectResponse
+    {
+        $input->merge(['author_id' => $input->user()->id, 'module' => 'helpdesk']);
+
+        if ($category = $this->categories->create($input->all())) {
+            flash($category->name . ' has been added as helpdesk category.')->success();
+        }
+
+        return redirect()->route('admin.helpdesk.categories.index');
+    }
+
+    /**
+     * Edit view for an helpdesk category
+     *
+     * @param  int $category    The unique identifier in the datababse storage
+     * @return \Illuminate\View\View
+     */
+    public function edit(): View 
+    {
+        return redirect()->route('admin.helpdesk.categories.index');
+    }
+
+    public function update(): RedirectResponse 
+    {
+        
+    }
+
+    /**
+     * Delete some helpdesk category out off the database storage.
+     * 
+     * @todo GI #23: Implement activity logger
+     * 
+     * @param  int $category    The unique identifier from the category in the database
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(int $category): RedirectResponse
+    {
+        $category = $this->categories->findOrFail($category); 
+
+        if ($category->delete()) {
+            flash($category->name . ' has been deleted as helpdesk category.')->success();
+        }
+
+        return redirect()->route('admin.helpdesk.categories.index');
     }
 }

@@ -16,30 +16,33 @@
                     </div>
 
                     <div class="panel-body">
-                        <form action="" method="POST" class="form-horizontal">
+                        <form action="{{ route('admin.helpdesk.categories.store') }}" method="POST" class="form-horizontal">
                             {{ csrf_field() }} {{-- Form field protection --}}
 
-                            <div class="form-group">
+                            <div class="form-group @error('name', 'has-error')">
                                 <label class="control-label col-md-3">Category title <span class="text-danger">*</span></label>
 
                                 <div class="col-md-9">
-                                    <input type="text" placeholder="Category title" class="form-control">
+                                    <input type="text" @input('name') placeholder="Category title" class="form-control">
+                                    @error('name')
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group @error('color', 'has-error')">
                                 <label class="control-label col-md-3">Category color <span class="text-danger">*</span></label>
 
                                 <div class="col-md-9">
-                                    <input type="color" class="form-control">
+                                    <input type="color" @input('color') class="form-control">
+                                    @error('color')
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group @error('description', 'has-error')">
                                 <label class="control-label col-md-3">Category description <span class="text-danger">*</span></label>
 
                                 <div class="col-md-9">
-                                    <textarea class="form-control" rows="5" placeholder="An short category description"></textarea>
+                                    <textarea class="form-control" rows="5" @input('description') placeholder="An short category description"></textarea>
+                                    @error('description')
                                 </div>
                             </div>
 

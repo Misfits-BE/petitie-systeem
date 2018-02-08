@@ -34,8 +34,8 @@
                                                         <i class="fa fa-fw fa-pencil"></i>
                                                     </a>
 
-                                                    <a href="" class="text-danger">
-                                                        <i class="fa fa-fw fa-trash-o"></i>
+                                                    <a href="{{ route('admin.helpdesk.categories.delete', $category) }}" class="text-danger">
+                                                        <i class="fa fa-fw fa-close"></i>
                                                     </a>
                                                 </span>
                                             </td> {{-- /// End options --}}
@@ -50,7 +50,7 @@
                         </table>
                     </div>
 
-                    {{-- TODO: Pagination view. --}}
+                    {{ $categories->links() }}
                 </div>
             </div> {{-- /// Content --}}
 
