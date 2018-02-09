@@ -176,6 +176,7 @@ return [
         // Misfits\Providers\BroadcastServiceProvider::class,
         Misfits\Providers\EventServiceProvider::class,
         Misfits\Providers\RouteServiceProvider::class,
+        Misfits\Providers\HelperServiceProvider::class,
 
     ],
 

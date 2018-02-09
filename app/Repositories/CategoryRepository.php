@@ -3,6 +3,7 @@
 namespace Misfits\Repositories;
 
 use Misfits\Category;
+use Illuminate\Pagination\Paginator;
 use ActivismeBE\DatabaseLayering\Repositories\Contracts\RepositoryInterface;
 use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
 
@@ -21,5 +22,18 @@ class CategoryRepository extends Repository
     public function model(): string
     {
         return Category::class;
+    }
+
+    /**
+     * Paginate all the helpdesk categories?
+     *
+     * @param  int $perPage  The amount off records u want to display per page.
+     * @return  \Illuminate\Pagination\Paginator
+     */
+    public function getHelpdeskCategories(int $perPage): Paginator
+    {
+        return $this->model->where('module', 'helpdesk')->simplePaginate($perPage, [
+            'id', 'name', 'color', 'description'
+        ]);
     }
 }
