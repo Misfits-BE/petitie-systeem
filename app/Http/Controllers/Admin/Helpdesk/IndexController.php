@@ -1,6 +1,6 @@
 <?php
 
-namespace Misfits\Http\Controllers\Admin;
+namespace Misfits\Http\Controllers\Admin\Helpdesk;
 
 use Illuminate\View\View;
 use Misfits\Http\Controllers\Controller;
@@ -12,9 +12,9 @@ use Misfits\Http\Controllers\Controller;
  *
  * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Tim Joosten and his contributors
- * @package     Misfits\Http\Controllers\Admin
+ * @package     Misfits\Http\Controllers\Admin\Helpdesk
  */
-class HelpdeskController extends Controller
+class IndexController extends Controller
 {
     /**
      * HelpdeskController constructor.
@@ -23,7 +23,7 @@ class HelpdeskController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('role:admin');
+        $this->middleware(['role:admin']);
     }
 
     /**
