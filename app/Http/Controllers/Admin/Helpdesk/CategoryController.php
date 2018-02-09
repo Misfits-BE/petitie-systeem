@@ -93,7 +93,7 @@ class CategoryController extends Controller
     /**
      * Update an helpdesk category in the database storage.
      *
-     * @todo GI #23: Implement activity logger µ
+     * @todo GI #23: Implement activity logger
      *
      * @param  CategoryEditValidator $input     The user given input. (Validated)
      * @param  int                   $category  The uniqie identifier in the database storage
