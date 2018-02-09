@@ -61,8 +61,6 @@ class CategoryController extends Controller
     /**
      * Store the new helpdesk category in the system.
      * 
-     * @todo GI #23: Implement activity logger
-     * 
      * @param  CategoryValidator $input     The user given input. (Validated)
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -71,6 +69,7 @@ class CategoryController extends Controller
         $input->merge(['author_id' => $input->user()->id, 'module' => 'helpdesk']);
 
         if ($category = $this->categories->create($input->all())) {
+            $this->logActivity($category, " has created the category {$category->name}");
             flash($category->name . ' has been added as helpdesk category.')->success();
         }
 
@@ -93,17 +92,16 @@ class CategoryController extends Controller
     /**
      * Update an helpdesk category in the database storage.
      *
-     * @todo GI #23: Implement activity logger
-     *
      * @param  CategoryEditValidator $input     The user given input. (Validated)
      * @param  int                   $category  The uniqie identifier in the database storage
-     * @return RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(CategoryEditValidator $input, int $category): RedirectResponse
     {
         $category = $this->categories->findOrFail($category);
 
         if ($category->update($input->all())) {
+            $this->logActivity($category, "Has updated the category {$category->name}");
             flash('The category has been updated.')->success();
         }
 
@@ -113,8 +111,6 @@ class CategoryController extends Controller
     /**
      * Delete some helpdesk category out off the database storage.
      * 
-     * @todo GI #23: Implement activity logger
-     * 
      * @param  int $category    The unique identifier from the category in the database
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -123,6 +119,7 @@ class CategoryController extends Controller
         $category = $this->categories->findOrFail($category); 
 
         if ($category->delete()) {
+            $this->logActivity($category, " has deleted the category {$category->name}");
             flash($category->name . ' has been deleted as helpdesk category.')->success();
         }
 
