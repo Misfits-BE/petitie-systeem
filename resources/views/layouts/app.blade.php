@@ -5,12 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}"> {{-- CSRF token --}}
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Styles -->
+    {{-- Styles --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -19,7 +18,7 @@
             <div class="container">
                 <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
+                    {{-- Collapsed Hamburger --}}
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
                         <span class="sr-only">Toggle Navigation</span>
                         <span class="icon-bar"></span>
@@ -27,15 +26,14 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <!-- Branding Image -->
+                    {{-- Branding Image --}}
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }} - Petitions
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav"> {{-- Left Side Of Navbar --}}
                         <li>
                             <a href="">
                                 <i class="fa fa-file-text-o"></i> Petitions
@@ -59,13 +57,11 @@
                         @endif {{-- // END auth check --}}
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
+                    <ul class="nav navbar-nav navbar-right"> {{-- Right Side Of Navbar --}}
+                        @guest {{-- Authentication Links --}}
                             <li><a href="{{ route('login') }}"><i class="fa fa-sign-in"></i> Login</a></li>
                             <li><a href="{{ route('register') }}"><i class="fa fa-user-plus"></i> Register</a></li>
-                        @else
+                        @else {{-- Link logged in user --}}
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                     <i class="fa fa-plus"></i> <span class="caret"></span>
@@ -153,7 +149,7 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
