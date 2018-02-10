@@ -20,7 +20,7 @@ trait ActivityLog
      * @param  string $message
      * @return void
      */
-    public function logActivity($model, string $message): string
+    public function logActivity($model, string $message): void
     {
         activity()
             ->performedOn($model)

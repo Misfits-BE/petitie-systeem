@@ -22,6 +22,9 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->timestamps();
+
+            // Foreign keys 
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 
