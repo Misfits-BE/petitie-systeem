@@ -17,26 +17,17 @@ class AdminHelpdeskCategoriesTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * 
-     */
     public function indexUnauthenticated() 
     {
 
     }
 
-    /**
-     * 
-     */
     public function indexWrongRole() 
     {
 
     }
 
-    /**
-     * 
-     */
-    public function indexCorrectRole()
+    public function ndexCorrectRole()
     {
 
     }
