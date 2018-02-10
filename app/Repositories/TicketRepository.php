@@ -8,7 +8,9 @@ use Misfits\Ticket;
 /**
  * Class TicketRepository
  *
- * @package Misfits\Repositories
+ * @author      Tim Joosten <tim@activisme.be>
+ * @copyright   2018 Tim Joosten and hs contributors
+ * @package     Misfits\Repositories
  */
 class TicketRepository extends Repository
 {

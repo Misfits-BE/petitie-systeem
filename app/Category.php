@@ -4,6 +4,8 @@ namespace Misfits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 /**
  * Class Category
@@ -14,6 +16,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Category extends Model
 {
+    use HasSlug;
+
     /**
      * Mass-assign fields for the database table.
      *
@@ -30,5 +34,17 @@ class Category extends Model
     {
         return $this->belongsTo(User::class, 'author_id')
             ->withDefault(['name' => '<span class="text-danger">' . config('app.name') . '</span>']);
+    }
+
+    /**
+     * Get the options for generating the slug.
+     *
+     * @return \Spatie\Sluggable\SlugOptions
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
     }
 }
