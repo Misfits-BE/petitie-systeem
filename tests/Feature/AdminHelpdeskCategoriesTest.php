@@ -27,7 +27,7 @@ class AdminHelpdeskCategoriesTest extends TestCase
 
     }
 
-    public function IndexCorrectRole()
+    public function indexCorrectRole()
     {
 
     }
