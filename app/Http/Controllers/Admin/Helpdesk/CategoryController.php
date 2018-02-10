@@ -31,7 +31,7 @@ class CategoryController extends Controller
      */
     public function __construct(CategoryRepository $categories)
     {
-        $this->middleware(['role:admin']);
+        $this->middleware(['auth', 'role:admin']);
         $this->categories = $categories;
     }
 
@@ -78,7 +78,7 @@ class CategoryController extends Controller
 
     /**
      * Function for editing a helpdesk category in the database storage
-     * 
+     *
      * @param  int $category    The unique identifier in the database storage
      * @return \Illuminate\View\View
      */

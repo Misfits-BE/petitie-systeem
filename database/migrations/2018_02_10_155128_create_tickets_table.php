@@ -8,7 +8,7 @@ class CreateTicketsTable extends Migration
 {
     /**
      * Run the migrations.
-     * 
+     *
      * @return void
      */
     public function up(): void
@@ -19,11 +19,11 @@ class CreateTicketsTable extends Migration
             $table->integer('assignee_id')->unsigned()->nullable();
             $table->integer('category')->unsigned()->nullable()->comment('BelongsTo Relation');
             $table->boolean('is_open')->default('1');
-            $table->string('title'); 
+            $table->string('title');
             $table->text('description');
             $table->timestamps();
 
-            // Foreign keys constraints 
+            // Foreign keys constraints
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('assignee_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('category')->references('id')->on('users')->onDelete('set null');

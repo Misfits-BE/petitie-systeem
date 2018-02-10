@@ -13,7 +13,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Misfits\User::class, function (Faker $faker) {
+$factory->define(Misfits\User::class, function (Faker $faker): array {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,

@@ -42,7 +42,7 @@ class HelpdeskController extends Controller
 
     /**
      * Get the helpdesk ticket that the user has been created.
-     * 
+     *
      * @todo register route (helpdesk.index)
      */
     public function index(): View
@@ -51,23 +51,23 @@ class HelpdeskController extends Controller
     }
 
     /**
-     * Show a specific helpdesk ticket in the application. 
+     * Show a specific helpdesk ticket in the application.
      * ----
      * This controller and route is used by users and admins.
-     * 
+     *
      * @param  int $ticket  The unique identifier in the database storage
      * @return mixed
      */
     public function show(int $ticket)
     {
-        $ticket = $this->helpdesk->findOrFail($ticket); 
+        $ticket = $this->helpdesk->findOrFail($ticket);
 
         if (Gate::allows('view', $ticket)) {
             return view('frontend.helpdesk.show', compact('ticket'));
         }
         
         return redirect()->route('helpdesk.index');
-    }   
+    }
 
     /**
      * Create view for the user his helpdesk question.

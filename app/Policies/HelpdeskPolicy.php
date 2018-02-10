@@ -2,13 +2,13 @@
 
 namespace Misfits\Policies;
 
-use Misfits\User;
-use Misfits\Ticket;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Misfits\Ticket;
+use Misfits\User;
 
 /**
- * Helpdesk Authorization policy 
- * 
+ * Helpdesk Authorization policy
+ *
  * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Tim Joosten and his contributors
  * @package     Misfits\Policies
