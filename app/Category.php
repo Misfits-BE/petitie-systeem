@@ -16,7 +16,7 @@ class Category extends Model
 {
     /**
      * Mass-assign fields for the database table.
-     * 
+     *
      * @var array
      */
     protected $fillable = ['author_id', 'module', 'color', 'name', 'description'];

@@ -2,8 +2,8 @@
 
 namespace Misfits\Http\Controllers\Auth;
 
-use Misfits\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Misfits\Http\Controllers\Controller;
 
 class ResetPasswordController extends Controller
 {

@@ -2,10 +2,9 @@
 
 namespace Misfits\Repositories;
 
-use Misfits\Category;
-use Illuminate\Pagination\Paginator;
-use ActivismeBE\DatabaseLayering\Repositories\Contracts\RepositoryInterface;
 use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
+use Illuminate\Pagination\Paginator;
+use Misfits\Category;
 
 /**
  * Class CategoryRepository

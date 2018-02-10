@@ -19,10 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Policies 
+// Policies
 Route::get('/disclaimer', 'Frontend\PolicyController@disclaimer')->name('policy.disclaimer');
 
-// Account settings 
+// Account settings
 Route::get('/account-settings', 'Auth\AccountSettingsController@index')->name('account.settings');
 
 // Helpdesk routes

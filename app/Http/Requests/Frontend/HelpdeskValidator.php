@@ -5,8 +5,8 @@ namespace Misfits\Http\Requests\Frontend;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Frontend user validator for an helpdesk ticket. 
- * 
+ * Frontend user validator for an helpdesk ticket.
+ *
  * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Tim Joosten and his contributors
  * @package     \Misfits\Http\Requests\Frontend
@@ -31,8 +31,8 @@ class HelpdeskValidator extends FormRequest
     public function rules(): array
     {
         return [
-            'title'       => 'required|max:190', 
-            'category'    => 'required', 
+            'title'       => 'required|max:190',
+            'category'    => 'required',
             'description' => 'required'
         ];
     }

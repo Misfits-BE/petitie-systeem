@@ -2,9 +2,8 @@
 
 namespace Misfits\Repositories;
 
-use Misfits\Ticket;
-use ActivismeBE\DatabaseLayering\Repositories\Contracts\RepositoryInterface;
 use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
+use Misfits\Ticket;
 
 /**
  * Class TicketRepository
@@ -25,7 +24,7 @@ class TicketRepository extends Repository
 
     /**
      * Count tickets in the helpdesk specified by field and value.
-     * 
+     *
      * @return int
      */
     public function countTickets($field, $value): int

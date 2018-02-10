@@ -5,8 +5,8 @@ namespace Misfits\Providers;
 use Illuminate\Support\ServiceProvider;
 
 /**
- * Application service provider 
- * 
+ * Application service provider
+ *
  * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Tim Joosten and his contributors
  * @package     Misfits\Providers

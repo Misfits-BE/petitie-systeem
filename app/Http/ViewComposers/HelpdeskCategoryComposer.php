@@ -1,17 +1,16 @@
 <?php 
 
-namespace Misfits\Http\ViewComposers; 
+namespace Misfits\Http\ViewComposers;
 
-use Illuminate\Contracts\Auth\Guard; 
 use Illuminate\View\View;
 use Misfits\Repositories\TicketRepository;
 
 /**
- * Class HelpdeskCategoryComposer 
+ * Class HelpdeskCategoryComposer
  * ----
- * The view composer for the helpdesk navigation 
- * 
- * 
+ * The view composer for the helpdesk navigation
+ *
+ *
  * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Tim Joosten and hs contributors
  * @package     App\Http\ViewComposers
@@ -19,11 +18,11 @@ use Misfits\Repositories\TicketRepository;
 class HelpdeskCategoryComposer
 {
     /** @var \Misfits\Repositories\TicketRepository $tickets */
-    protected $tickets; 
+    protected $tickets;
 
     /**
-     * Create a admin helpdesk admin composer 
-     * 
+     * Create a admin helpdesk admin composer
+     *
      * @param  TicketsRepository $tickets   Abstraction layer between app and database
      * @return void
      */
@@ -33,12 +32,12 @@ class HelpdeskCategoryComposer
     }
 
     /**
-     * Bind data to the view 
-     * 
-     * @param  View $view    The view contract from laravel. 
+     * Bind data to the view
+     *
+     * @param  View $view    The view contract from laravel.
      * @return void
      */
-    public function compose(View $view): void 
+    public function compose(View $view): void
     {
         $user = auth()->user();
 

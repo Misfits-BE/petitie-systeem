@@ -2,16 +2,15 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class DisclaimerTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * @test 
+     * @test
      * @testdox Test the front-end disclaimer policy page.
      */
     public function disclaimerPolicy()

@@ -21,7 +21,7 @@ use Misfits\Repositories\CategoryRepository;
 class CategoryController extends Controller
 {
     /** @var \Misfits\Repositories\CategoryRepository $categories */
-    private $categories; 
+    private $categories;
 
     /**
      * CategoryController constructor.
@@ -37,7 +37,7 @@ class CategoryController extends Controller
 
     /**
      * Get the admin dashboard for the ticket categories
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function index(): View
@@ -60,7 +60,7 @@ class CategoryController extends Controller
 
     /**
      * Store the new helpdesk category in the system.
-     * 
+     *
      * @param  CategoryValidator $input     The user given input. (Validated)
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -82,7 +82,7 @@ class CategoryController extends Controller
      * @param  int $category    The unique identifier in the database storage
      * @return \Illuminate\View\View
      */
-    public function edit(int $category): View 
+    public function edit(int $category): View
     {
         return view('admin.helpdesk.categories.edit', [
             'category' => $this->categories->findOrFail($category)
@@ -110,13 +110,13 @@ class CategoryController extends Controller
 
     /**
      * Delete some helpdesk category out off the database storage.
-     * 
+     *
      * @param  int $category    The unique identifier from the category in the database
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(int $category): RedirectResponse
     {
-        $category = $this->categories->findOrFail($category); 
+        $category = $this->categories->findOrFail($category);
 
         if ($category->delete()) {
             $this->logActivity($category, " has deleted the category {$category->name}");
