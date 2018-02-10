@@ -18,7 +18,7 @@ class AdminHelpdeskCategoriesTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * 
+     * @test
      */
     public function indexUnauthenticated() 
     {
@@ -26,7 +26,7 @@ class AdminHelpdeskCategoriesTest extends TestCase
     }
 
     /**
-     * 
+     * @test
      */
     public function indexWrongRole() 
     {
@@ -34,7 +34,7 @@ class AdminHelpdeskCategoriesTest extends TestCase
     }
 
     /**
-     * 
+     * @test
      */
     public function indexCorrectRole()
     {

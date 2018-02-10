@@ -1,0 +1,3 @@
+ignore: 
+  - "app/Providers/BroadcastServiceProvider.php"          # Ignore because no usage
+  - "app/Http/Controllers/Auth/*.php"                     # Ignore because standard auth scaffolding
