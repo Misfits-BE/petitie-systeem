@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
         // Shared view composers
         view()->composer('*', \Misfits\Http\ViewComposers\GlobalComposer::class);
         view()->composer('layouts.app', \Misfits\Http\ViewComposers\AppLayoutComposer::class);
-        view()->composer('shared.helpdesk.navigation', \Misfits\Http\ViewComposers\HelpdeskCategoryComposer::class); // TODO: Implementatie class
+        view()->composer('shared.helpdesk.navigation', \Misfits\Http\ViewComposers\HelpdeskCategoryComposer::class);
     }
 }
