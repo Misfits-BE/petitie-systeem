@@ -79,9 +79,6 @@ class CategoryController extends Controller
     /**
      * Function for editing a helpdesk category in the database storage
      * 
-     * @todo Category author zou naar null gezet moeten worden.
-     *       Wanneer de gebruiker in kwestie verwijderd is. 
-     * 
      * @param  int $category    The unique identifier in the database storage
      * @return \Illuminate\View\View
      */
