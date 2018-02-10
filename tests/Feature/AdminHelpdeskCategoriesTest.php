@@ -13,10 +13,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
  * @copyright   2018 Tim Joosten and his contributors
  * @package     Tests\Feature
  */
-class AdmnHelpdeskCategoriesTest extends TestCase
+class AdminHelpdeskCategoriesTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     public function indexUnauthenticated() 
     {
 
