@@ -36,7 +36,7 @@ class AdminHelpdeskCategoriesTest extends TestCase
     /**
      * @test
      */
-    public function ndexCorrectRole()
+    public function indexCorrectRole()
     {
 
     }
