@@ -19,6 +19,7 @@ class AdminHelpdeskCategoriesTest extends TestCase
 
     /**
      * @test
+     * @testdox Test if an unauthenticated user doàesn't have access to the helpdesk admin section
      */
     public function indexUnauthenticated() 
     {
@@ -27,6 +28,7 @@ class AdminHelpdeskCategoriesTest extends TestCase
 
     /**
      * @test
+     * @testdox Test if an user with the correct role can view the helpdesk categories
      */
     public function indexWrongRole() 
     {
@@ -35,6 +37,7 @@ class AdminHelpdeskCategoriesTest extends TestCase
 
     /**
      * @test
+     * @testdox Test if an user with an incorrect doesn't have access to the helpdesk categories admin
      */
     public function indexCorrectRole()
     {
