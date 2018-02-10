@@ -4,10 +4,10 @@
             <a href="{{ route('admin.helpdesk.index') }}">Dashboard</a>
         </li>
         <li role="presentation">
-            <a href="">Assigned tickets <span class="badge">0</span></a>
+            <a href="">Assigned tickets <span class="badge">{{ $assignedTickets }}</span></a>
         </li>
         <li role="presentation">
-            <a href="">Open tickets <span class="badge">0</span></a>
+            <a href="">Open tickets <span class="badge">{{ $openTickets}}</span></a>
         </li>
         <li role="presentation" class="{{ isActive('admin/helpdesk/categories*') }}">
             <a href="{{ route('admin.helpdesk.categories.index') }}">Categories</a>
