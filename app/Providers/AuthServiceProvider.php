@@ -12,7 +12,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Misfits\Model' => 'Misfits\Policies\ModelPolicy',
+        \Misfits\Ticket::class => \Misfits\Policies\HelpdeskPolicy::class,
     ];
 
     /**
@@ -20,10 +20,8 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
-
-        //
     }
 }
