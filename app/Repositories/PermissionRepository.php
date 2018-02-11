@@ -2,10 +2,9 @@
 
 namespace Misfits\Repositories;
 
-use ActivismeBE\DatabaseLayering\Repositories\Contracts\RepositoryInterface;
 use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Eloquent\Collection;
+use Spatie\Permission\Models\Permission;
 
 /**
  * Class PermissionRepository
@@ -25,8 +24,8 @@ class PermissionRepository extends Repository
     }
 
     /**
-     * Get all the normal user permissions. 
-     * 
+     * Get all the normal user permissions.
+     *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getUserPermissions(): Collection

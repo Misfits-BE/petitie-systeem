@@ -65,9 +65,15 @@
                                 <div class="col-md-5">
                                     <select @input('category') class="form-control">
                                         <option value="">-- Select your category --</option>
+
+                                        @foreach ($categories as $category) {{-- Categories loop --}}
+                                            <option value="{{ $category->id }}" @if (old('category') == $category->id) selected @endif>
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
                                     </select>
 
-                                    @error('category')
+                                    @error('category') {{-- Error message display --}}
                                 </div>
                             </div>
 
@@ -78,7 +84,14 @@
 
                                 <div class="col-md-9">
                                     <textarea rows="8" @input('description') class="form-control" placeholder="Describe your question or feedback.">{{ old('description') }}</textarea>
-                                    @error('description')
+                                    
+                                    @if ($errors->has('decription')) {{-- Display validation error --}}
+                                        @error('description') {{-- View partials --}}
+                                    @else {{-- Display help text --}}
+                                        <span class="help-block">
+                                            <span class="text-danger">*</span> Dit veld is <a href="">Markdown</a> ondersteund
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
 

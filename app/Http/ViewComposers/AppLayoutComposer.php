@@ -38,9 +38,13 @@ class AppLayoutComposer
      */
     public function compose(View $view): void
     {
-        $view->with('helpdeskUrl', $this->auth->user()->hasRole('admin')
-            ? route('admin.helpdesk.index') // TRUE
-            : route('helpdesk.index')       // FALSE
-        );
+        if ($this->auth->check()) {
+            $view->with(
+                'helpdeskUrl',
+                $this->auth->user()->hasRole('admin')
+                ? route('admin.helpdesk.index') // TRUE
+                : route('helpdesk.index')       // FALSE
+            );
+        }
     }
 }

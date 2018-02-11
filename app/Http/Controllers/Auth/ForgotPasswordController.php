@@ -2,8 +2,8 @@
 
 namespace Misfits\Http\Controllers\Auth;
 
-use Misfits\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Misfits\Http\Controllers\Controller;
 
 class ForgotPasswordController extends Controller
 {

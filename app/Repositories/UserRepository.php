@@ -2,10 +2,9 @@
 
 namespace Misfits\Repositories;
 
+use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
 use Misfits\User;
 use Spatie\Permission\Models\Role;
-use ActivismeBE\DatabaseLayering\Repositories\Contracts\RepositoryInterface;
-use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
 
 /**
  * Class UserRepository
