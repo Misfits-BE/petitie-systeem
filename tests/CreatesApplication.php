@@ -4,6 +4,7 @@ namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Hashing\Hasher;
 
 /**
  * Trait for booting up the application while testing.
@@ -23,6 +24,7 @@ trait CreatesApplication
     {
         $app = require __DIR__.'/../bootstrap/app.php';
         $app->make(Kernel::class)->bootstrap();
+        $app->make(Hasher::class)->setRounds(4);
 
         return $app;
     }
