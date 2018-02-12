@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Traits;
 
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
@@ -11,7 +11,7 @@ use Illuminate\Contracts\Hashing\Hasher;
  *
  * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Tim Joosten and his contributors
- * @package     Test
+ * @package     Tests\Traits
  */
 trait CreatesApplication
 {
@@ -22,7 +22,7 @@ trait CreatesApplication
      */
     public function createApplication(): Application
     {
-        $app = require __DIR__.'/../bootstrap/app.php';
+        $app = require __DIR__.'/../../bootstrap/app.php';
         $app->make(Kernel::class)->bootstrap();
         $app->make(Hasher::class)->setRounds(4);
 

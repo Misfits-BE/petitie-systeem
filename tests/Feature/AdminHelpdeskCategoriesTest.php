@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Misfits\Category;
 use Tests\TestCase;
+use Tests\Traits\CreatesUsers;
+use Tests\Traits\InputFakers;
 
 /**
  * [HELPDESK]: Admin categories test case
@@ -15,7 +17,7 @@ use Tests\TestCase;
  */
 class AdminHelpdeskCategoriesTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, CreatesUsers, InputFakers;
 
     /**
      * @test
@@ -94,5 +96,43 @@ class AdminHelpdeskCategoriesTest extends TestCase
             ->assertAuthenticatedAs($user)
             ->get(route('admin.helpdesk.categories.create'))
             ->assertStatus(200);
+    }
+
+    /**
+     * @test 
+     * @testdox Test that an unauthenticated user can't insert a helpdesk ticket
+     */
+    public function storeNoAuthenticated(): void
+    {
+        $this->post(route('admin.helpdesk.categories.store'), $this->fakeCategoryInput())
+            ->assertStatus(302)
+            ->assertRedirect(route('login'));
+    }
+
+    /**
+     * @test 
+     * @testdox Thest the error response when a user with incorrect role tries to insert some category.
+     */
+    public function storeIncorrectRole(): void 
+    {
+        //
+    }
+
+    /**
+     * @test 
+     * @testdox Test than a authenticated user can insert a new helpdesk category.
+     */
+    public function storeCorrectRole(): void 
+    {
+        //
+    }
+
+    /**
+     * @test 
+     * @testdox Test that the validation errors return from the controller
+     */
+    public function storeValidationErrors(): void
+    {
+        //
     }
 }

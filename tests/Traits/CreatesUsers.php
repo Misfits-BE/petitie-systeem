@@ -1,6 +1,6 @@
 <?php 
 
-namespace Tests;
+namespace Tests\Traits;
 
 use Misfits\User;
 use Spatie\Permission\Models\Role;
@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Role;
  *
  * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Tim Joosten and his contributors
- * @package     Tests
+ * @package     Tests\Traits
  */
 trait CreatesUsers
 {
