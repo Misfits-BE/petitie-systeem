@@ -215,7 +215,10 @@ class AdminHelpdeskCategoriesTest extends TestCase
      */
     public function categoryUpdateUnauthenticated(): void 
     {
+        $input    = $this->fakeCategoryInput();
+        $category = factory(Category::class)->create();
 
+        $this->patch(route('admin.helpdesk.categories.update', $category))
     }
 
     /**
@@ -229,7 +232,7 @@ class AdminHelpdeskCategoriesTest extends TestCase
 
     /**
      * @test
-     * @testdox
+     * @testdox Category update correct role invalid id
      */
     public function categoryUpdateCorrectRoleInvalidId(): void
     {
@@ -238,7 +241,7 @@ class AdminHelpdeskCategoriesTest extends TestCase
 
     /**
      * @test
-     * @testdox
+     * @testdox Category updaten incorect Role valid id
      */
     public function categoryUpdateIncorrectRoleValidId(): void 
     {
