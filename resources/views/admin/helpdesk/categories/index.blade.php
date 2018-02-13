@@ -30,7 +30,7 @@
                                             <td>{{ $category->description }}</td>
                                             <td> {{-- Options --}}
                                                 <span class="pull-right">
-                                                    <a href="" class="text-muted">
+                                                    <a href="{{ route('admin.helpdesk.categories.edit', $category) }}" class="text-muted">
                                                         <i class="fa fa-fw fa-pencil"></i>
                                                     </a>
 

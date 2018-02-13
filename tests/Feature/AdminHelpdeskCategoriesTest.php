@@ -39,7 +39,6 @@ class AdminHelpdeskCategoriesTest extends TestCase
         $user = $this->createNormalUser();
 
         $this->actingAs($user)
-            ->assertAuthenticatedAs($user)
             ->get(route('admin.helpdesk.categories.index'))
             ->assertStatus(403);
     }
@@ -54,7 +53,6 @@ class AdminHelpdeskCategoriesTest extends TestCase
         $user = $this->createAdminUser();
 
         $this->actingAs($user)
-            ->assertAuthenticatedAs($user)
             ->get(route('admin.helpdesk.categories.index'))
             ->assertStatus(200);
     }
@@ -79,7 +77,6 @@ class AdminHelpdeskCategoriesTest extends TestCase
         $user = $this->createNormalUser();
 
         $this->actingAs($user)
-            ->assertAuthenticatedAs($user)
             ->get(route('admin.helpdesk.categories.create'))
             ->assertStatus(403);
     }
@@ -93,7 +90,6 @@ class AdminHelpdeskCategoriesTest extends TestCase
         $user = $this->createAdminUser();
 
         $this->actingAs($user)
-            ->assertAuthenticatedAs($user)
             ->get(route('admin.helpdesk.categories.create'))
             ->assertStatus(200);
     }
@@ -115,7 +111,11 @@ class AdminHelpdeskCategoriesTest extends TestCase
      */
     public function storeIncorrectRole(): void 
     {
-        //
+        $user = $this->createNormalUser(); 
+
+        $this->actingAs($user)
+            ->post(route('admin.helpdesk.categories.store'), $this->fakeCategoryInput())
+            ->assertStatus(403);
     }
 
     /**
@@ -124,7 +124,20 @@ class AdminHelpdeskCategoriesTest extends TestCase
      */
     public function storeCorrectRole(): void 
     {
-        //
+        $user         = $this->createAdminUser();
+        $input        = $this->fakeCategoryInput(); 
+        $methodFields = ['author_id' => $user->id, 'slug' => 'category', 'module' => 'helpdesk'];
+
+        $this->actingAs($user)
+            ->post(route('admin.helpdesk.categories.store'), $input)
+            ->assertSessionHas([
+                $this->flashSession . '.message' => $input['name'] . ' has been added as helpdesk category.', 
+                $this->flashSession . '.level'   => 'success'
+            ])
+            ->assertStatus(302)
+            ->assertRedirect(route('admin.helpdesk.categories.index'));
+
+        $this->assertDatabaseHas('categories', array_merge($methodFields, $input));
     }
 
     /**
@@ -133,6 +146,102 @@ class AdminHelpdeskCategoriesTest extends TestCase
      */
     public function storeValidationErrors(): void
     {
-        //
+        $user = $this->createAdminUser();
+
+        $this->actingAs($user)
+            ->post(route('admin.helpdesk.categories.store'), [])
+            ->assertSessionHasErrors()
+            ->assertSessionMissing([
+                $this->flashSession . '.message' => 'Category has been added as helpdesk category.', 
+                $this->flashSession . '.level'   => 'success']
+            )
+            ->assertStatus(302);
+    }
+
+    /**
+     * @test 
+     * @testdox Category edit unauthenticated
+     */
+    public function categoryEditUnauthenticated(): void 
+    {
+        $this->get(route('admin.helpdesk.categories.edit', factory(Category::class)->create()))
+            ->assertStatus(302)
+            ->assertRedirect(route('login'));
+    }
+
+    /**
+     * @test 
+     * @testdox Category edit incorrect role
+     */
+    public function categoryEditIncorrectRole(): void
+    {
+        $user = $this->createNormalUser();
+
+        $this->actingAs($user)
+            ->get(route('admin.helpdesk.categories.edit', factory(Category::class)->create()))
+            ->assertStatus(403);
+    }
+
+    /**
+     * @test 
+     * @testdox Category edit correct role and valid ID
+     */
+    public function categoryEditCorrectRoleValidId(): void
+    {
+        $user     = $this->createAdminUser();
+        $category = factory(Category::class)->create(); 
+
+        $this->actingAs($user)
+            ->get(route('admin.helpdesk.categories.edit', $category))
+            ->assertStatus(200);
+    }
+
+    /**
+     * @test 
+     * @testdox Category edit correct role but invalid id
+     */
+    public function categoryEditCorrectRoleInvalidId(): void 
+    {
+        $user = $this->createAdminUser(); 
+
+        $this->actingAs($user)
+            ->get(route('admin.helpdesk.categories.edit', ['id' => 1000]))
+            ->assertStatus(404);
+    }
+
+    /**
+     * @test
+     * @testdox Category update unauthenticated
+     */
+    public function categoryUpdateUnauthenticated(): void 
+    {
+
+    }
+
+    /**
+     * @test 
+     * @testdox Catgegory update incorrect role
+     */
+    public function categoryUpdateIncorrectRole(): void 
+    {
+        
+    }
+
+    /**
+     * @test
+     * @testdox
+     */
+    public function categoryUpdateCorrectRoleInvalidId(): void
+    {
+
+    }
+
+    /**
+     * @test
+     * @testdox
+     */
+    public function categoryUpdateIncorrectRoleValidId(): void 
+    {
+
     }
 }
