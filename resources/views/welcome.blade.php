@@ -37,6 +37,8 @@
                     </div>
                 </div>
 
+                <button type="button" class="btn btn-primary btn-lg btn-block">Explore more petitions</button>
+
             </div>
 
             <div class="col-md-4">

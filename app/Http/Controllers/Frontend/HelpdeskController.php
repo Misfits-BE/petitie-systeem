@@ -42,8 +42,8 @@ class HelpdeskController extends Controller
 
     /**
      * Get the helpdesk ticket that the user has been created.
-     *
-     * @todo register route (helpdesk.index)
+     * 
+     * @return Illuminate\View\View
      */
     public function index(): View
     {

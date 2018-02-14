@@ -41,20 +41,28 @@
                         </li>
 
                         @if (auth()->check())
-                            @if($user->hasRole('admin'))
+                            <li>
+                                <a href="{{ $helpdeskUrl  }}">
+                                    <i class="fa fa-bug"></i> Helpdesk
+                                </a>
+                            </li>
+
+                            @if ($user->hasRole('admin'))
                                 <li>
                                     <a href="">
                                         <i class="fa fa-users"></i> Users
                                     </a>
                                 </li>
-
-                                <li>
-                                    <a href="{{ $helpdeskUrl  }}">
-                                        <i class="fa fa-bug"></i> Helpdesk
-                                    </a>
-                                </li>
-                            @endif {{-- // END admin permission check --}}         
+                            @endif {{-- // END admin permission check --}}     
                         @endif {{-- // END auth check --}}
+
+                        @if (! auth()->check() || $user->hasRole('user'))
+                            <li>
+                                <a href="">
+                                    <i class="fa fa-envelope"></i> Contact
+                                </a>
+                            </li> 
+                        @endif   
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right"> {{-- Right Side Of Navbar --}}
@@ -122,8 +130,9 @@
                     </ul>
                 </div>
                 <div class="col-sm-3">
-                    <h5>Legal</h5>
+                    <h5>Support</h5>
                     <ul>
+                        <li><a href="">FAQ</a></li>
                         <li><a href="{{ route('policy.disclaimer') }}">Disclaimer</a></li>
                     </ul>
                 </div>

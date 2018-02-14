@@ -20,18 +20,14 @@
 
             <div class="form-group">
                 <label class="col-md-3 control-label">
-                    Your name: <span class="text-danger">*</span>
+                    Your email address: <span class="text-danger">*</span>
                 </label>
 
-                <div class="col-md-4">
-                    <input type="text" class="form-control" placeholder="Firstname">
-                </div> 
-
-                <div class="col-md-5">
-                    <input type="text" class="form-control" placeholder="Lastname">
+                <div class="col-md-9">
+                    <input type="email" class="form-control" placeholder="Your email address">
                 </div>
             </div>
-
+            
             <div class="form-group">
                 <div class="col-md-offset-3 col-md-9">
                     <button type="submit" class="btn btn-sm btn-success">
