@@ -13,7 +13,7 @@ use Misfits\Repositories\UserRepository;
  * ---
  * Controller for user management in the system.
  *
- * @author      Tim Joosten
+ * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Tim Joosten and his contributors
  * @package     Misfits\Http\Controllers\Admin\Users
  */
