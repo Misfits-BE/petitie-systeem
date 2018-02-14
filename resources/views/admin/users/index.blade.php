@@ -9,9 +9,11 @@
                         <i class="fa fa-users"></i> User Management
 
                         <span class="pull-right">
-                            <a href="" class="btn btn-xs btn-default">
-                                <i class="fa fa-search"></i> Search user
-                            </a>
+                            @if (count($users) > 10)
+                                <a href="" class="btn btn-xs btn-default">
+                                    <i class="fa fa-search"></i> Search user
+                                </a> 
+                            @endif
 
                             <a href="" class="btn btn-xs btn-default">
                                 <i class="fa fa-user-plus"></i> Add user
@@ -25,7 +27,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Status:</th>
+                                        <th>Role:</th>
                                         <th>Username:</th>
                                         <th>Name:</th>
                                         <th>Email:</th>
@@ -36,11 +38,42 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <td><strong>#U{{ $user->id }}</strong></td>
+                                            
+                                            <td>
+                                                @if ($user->hasRole('admin'))
+                                                    <span class="label label-danger">Administrator</span>
+                                                @elseif ($user->hasRole('user'))
+                                                    <span class="label label-success">User</span>
+                                                @endif
+                                            </td>
+                                            
+                                            <td>{{ $user->name }}</td>
+                                            <td></td> {{-- First and lastname from the user --}}
+                                            <td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
+                                            <td>{{ $user->created_at->diffForHumans() }}</td>
+
+                                            <td> {{-- Opties --}}
+                                                <span class="pull-right">
+                                                    <a href="" class="text-muted">
+                                                        <i class="fa fa-fw fa-cogs"></i>
+                                                    </a> 
+                                                
+                                                    <a href="{{ route('admin.users.ban', $user) }}" class="text-danger">
+                                                        <i class="fa fa-fw fa-lock"></i>
+                                                    </a>
+
+                                                    <a href="{{ route('admin.users.delete', $user) }}" class="text-danger">
+                                                        <i class="fa fa-fw fa-close"></i>
+                                                    </a>
+                                                </span>
+                                            </td> {{-- /Opties --}}
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
+
+                        {{ $users->render() }}
                     </div>
                 </div>
             </div>

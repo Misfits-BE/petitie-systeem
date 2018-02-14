@@ -42,5 +42,9 @@ Route::get('admin/helpdesk/categories/delete/{id}', 'Admin\Helpdesk\CategoryCont
 Route::post('admin/helpdesk/categories/store', 'Admin\Helpdesk\CategoryController@store')->name('admin.helpdesk.categories.store');
 Route::patch('admin/helpdesk/categories/update/{id}', 'Admin\Helpdesk\CategoryController@update')->name('admin.helpdesk.categories.update');
 
+// User ban routes 
+Route::get('admin/users/ban/{id}', 'Admin\Users\BanController@create')->name('admin.users.ban');
+
 // User management console
-Route::get('users', 'Admin\Users\IndexController@index')->name('admin.users.index');
+Route::get('admin/users', 'Admin\Users\IndexController@index')->name('admin.users.index');
+Route::get('admin/users/delete/{id}', 'Admin\Users\IndexController@destroy')->name('admin.users.delete');
