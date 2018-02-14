@@ -137,6 +137,10 @@ class AdminHelpdeskCategoriesTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect(route('admin.helpdesk.categories.index'));
 
+        $this->assertDatabaseHas('activity_log', [
+            'log_name' => 'default', 'description' => "has created the category {$input['name']}", 'subject_type' => 'Misfits\Category', 'causer_id' => $user->id, 'properties' => '[]'
+        ]);
+
         $this->assertDatabaseHas('categories', array_merge($methodFields, $input));
     }
 
@@ -151,7 +155,11 @@ class AdminHelpdeskCategoriesTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.helpdesk.categories.store'), [])
             ->assertSessionHasErrors()
-            ->assertSessionMissing([
+            ->assertSessionHasErrors([
+                'name' => 'The name field is required.', 
+                'color' => 'The color field is required.', 
+                'description' => 'The description field is required.',
+            ])->assertSessionMissing([
                 $this->flashSession . '.message' => 'Category has been added as helpdesk category.', 
                 $this->flashSession . '.level'   => 'success']
             )
@@ -218,16 +226,24 @@ class AdminHelpdeskCategoriesTest extends TestCase
         $input    = $this->fakeCategoryInput();
         $category = factory(Category::class)->create();
 
-        $this->patch(route('admin.helpdesk.categories.update', $category))
+        $this->patch(route('admin.helpdesk.categories.update', $category), $input)
+            ->assertStatus(302)
+            ->assertRedirect(route('login'));
     }
 
     /**
      * @test 
-     * @testdox Catgegory update incorrect role
+     * @testdox Category update incorrect role
      */
     public function categoryUpdateIncorrectRole(): void 
     {
-        
+        $user     = $this->createNormalUser();
+        $input    = $this->fakeCategoryInput();
+        $category = factory(Category::class)->create(); 
+
+        $this->actingAs($user)
+            ->patch(route('admin.helpdesk.categories.update', $category), $input)
+            ->assertStatus(403);
     }
 
     /**
@@ -236,15 +252,136 @@ class AdminHelpdeskCategoriesTest extends TestCase
      */
     public function categoryUpdateCorrectRoleInvalidId(): void
     {
+        $user     = $this->createAdminUser();
+        $input    = $this->fakeCategoryInput();
 
+        $this->actingAs($user)
+            ->patch(route('admin.helpdesk.categories.update', ['id' => 1000]), $input)
+            ->assertStatus(404);
     }
 
     /**
      * @test
-     * @testdox Category updaten incorect Role valid id
+     * @testdox Category update incorect Role valid id
      */
     public function categoryUpdateIncorrectRoleValidId(): void 
     {
+        $user     = $this->createAdminUser(); 
+        $input    = $this->fakeCategoryInput();
+        $category = factory(Category::class)->create();
 
+        $this->actingAs($user)
+            ->patch(route('admin.helpdesk.categories.update', $category), $input)
+            ->assertStatus(302)
+            ->assertRedirect(route('admin.helpdesk.categories.edit', $category))
+            ->assertSessionMissing([
+                $this->flashSession . '.message' => 'Category has been added as helpdesk category.', 
+                $this->flashSession . '.level'   => 'success']
+            );
+
+        $this->assertDatabaseHas('categories', array_merge(['id' => $category->id], $input));
+
+        $this->assertDatabaseHas('activity_log', [
+            'log_name' => 'default', 'description' => "Has updated the category {$input['name']}", 
+            'subject_id' => $category->id, 'subject_type' => 'Misfits\Category', 'causer_id' => $user->id, 'properties' => '[]'
+        ]);
+
+        $this->assertDatabaseMissing('categories', [
+            'id' => $category->id, 'name' => $category->name, 'color' => $category->color, 'description' => $category->description
+        ]);
+    }
+
+    /**
+     * @test
+     * @testdox Category updat with coreect role and id but with incomple data
+     */
+    public function categoryUpdateCorrectRoleValidationErrors(): void 
+    {
+        $user     = $this->createAdminUser(); 
+        $category = factory(Category::class)->create(); 
+
+        $this->actingAs($user)
+            ->patch(route('admin.helpdesk.categories.update', $category), [])
+            ->assertStatus(302)
+            ->assertSessionMissing([
+                $this->flashSession . '.message' => 'The category has been updated.', 
+                $this->flashSession . '.level'   => 'success']
+            )->assertSessionHasErrors([
+                'name' => 'The name field is required.', 
+                'color' => 'The color field is required.', 
+                'description' => 'The description field is required.',
+            ]);
+
+        $this->assertDatabaseMissing('activity_log', [
+            'log_name' => 'default', 'subject_id' => $category->id, 
+            'subject_type' => 'Misfits\Category', 'causer_id' => $user->id, 'properties' => '[]',
+            'description' => "Has updated the category {$category->name}", 
+        ]);
+    }
+
+    /**
+     * @test
+     * @testdox Delete category Unauthenticated
+     */
+    public function deleteCategoryUnauthenticated(): void 
+    {
+        $category = factory(Category::class)->create(); 
+
+        $this->get(route('admin.helpdesk.categories.delete', $category))
+            ->assertStatus(302)
+            ->assertRedirect(route('login')); 
+    }
+
+    /**
+     * @test
+     * @testdox delete category Incorrect role
+     */
+    public function deleteCategoryIncorrectRole(): void 
+    {
+        $user     = $this->createNormalUser();
+        $category = factory(Category::class)->create(); 
+
+        $this->actingAs($user)
+            ->get(route('admin.helpdesk.categories.delete', $category))
+            ->assertStatus(403);
+    }
+
+    /**
+     * @test 
+     * @testdox Delete category correct role and valid id
+     */
+    public function deleteCategoryCorrectRoleValidId(): void 
+    {
+        $user     = $this->createAdminUser();
+        $category = factory(Category::class)->create(); 
+
+        $this->actingAs($user)
+            ->get(route('admin.helpdesk.categories.delete', $category))
+            ->assertStatus(302)
+            ->assertSessionHas([
+                $this->flashSession . '.message' => $category->name . ' has been deleted as helpdesk category.', 
+                $this->flashSession . '.level'   => 'success'
+            ]);
+
+            $this->assertDatabaseMissing('categories', ['id' => $category->id]);
+
+            $this->assertDatabaseHas('activity_log', [
+                'log_name' => 'default',  'description' => " has deleted the category {$category->name}", 'subject_id' => $category->id, 
+                'subject_type' => 'Misfits\Category', 'causer_id' => $user->id, 
+                'properties' => '[]'
+            ]);
+    }
+
+    /**
+     * @test 
+     * @testdox
+     */
+    public function deleteCategoryCorrectRoleInvalidId(): void 
+    {
+        $user     = $this->createAdminUser();
+    
+        $this->actingAs($user)
+            ->get(route('admin.helpdesk.categories.delete', ['id' => 1000]))
+            ->assertStatus(404);
     }
 }

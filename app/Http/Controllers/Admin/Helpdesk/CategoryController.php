@@ -69,7 +69,7 @@ class CategoryController extends Controller
         $input->merge(['author_id' => $input->user()->id, 'module' => 'helpdesk']);
 
         if ($category = $this->categories->create($input->all())) {
-            $this->logActivity($category, " has created the category {$category->name}");
+            $this->logActivity($category, "has created the category {$category->name}");
             flash($category->name . ' has been added as helpdesk category.')->success();
         }
 
@@ -105,7 +105,7 @@ class CategoryController extends Controller
             flash('The category has been updated.')->success();
         }
 
-        return redirect()->route(route('admin.helpdesk.categories.edit', $category));
+        return redirect()->route('admin.helpdesk.categories.edit', $category);
     }
 
     /**

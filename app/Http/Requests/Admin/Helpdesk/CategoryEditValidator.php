@@ -4,6 +4,13 @@ namespace Misfits\Http\Requests\Admin\Helpdesk;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Validator for editig categories in the system. 
+ * 
+ * @author      Tim Joosten <tim@activisme.be>
+ * @copyright   2018 Tim Joosten and his contributors
+ * @package     Misfits\Http\Requests\Admin\Helpdesk
+ */
 class CategoryEditValidator extends FormRequest
 {
     /**
@@ -11,9 +18,9 @@ class CategoryEditValidator extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return auth()->user()->hasRole('admin');
     }
 
     /**
@@ -21,10 +28,12 @@ class CategoryEditValidator extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'name' => 'string|required|max:180',
+            'color' => 'required|string|max:7',
+            'description' => 'required'
         ];
     }
 }
