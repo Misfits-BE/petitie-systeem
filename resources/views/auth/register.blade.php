@@ -61,6 +61,19 @@
                             </div>
                         </div>
 
+                        <div class="form-group {{ $errors->has('TermsOfService') ? 'has-error' : '' }}">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="accept" @input('TermsOfService')>
+                                        I accept the <a target="_blank" href="{{ route('policy.disclaimer') }}">terms of service</a>
+                                    </label>
+                                </div>
+
+                                @error("TermsOfService")
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
