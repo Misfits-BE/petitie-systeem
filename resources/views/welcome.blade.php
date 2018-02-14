@@ -15,7 +15,7 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-file-text-o" style="padding-right: 5px;"></i> trending in <a href="">#test</a>
+                        <i class="fa fa-file-text-o" style="padding-right: 5px;"></i> Trending in <a href="">#test</a>
 
                         <span class="pull-right">
                             1.000.000 signatures
@@ -37,7 +37,9 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary btn-lg btn-block">Explore more petitions</button>
+                <a href="" class="btn btn-primary btn-lg btn-block">
+                    <i class="fa fa-fw fa-wpexplorer"></i> Explore more petitions
+                </a>
 
             </div>
 
