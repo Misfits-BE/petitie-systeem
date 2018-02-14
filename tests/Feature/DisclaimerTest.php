@@ -18,7 +18,7 @@ class DisclaimerTest extends TestCase
      * @test
      * @testdox Test the front-end disclaimer policy page.
      */
-    public function disclaimerPolicy()
+    public function disclaimerPolicy(): void
     {
         $this->get(route('policy.disclaimer'))->assertStatus(200);
     }

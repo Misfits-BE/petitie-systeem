@@ -15,7 +15,7 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-file-text-o" style="padding-right: 5px;"></i> trending in #test
+                        <i class="fa fa-file-text-o" style="padding-right: 5px;"></i> trending in <a href="">#test</a>
 
                         <span class="pull-right">
                             1.000.000 signatures

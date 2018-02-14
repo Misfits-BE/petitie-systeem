@@ -117,6 +117,7 @@
                 <div class="col-sm-3">
                     <h5>Get started</h5>
                     <ul>
+                        <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     </ul>
                 </div>
@@ -129,9 +130,9 @@
                 <div class="col-sm-3">
                     <h5>Connect with us</h5>
                     <ul>
-                        <li><a href="https://www.facebook.com/ActivismeBE/"><i class="fa fa-fw fa-facebook"></i> Facebook</a></li>
-                        <li><a href="https://twitter.com/Activisme_be"><i class="fa fa-fw fa-twitter"></i> Twitter</a></li>
-                        <li><a href="https://github.com/Misfits-BE/petitie-systeem"><i class="fa fa-fw fa-github"></i> GitHub</a></li>
+                        <li><a href="https://www.facebook.com/ActivismeBE/"><i class="color-facebook fa fa-fw fa-facebook"></i> Facebook</a></li>
+                        <li><a href="https://twitter.com/Activisme_be"><i class="color-twitter fa fa-fw fa-twitter"></i> Twitter</a></li>
+                        <li><a href="https://github.com/Misfits-BE/petitie-systeem"><i class="color-github fa fa-fw fa-github"></i> GitHub</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-3 info">
