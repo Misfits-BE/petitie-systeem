@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Misfits\Http\Controllers\Controller;
+use Misfits\Http\Requests\Admin\Ban\BanValidator;
 use Misfits\Repositories\UserRepository;
 
 /**
@@ -52,16 +53,29 @@ class BanController extends Controller
     /**
      * Create the user ban in the storage.
      *
-     * @param  int $user    The uniqie identifier from the user in the database storage
+     * @param  BanValidator $input
+     * @param  int          $user    The unique identifier from the user in the database storage
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(int $user): RedirectResponse
+    public function store(BanValidator $input, int $user): RedirectResponse
     {
+        $user = $this->users->findOrFail($user);
 
+        if ($this->users->lockUser($input)) {
+            flash($user->name . 'has been banned in the system.')->success();
+        }
     }
 
-    public function destroy(): RedirectResponse
+    /**
+     * Delete a user ban out of the system.
+     *
+     * @param  int $user    The unique identifier from the user in the database storage
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(int $user): RedirectResponse
     {
-
+        if ($this->users->activateUser($user)) {
+            //
+        }
     }
 }
