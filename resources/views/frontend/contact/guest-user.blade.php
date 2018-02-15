@@ -13,19 +13,14 @@
         <div class="row">
             <div class="panel panel-default panel-body">
 
-                <div role="alert" class="tw-bg-blue-lightest tw-border tw-border-blue-light tw-text-blue-dark tw-px-4 tw-py-3 tw-rounded tw-relative"> {{-- INFO alert --}}
-                    <strong class="tw-font-bold"><i class="fa fa-fw fa-info-circle"></i></strong> 
-                    <span class="tw-font-bold tw-sm:inline">
-                        Please read first the <span class="tw-underline">FAQ</span> section before you send us a question.
-                    </span> 
-                    
-                    <br><br> 
-                    
-                    <span class="tw-sm:inline">
+                <div class="alert-message alert-message-success">
+                    <h4><strong><i class="fa fa-info-circle"></i> Please read first the <span class="tw-underline">FAQ</span> section before you send us a question. </strong></h4>
+
+                    <p>
                         If your answer is not provided in the FAQ (you can find the faq at the footer of this page.), or you want to just leave a massage. You can send the form and send it to us. <br>
                         Further we are also active on Facebook and Twitter.
-                    </span>
-                </div> {{-- // End info alert --}}
+                    </p>
+                </div>
 
                 <form action="" method="POST" class="tw-mt-8"> {{-- Contact form --}}
                     {{ csrf_field() }} {{-- form field protection --}}
@@ -63,7 +58,7 @@
                         </div>
 
                         <div class="col-md-12"> {{-- Submit and reset button --}}
-                            <button type="submit" style="border-radius: 3px;" class="btn btn-success pull-right">
+                            <button type="submit" class="btn btn-success pull-right">
                                 <i class="fa fa-check"></i> Send
                             </button> 
                         </div> {{-- // END submit and reset bbutton --}}
