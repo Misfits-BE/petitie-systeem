@@ -4,7 +4,10 @@
 <div class="jumbotron margin-top-minus-20">
         <div class="container">
             <h1>{{ config('app.name' )}} - Petitions</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p>
+                Change isn’t a product exclusively manufactured by the industrial leaders or governments. <br>
+                That’s something that’s in everybody.
+            </p>
             <p><a class="btn btn-primary btn-lg" href="#" role="button">Discover petitions »</a></p>
         </div>
     </div>

@@ -3,8 +3,12 @@
 @section('content')
     <div class="jumbotron margin-top-minus-20">
         <div class="container">
-            <h1>{{ config('app.name' )}} - Disclaimer</h1>
-            <p>Last edited on: 00/00/0000</p>
+            <h1>{{ config('app.name' )}} - Petitions</h1>
+            <p>
+                Change isn’t a product exclusively manufactured by the industrial leaders or governments. <br>
+                That’s something that’s in everybody.
+            </p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Discover petitions »</a></p>
         </div>
     </div>
 
@@ -13,6 +17,8 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        <h1>Terms of service</h1>
+
                         <p>
                             This website is property of Activisme_BE. By accessing and using this website you explicity agree
                             with the following terms and conditions.
