@@ -11610,7 +11610,8 @@ i.color-github {
   border-color: #d9534f;
 }
 
-.alert-message-danger h4 {
+.alert-message-danger h4,
+.alert-message-danger p {
   color: #d9534f;
 }
 
@@ -11619,7 +11620,8 @@ i.color-github {
   border-color: #f0ad4e;
 }
 
-.alert-message-warning h4 {
+.alert-message-warning h4,
+.alert-message-warning p {
   color: #f0ad4e;
 }
 
