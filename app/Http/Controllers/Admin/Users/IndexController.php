@@ -36,7 +36,7 @@ class IndexController extends Controller
      */
     public function __construct(UserRepository $users, RoleRepository $roles)
     {
-        $this->middleware(['auth', 'role:admin']);
+        $this->middleware(['auth', 'role:admin', 'forbid-banned-user']);
 
         $this->users = $users;
         $this->roles = $roles;

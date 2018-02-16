@@ -34,7 +34,7 @@ class HelpdeskController extends Controller
      */
     public function __construct(CategoryRepository $categories, TicketRepository $helpdesk)
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth', 'forbid-banned-user']);
 
         $this->categories = $categories;
         $this->helpdesk   = $helpdesk;

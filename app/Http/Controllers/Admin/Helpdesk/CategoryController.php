@@ -31,7 +31,7 @@ class CategoryController extends Controller
      */
     public function __construct(CategoryRepository $categories)
     {
-        $this->middleware(['auth', 'role:admin']);
+        $this->middleware(['auth', 'role:admin', 'forbid-banned-user']);
         $this->categories = $categories;
     }
 
