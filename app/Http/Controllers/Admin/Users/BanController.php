@@ -8,6 +8,7 @@ use Illuminate\View\View;
 use Misfits\Http\Controllers\Controller;
 use Misfits\Http\Requests\Admin\Ban\BanValidator;
 use Misfits\Repositories\UserRepository;
+use Misfits\Repositories\BanRepository;
 
 /**
  * Class BanController
@@ -23,18 +24,24 @@ class BanController extends Controller
     /** @var \Misfits\Repositories\UserRepository $users */
     private $users;
 
+    /** @var \Misfits\Repositories\BanRepository $bans */
+    private $bans;
+
     /**
      * BanController constructor.
      *
      * @todo Implmentatie Laravel authorization gate.
      *
      * @param  UserRepository $users    Abstraction layer between controller, logic, database
+     * @param  BanRepository  $bans     Repository for all the ban/unban logic in the application.
      * @return void
      */
-    public function __construct(UserRepository $users)
+    public function __construct(UserRepository $users, BanRepository $bans)
     {
         $this->middleware(['auth', 'role:admin', 'forbid-banned-user']);
+
         $this->users = $users;
+        $this->bans  = $bans;
     }
 
     /**
@@ -45,9 +52,7 @@ class BanController extends Controller
      */
     public function create(int $user): View
     {
-        return view('admin.ban.create', [
-            'user' => $this->users->findOrFail($user)
-        ]);
+        return view('admin.ban.create', ['user' => $this->users->findOrFail($user)]);
     }
 
     /**
@@ -61,7 +66,7 @@ class BanController extends Controller
     {
         $user = $this->users->findOrFail($user);
 
-        if ($this->users->lockUser($input)) {
+        if ($this->bans->lock($input)) {
             flash($user->name . 'has been banned in the system.')->success();
         }
     }
@@ -74,7 +79,7 @@ class BanController extends Controller
      */
     public function destroy(int $user): RedirectResponse
     {
-        if ($this->users->activateUser($user)) {
+        if ($this->bans->unlock($user)) {
             //
         }
     }
