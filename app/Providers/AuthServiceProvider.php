@@ -13,6 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         \Misfits\Ticket::class => \Misfits\Policies\HelpdeskPolicy::class,
+        \Misfits\User::class   => \Misfits\Policies\UserPolicy::class,
     ];
 
     /**
