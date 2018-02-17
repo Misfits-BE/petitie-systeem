@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Cog\Laravel\Ban\Traits\Bannable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements BannableContract
 {
     use Notifiable, HasRoles, Bannable;
 
