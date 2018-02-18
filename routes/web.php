@@ -44,6 +44,7 @@ Route::patch('admin/helpdesk/categories/update/{id}', 'Admin\Helpdesk\CategoryCo
 
 // User ban routes 
 Route::get('admin/users/ban/{id}', 'Admin\Users\BanController@create')->name('admin.users.ban');
+Route::post('admin/users/ban/{id}', 'Admin\Users\BanController@store')->name('admin.users.ban.create');
 
 // User management console
 Route::get('admin/users', 'Admin\Users\IndexController@index')->name('admin.users.index');

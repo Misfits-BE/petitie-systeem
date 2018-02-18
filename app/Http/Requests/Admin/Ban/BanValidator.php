@@ -4,6 +4,13 @@ namespace Misfits\Http\Requests\Admin\Ban;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Request validator for the banning of users. 
+ * 
+ * @author      Tim Joosten <tim@activisme.be>
+ * @copyright   2018 Tim Joosten and huis contributors
+ * @package     Misfits\Http\Requests\Admin\Ban
+ */
 class BanValidator extends FormRequest
 {
     /**
@@ -11,9 +18,9 @@ class BanValidator extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return auth()->user()->hasRole('admin');
     }
 
     /**
@@ -21,10 +28,8 @@ class BanValidator extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
-        return [
-            //
-        ];
+        return ['reason' => 'required'];
     }
 }

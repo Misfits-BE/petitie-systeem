@@ -5,11 +5,14 @@ namespace Misfits\Repositories;
 use Misfits\User;
 use ActivismeBE\DatabaseLayering\Repositories\Contracts\RepositoryInterface;
 use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
+use Cog\Laravel\Ban\Models\Ban;
 
 /**
  * Class BanRepository
  *
- * @package Misfits\Repositories
+ * @author      Tim Joosten <tim@activisme.be>
+ * @copyright   2018 Tim Joosten and his contributors
+ * @package     Misfits\Repositories
  */
 class BanRepository extends Repository
 {
@@ -24,11 +27,17 @@ class BanRepository extends Repository
     }
 
     /**
-     * 
-     * @return Ban
+     * Method for notifying and banning users in the application 
+     *
+     * @todo Implement mail notification.
+     * @todo Implement ban logic
+     *  
+     * @param  string       $reason The reason why the user is banned.
+     * @param  Misftis\User $user   The user that returned from the database storage
+     * @return \Cog\Laravel\Ban\Models\Ban
      */
-    public function lock(User $user) 
+    public function lock(User $user, string $input): Ban
     {
-        $user->ban();
+        return $ban;
     }
 }

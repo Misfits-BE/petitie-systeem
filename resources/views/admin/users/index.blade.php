@@ -58,9 +58,11 @@
                                                         <i class="fa fa-fw fa-cogs"></i>
                                                     </a> 
                                                 
-                                                    <a href="{{ route('admin.users.ban', $user) }}" class="text-danger">
-                                                        <i class="fa fa-fw fa-lock"></i>
-                                                    </a>
+                                                    @cannot('same-user', $user) {{-- The user is not the same then the authenticated user --}}
+                                                        <a href="{{ route('admin.users.ban', $user) }}" class="text-danger">
+                                                            <i class="fa fa-fw fa-lock"></i>
+                                                        </a>
+                                                    @endcannot
 
                                                     <a href="{{ route('admin.users.delete', $user) }}" class="text-danger">
                                                         <i class="fa fa-fw fa-close"></i>
