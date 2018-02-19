@@ -60,9 +60,9 @@ class BanTest extends TestCase
             ->post(route('admin.users.ban.create', $user), $this->fakeBanInput())
             ->assertStatus(302)
             ->assertSessionHas([
-                $this->flashSession . '.message'   => 'Info: You cannot ban yourself in the application.', 
+                $this->flashSession . '.message'   => 'Info: We could not perform the ban in the application.',
                 $this->flashSession . '.level'     => 'info',
-                $this->flashSession . '.important' => 'true',
+                $this->flashSession . '.important' => true,
             ])->assertRedirect(route('admin.users.index'));
     }
 
@@ -94,7 +94,7 @@ class BanTest extends TestCase
             ->assertSessionMissing([
                 $this->flashSession . '.message'   => "{$user['name']} has been banned in the system.",
                 $this->flashSession . '.level'     => 'success',
-                $this->flashSession . '.important' => "true",
+                $this->flashSession . '.important' => 'true',
             ])->assertStatus(302);
 
     }
@@ -105,6 +105,6 @@ class BanTest extends TestCase
      */
     public function correctRoleWithValidId(): void
     {
-        //
+        $this->markTestIncomplete('TODO: Build up the phpunit test');
     }
 }

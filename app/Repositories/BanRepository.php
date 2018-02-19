@@ -30,14 +30,26 @@ class BanRepository extends Repository
      * Method for notifying and banning users in the application 
      *
      * @todo Implement mail notification.
-     * @todo Implement ban logic
-     *  
+     *
+     * @param  \Misfits\User $user   The user that returned from the database storage
      * @param  string       $reason The reason why the user is banned.
-     * @param  Misftis\User $user   The user that returned from the database storage
      * @return \Cog\Laravel\Ban\Models\Ban
      */
-    public function lock(User $user, string $input): Ban
+    public function lock(User $user, string $reason): Ban
     {
-        return $ban;
+        return $user->ban(['comment' => $reason, 'expired_at' => '+2 weeks']);
+    }
+
+    /**
+     * Revoke a user ban in the system.
+     *
+     * @todo Implementation notification mail.
+     *
+     * @param  \Misfits\User $user The data from the user where te bans need to revoked.
+     * @return void
+     */
+    public function unlock(User $user): void
+    {
+        $user->unban();
     }
 }

@@ -17,14 +17,26 @@ class UserPolicy
     use HandlesAuthorization;
 
     /**
-     * Policy for checking is the db user is the same then the authenticated user.
+     * The user is permitted to ban the user.
      *
      * @param  \Misfits\User  $user     User entity from the auth session guard.
      * @param  \Misfits\User  $model    User entity from the database storage
      * @return bool
      */
-    public function sameUser(User $user, User $model): bool
+    public function banUser(User $user, User $model): bool
     {
-        return $user->id === $model->id;
+        return $user->id !== $model->id && $user->hasRole('admin') && $model->isNotBanned();
+    }
+
+    /**
+     * Authorization checker to check if the user is permitted to revoke a user ban
+     *
+     * @param  \Misfits\User $user      User entity from the auth session guard.
+     * @param  \Misfits\User $model     user entity from the database storage.
+     * @return bool
+     */
+    public function revokeBanUser(User $user, User $model): bool
+    {
+        return $user->id !== $model->id && $user->hasRole('admin') && $model->isBanned();
     }
 }

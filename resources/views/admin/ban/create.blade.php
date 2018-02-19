@@ -8,11 +8,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="text-danger fa fa-lock"></i> Ban an user in the system. 
-                        User: <strong class="pull-right">{{ $user->name }} ({{ $user->email }})</strong>
+                        User: <strong class="pull-right">{{ $dbUser->name }} ({{ $dbUser->email }})</strong>
                     </div>
 
                     <div class="panel-body">
-                        <form method="POST" action="{{ route('admin.users.ban.create', $user) }}" class="form-horizontal">
+                        <form method="POST" action="{{ route('admin.users.ban.create', $dbUser) }}" class="form-horizontal">
                             {{ csrf_field() }} {{-- Form field protection --}}
                         
                             <div class="form-group">
@@ -21,9 +21,9 @@
                                 </label>
 
                                 <div class="col-md-9">
-                                    <input type="type" id="user" class="form-control" value="{{ $user->name }}" disabled>
+                                    <input type="type" id="user" class="form-control" value="{{ $dbUser->name }}" disabled>
                                     <small class="help-block">
-                                        <span class="text-danger">*</span> User ({{ $user->name }}) will be banned for 2 weeks.
+                                        <span class="text-danger">*</span> User ({{ $dbUser->name }}) will be banned for 2 weeks.
                                     </small>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
                                 </label>
 
                                 <div class="col-md-9">
-                                    <textarea @input('reason') placeholder="The reason why {{ $user->name }} will be banned. This reason will ben mailed to the user." class="form-control" rows="8">{{ old('reason') }}</textarea>
+                                    <textarea @input('reason') placeholder="The reason why {{ $dbUser->name }} will be banned. This reason will ben mailed to the user." class="form-control" rows="8">{{ old('reason') }}</textarea>
                                     @error('reason') {{-- Error view partial --}}
                                 </div>
                             </div>

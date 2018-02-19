@@ -57,7 +57,10 @@ class BanController extends Controller
      */
     public function create(int $user): View
     {
-        return view('admin.ban.create', ['user' => $this->users->findOrFail($user)]);
+        // variable $dbUser is used becasue the variabe,
+        // $user is reserved for the authenticated user.
+
+        return view('admin.ban.create', ['dbUser' => $this->users->findOrFail($user)]);
     }
 
     /**
@@ -73,14 +76,14 @@ class BanController extends Controller
     {
         $user = $this->users->findOrFail($user);
 
-        if (Gate::denies('same-user', $user)) { // The user is not the same user then the authenticated user
-            // TODO: Fill in the ->lock() function. (Ban logic, notify logic)
+        if (Gate::allows('ban-user', $user)) { // The user is not the same user then the authenticated user
+            // TODO: Fill in the ->lock() function. (notify logic)
             if ($this->bans->lock($user, $input->reason)) { // The user is notified and blocked. 
                 $this->logActivity($user, auth()->user()->name . ' has banned a user in the application');
                 flash($user->name . ' has been banned in the system.')->important()->success();
             }
         } else { // User is the same user then the authenticated user. And can't ban himself
-            flash('Info: You cannot ban yourself in the application.')->important()->info();
+            flash('Info: We could not perform the ban in the application.')->important()->info();
         }
 
         return redirect()->route('admin.users.index');
@@ -89,25 +92,24 @@ class BanController extends Controller
     /**
      * Delete a user ban out of the system.
      *
-     * @todo Implement test trying to unban the user when he is the authenticated user
-     * @todo Implement test incorrect role 
      * @todo Implement test revoke ban success
-     * @todo Implement test revoke ban wrong id
-     * @todo Implement test unauthenticated user
      * 
      * @param  int $user    The unique identifier from the user in the database storage
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(int $user): RedirectResponse
     {
-        if (Gate::denies('same-users', $user)) {
-            // TODO: fill in the unlock method. (Unban logic and notify logic)
-            if ($this->bans->unlock($user)) {
-                $this->logActivity($user, auth()->user()->name . ' has revoked the ban from ' . $user->name);
-                flash($user->name . ' his ban has been revoked in the system.')->success()->important();
-            }
+        $user = $this->users->findOrFail($user);
+
+        if (Gate::allows('revoke-ban-user', $user)) {
+            $this->bans->unlock($user); // TODO: implementatie notify logic.
+            $this->logActivity($user, auth()->user()->name . ' has revoked the ban from ' . $user->name);
+
+            flash($user->name . ' his ban has been revoked in the system.')->success()->important();
         } else { // user is the same user then the authenticated user. and can't ban himself
-            flash('Info: you can not revoke the ban on yourself in the application.')->important()->success();
+            flash('Info: we could not revoke the ban in the application.')->important()->info();
         }
+
+        return redirect()->route('admin.users.index');
     }
 }
