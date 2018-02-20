@@ -17,7 +17,7 @@
                                 </a> 
                             @endif
 
-                            <a href="" class="btn btn-xs btn-default">
+                            <a href="{{ route('admin.users.create') }}" class="btn btn-xs btn-default">
                                 <i class="fa fa-user-plus"></i> Add user
                             </a>
                         </span>
