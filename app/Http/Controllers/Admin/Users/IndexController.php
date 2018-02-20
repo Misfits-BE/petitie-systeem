@@ -45,8 +45,6 @@ class IndexController extends Controller
     /**
      * Get the index controller for the user management.
      *
-     * @todo build up phpunit tests
-     *
      * @return \Illuminate\View\View
      */
     public function index(): View
@@ -58,9 +56,6 @@ class IndexController extends Controller
 
     /**
      * Create view for a new user in the system.
-     *
-     * @todo register route
-     * @todo build up phpunit tests
      *
      * @return \Illuminate\View\View
      */
@@ -92,9 +87,6 @@ class IndexController extends Controller
 
     /**
      * Delete a user out off the system.
-     *
-     * @todo register route
-     * @todo build up phpunit tests
      *
      * @param  int $user    The unique identifier in the database storage
      * @return \Illuminate\Http\RedirectResponse
