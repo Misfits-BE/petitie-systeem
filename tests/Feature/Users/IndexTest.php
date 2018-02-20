@@ -20,7 +20,7 @@ use Tests\Traits\InputFakers;
  */
 class IndexTest extends TestCase
 {
-    use RefreshDatabase, InputFakers, CreatesUsers;
+    use RefreshDatabase, CreatesUsers;
 
     /**
      * @test
