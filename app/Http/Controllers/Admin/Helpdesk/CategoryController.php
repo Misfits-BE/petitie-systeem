@@ -86,8 +86,14 @@ class CategoryController extends Controller
      */
     public function edit(int $category): View
     {
+        dd($this->categories->findOrFail($category, [
+            'name', 'color', 'description' //? Database columns
+        ]));
+
         return view('admin.helpdesk.categories.edit', [
-            'category' => $this->categories->findOrFail($category)
+            'category' => $this->categories->findOrFail($category, [
+                'name', 'color', 'description' //? Database columns
+            ])
         ]);
     }
 

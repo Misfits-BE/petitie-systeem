@@ -48,6 +48,9 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Access role <span class="text-danger">*</span>
+                                </label>
                             </div>
 
                             <div class="form-group">
