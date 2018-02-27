@@ -32,7 +32,7 @@ class HelpdeskValidator extends FormRequest
     {
         return [
             'title'       => 'required|max:190',
-            'category'    => 'required',
+            'category_id' => 'required',
             'description' => 'required'
         ];
     }

@@ -6,8 +6,8 @@
         <li role="presentation">
             <a href="">Assigned tickets <span class="badge">{{ $assignedTickets }}</span></a>
         </li>
-        <li role="presentation">
-            <a href="">Open tickets <span class="badge">{{ $openTickets}}</span></a>
+        <li role="presentation" class="{{ isActive('admin/helpdesk/tickets') }}">
+            <a href="{{ route('admin.helpdesk.tickets') }}">Open tickets <span class="badge">{{ $openTickets}}</span></a>
         </li>
         <li role="presentation" class="{{ isActive('admin/helpdesk/categories*') }}">
             <a href="{{ route('admin.helpdesk.categories.index') }}">Categories</a>

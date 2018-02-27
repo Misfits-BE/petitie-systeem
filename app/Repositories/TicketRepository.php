@@ -4,6 +4,7 @@ namespace Misfits\Repositories;
 
 use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
 use Misfits\Ticket;
+use Illuminate\Pagination\Paginator;
 
 /**
  * Class TicketRepository
@@ -32,5 +33,26 @@ class TicketRepository extends Repository
     public function countTickets($field, $value): int
     {
         return $this->model->where($field, $value)->count();
+    }
+
+    /**
+     * Get all the open tickets. The query will be changed when the user gives a search term. 
+     * 
+     * @param  null|string  $term    The user given search term.
+     * @param  int          $perPage The amount of results u want per page. Defaults to 15
+     * @return \illuminate\Pagination\Paginator
+     */
+    public function getOpenTickets(?string $term, int $perPage = 15): Paginator
+    {
+        $outputColumns = ['id', 'slug', 'title', 'author_id', 'created_at'];
+        $baseQuery     = $this->model->where(['is_open' => true]);
+
+        switch ($term) {
+            case is_null($term): // There is a search term given.
+                return $baseQuery->simplePaginate($perPage, $outputColumns);
+
+            default: // No search term given so fallback on the normal DB query.
+                return $baseQuery->where('title', 'LIKE', "%{$term}%")->simplePaginate($perPage, $outputColumns);
+        }
     }
 }

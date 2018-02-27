@@ -161,5 +161,6 @@
 
     {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts') {{-- page specific JavaScript Stack --}}
 </body>
 </html>

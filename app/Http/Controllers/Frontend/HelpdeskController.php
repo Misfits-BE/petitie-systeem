@@ -83,7 +83,7 @@ class HelpdeskController extends Controller
 
     /**
      * Store method for the user his helpdesk ticket.
-     *
+     * 
      * @param  HelpdeskValidator $input     The user given input (validated).
      * @return \Illuminate\Http\RedirectResponse
      */
