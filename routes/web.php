@@ -31,6 +31,8 @@ Route::get('helpdesk/nieuw', 'Frontend\HelpdeskController@create')->name('helpde
 Route::get('helpdesk/{ticket}', 'Frontend\HelpdeskController@show')->name('helpdesk.show');
 Route::post('helpdesk/store', 'Frontend\HelpdeskController@store')->name('helpdesk.store');
 
+Route::get('helpdesk/status/{slug}/{status}', 'Admin\Helpdesk\TicketController@close')->name('admin.helpdesk.tickets.status');
+
 // Admin helpdesk routes
 Route::get('admin/helpdesk', 'Admin\Helpdesk\IndexController@index')->name('admin.helpdesk.index');
 
@@ -44,8 +46,8 @@ Route::patch('admin/helpdesk/categories/update/{id}', 'Admin\Helpdesk\CategoryCo
 
 // Admin helpdesk routes (Tickets)
 Route::get('admin/helpdesk/tickets', 'Admin\Helpdesk\TicketController@index')->name('admin.helpdesk.tickets');
-Route::get('admin/helpdesk/show/{slug}', 'Admin\Helpdesk\TicketController@show')->name('admin.helpdesk.tickets.show');
-Route::get('admin/helpdesk/assign/{slug}', 'Admin\Helpdesk\TicketController@assign')->name('admin.helpdesk.tickets.assign');
+Route::get('admin/helpdesk/ticket/show/{slug}', 'Admin\Helpdesk\TicketController@show')->name('admin.helpdesk.tickets.show');
+Route::get('admin/helpdesk/tickets/assign/{slug}', 'Admin\Helpdesk\TicketController@assign')->name('admin.helpdesk.tickets.assign');
 
 // User ban routes 
 Route::get('admin/users/ban/{id}', 'Admin\Users\BanController@create')->name('admin.users.ban');

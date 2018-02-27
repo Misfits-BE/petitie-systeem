@@ -55,4 +55,20 @@ class TicketRepository extends Repository
                 return $baseQuery->where('title', 'LIKE', "%{$term}%")->simplePaginate($perPage, $outputColumns);
         }
     }
+
+    /**
+     * @param  \Misfits\Ticket  $ticket  The database entity form the ticket in the database.
+     * @param  string           $status  The newly status form the ticket. Default to. be reopen or close.
+     * @return bool
+     */
+    public function openClose(Ticket $ticket, string $status): bool
+    {
+        switch ($status) { // Determine the database query
+            case 'reopen': return $ticket->update(['is_open' => true,  'closed_at' => null]); 
+            case 'close':  return $ticket->update(['is_open' => false, 'closed_at' => now()]);
+
+            // Default return value
+            default: return false;
+        }
+    }
 }

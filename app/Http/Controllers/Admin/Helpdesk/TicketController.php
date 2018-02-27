@@ -30,7 +30,7 @@ class TicketController extends Controller
      */
     public function __construct(TicketRepository $tickets)
     {
-        $this->middleware(['auth', 'role:admin', 'forbid-banned-user'])->except(['show']); 
+        $this->middleware(['auth', 'role:admin', 'forbid-banned-user'])->except(['show', 'close']); 
         $this->tickets = $tickets;
     }
 
@@ -86,21 +86,24 @@ class TicketController extends Controller
             flash('The ticket has been assigned to you.')->info()->important();
         }
 
-        return back(Response::HTTP_FOUND);
+        return redirect()->route('admin.helpdesk.tickets.show', $ticket);
     }
 
     /**
      * Function for closing a ticket in the database storage. 
      * 
-     * @param  string  $slug  
+     * @param  string  $slug   The uniqie identifier from the ticket in the database storage
+     * @param  string  $status The status for the ticket. Can only be open or closed
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function close(): RedirectResponse 
+    public function close(string $slug, string $status): RedirectResponse 
     {
-        $ticket = $this->tickets->findBy('slug', $slug); 
+        $ticket = $this->tickets->findBy('slug', $slug);
 
-        if ($ticket->update()) {
-
+        if (Gate::allows('view', $ticket) && $this->tickets->openClose($ticket, $status)) {
+            $this->logActivity($ticket, auth()->user()->id . ' closed a support ticket');
         }
+
+        return redirect()->route('admin.helpdesk.tickets.show', ['slug' => $ticket->slug]);
     }
 }

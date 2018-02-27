@@ -11578,3 +11578,19 @@ i.color-github {
   margin-top: -20px;
 }
 
+.ticket-info {
+  margin-bottom: 10px;
+}
+
+.comment-avatar {
+  margin-right: 5px;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+
+.comments-border {
+  margin-top: 10px;
+  border-color: #d3e0e9;
+  margin-bottom: 10px;
+}
+
