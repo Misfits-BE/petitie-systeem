@@ -11,5 +11,12 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix // Laravel mix instance
+
+    // Global application JS and Stylesheets
+    .js('resources/assets/js/app.js', 'public/js')
+    .sass('resources/assets/sass/app.scss', 'public/css')
+   
+    // Bootstrap markdown (used for the comment sections)
+    .js('node_modules/bootstrap-markdown/js/bootstrap-markdown.js', 'public/js') 
+    .copy('node_modules/bootstrap-markdown/css/bootstrap-markdown.min.css', 'public/css');

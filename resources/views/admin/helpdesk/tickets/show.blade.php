@@ -41,9 +41,10 @@
 
                 <hr class="comments-border" /> {{-- END comment listing --}}
 
-                <div class="panel panel-default panel-body">
-                    
-                </div>
+                <form> {{-- Reply form --}}
+                    <textarea name="content" class="form-control wysiwyg" data-provide="markdown" rows="5"></textarea>
+                    <button type="submit" class="btn btn-sm btn-reply btn-success">Reply</button>
+                </form> {{-- // Reply form --}}
 
             </div> {{-- /End content --}}
 
@@ -127,6 +128,11 @@
     </div>
 @endsection
 
+@push('stylesheets')
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-markdown.min.css') }}"></link>
+@endpush
+
 @push('scripts')
+    <script src="{{ asset('js/bootstrap-markdown.js') }}"></script>
     <script> $(function () { $('[data-toggle="tooltip"]').tooltip() }) </script> 
 @endpush
