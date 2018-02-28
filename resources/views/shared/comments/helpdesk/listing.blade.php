@@ -5,8 +5,8 @@
 <div class="panel panel-default ticket-info"> {{-- Comment box --}}
     <div class="panel-heading">
         <img src="http://via.placeholder.com/20x20" class="comment-avatar" alt="{{ $reaction->author->name }} - avatar">
-        <strong>{{ $reaction->author->name }}</strong> 
-        <small class="text-muted">replied {{ $reaction->created_at->diffForHumans() }}}</small>
+        <strong><a href="">{{ $reaction->author->name }}</a></strong> 
+        <small class="text-muted">replied {{ $reaction->created_at->diffForHumans() }}</small>
 
         @can ('delete', $reaction) {{-- The authencated user is the comment author and can delete the comment --}}
             <a href="" class="pull-right text-muted" data-toggle="tooltip" data-placement="bottom" title="Delete">
