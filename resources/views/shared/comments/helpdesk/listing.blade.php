@@ -4,7 +4,7 @@
                     
 <div class="panel panel-default ticket-info"> {{-- Comment box --}}
     <div class="panel-heading">
-        <img src="http://via.placeholder.com/20x20" class="comment-avatar">
+        <img src="http://via.placeholder.com/20x20" class="comment-avatar" alt="{{ $reaction->author->name }} - avatar">
         <strong>{{ $reaction->author->name }}</strong> 
         <small class="text-muted">replied {{ $reaction->created_at->diffForHumans() }}}</small>
 
@@ -13,7 +13,5 @@
         </a>
     </div>
 
-    <div class="panel-body">
-        Edit composer.json, edit app.php in /config and then run composer update.
-    </div>
+    <div class="panel-body">{{ $reaction->comment }}</div>
 </div> {{-- // Comment box --}}
