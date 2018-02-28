@@ -3,6 +3,7 @@
 namespace Misfits\Repositories;
 
 use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
+use Illuminate\Pagination\Paginator;
 use Misfits\User;
 use Spatie\Permission\Models\Role;
 
@@ -40,5 +41,16 @@ class UserRepository extends Repository
             $commandBus->warn($user->email);
             $commandBus->warn('Password is "secret"');
         }
+    }
+
+    /**
+     * Paginate all the users in the system.
+     *
+     * @param  int $perPage     The amount of results u want to display per page
+     * @return \Illuminate\Pagination\Paginator
+     */
+    public function getUsers(int $perPage): Paginator
+    {
+        return $this->model->simplePaginate($perPage);
     }
 }

@@ -49,7 +49,7 @@
 
                             @if ($user->hasRole('admin'))
                                 <li>
-                                    <a href="">
+                                    <a href="{{ route('admin.users.index') }}">
                                         <i class="fa fa-users"></i> Users
                                     </a>
                                 </li>
