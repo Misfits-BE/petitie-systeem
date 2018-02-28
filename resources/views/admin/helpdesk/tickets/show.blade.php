@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="panel-body">
-                        I've got some Laravel packages from @Cartalyst (I have a subscription). I've downloaded the packages as I can't currently install them via Composer for some reason.
+                        I've got some Laravel packages from Composer. I've downloaded the packages as I can't currently install them via Composer for some reason.
                         Is there a way I can integrate them into Laravel manually? I've put the relevant files into vendor/cartalyst but not sure what to do next.
                         Any suggestions would be appreciated. :)
                     </div>
@@ -43,8 +43,12 @@
 
                 <hr class="comments-border" /> {{-- END comment listing --}}
 
-                <form> {{-- Reply form --}}
-                    <textarea name="content" class="form-control wysiwyg" data-provide="markdown" rows="5"></textarea>
+                <form class="form-horizontal" method="POST" action="{{ route('comment.store', ['slug' => $ticket->slug]) }}"> {{-- Reply form --}}
+                    {{ csrf_field() }} {{-- Form field protection --}}
+
+                    <textarea @input('comment') class="form-control wysiwyg" data-provide="markdown" rows="5">{{ old('comment') }}</textarea>
+                    @error('comment', '<span class="help-block text-danger"><span class="text-danger">:message</span></span>') {{-- Validation error view partial --}}
+
                     <button type="submit" class="btn btn-sm btn-reply btn-success">Reply</button>
                 </form> {{-- // Reply form --}}
 
@@ -95,7 +99,7 @@
                     <div class="panel panel-default panel-body"> {{-- Additional ticket data --}}
                         <div class="table-responsive">
                         
-                            <table class="table table-responsive">
+                            <table class="table table-condensed">
                                 <thead>
                                     <tr><th colspan="2"><span class="pull-right text-muted">Additional data</span></th></tr>
                                 </thead>

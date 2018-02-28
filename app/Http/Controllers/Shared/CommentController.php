@@ -2,10 +2,12 @@
 
 namespace Misfits\Http\Controllers\Shared;
 
+use Gate;
 use Misfits\Http\Controllers\Controller;
 use Misfits\Repositories\CommentRepository;
 use Illuminate\Http\RedirectResponse;
 use Misfits\Http\Requests\Comment\CommentValidator;
+use Misfits\Repositories\TicketRepository;
 
 /**
  * Class CommentController 
@@ -19,16 +21,21 @@ class CommentController extends Controller
     /** @var \Misfits\Repositories\CommentRepository $comments */
     private $comments; 
 
+    /** @var \Misfits\Repositories\TicketRepository $tickets */
+    private $tickets;
+
     /**
      * CommentController constructor
      * 
      * @param  CommentRepository  $comments The abstraction layer between controller and database related logic.
      * @return void
      */
-    public function __construct(CommentRepository $comments) 
+    public function __construct(CommentRepository $comments, TicketRepository $tickets) 
     {
         $this->middleware(['auth']);
+
         $this->comments = $comments;
+        $this->tickets  = $tickets;
     }
 
     /** 
@@ -40,6 +47,12 @@ class CommentController extends Controller
      */
     public function store(CommentValidator $input, string $slug): RedirectResponse
     {
-        //
+        $ticketEntity = $this->tickets->findBy('slug', $slug);
+
+        if (Gate::allows('comment', $ticketEntity)) {
+            $this->comments->storeHelpdeskComment($ticketEntity, $input);
+        }
+
+        return redirect()->route('admin.helpdesk.tickets.show', ['slug' => $slug]);
     }
 }

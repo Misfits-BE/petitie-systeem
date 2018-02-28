@@ -33,6 +33,9 @@ Route::post('helpdesk/store', 'Frontend\HelpdeskController@store')->name('helpde
 
 Route::get('helpdesk/status/{slug}/{status}', 'Admin\Helpdesk\TicketController@close')->name('admin.helpdesk.tickets.status');
 
+// Comment routes
+Route::post('comment/{slug}/store', 'Shared\CommentController@store')->name('comment.store');
+
 // Admin helpdesk routes
 Route::get('admin/helpdesk', 'Admin\Helpdesk\IndexController@index')->name('admin.helpdesk.index');
 
