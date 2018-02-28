@@ -10,9 +10,11 @@
                     <div class="panel-heading">
                         <strong><i class="fa fa-fw fa-file-text-o"></i> {{ $ticket->title }}</strong>
 
-                        <a href="" class="pull-right text-muted" data-toggle="tooltip" data-placement="bottom" title="Edit ticket">
-                            <i class="fa fa-pencil"></i>
-                        </a>
+                        @can ('update', $ticket) {{-- user is authorizated to edit the ticket --}}
+                            <a href="" class="pull-right text-muted" data-toggle="tooltip" data-placement="bottom" title="Edit ticket">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        @endcan
                     </div>
 
                     <div class="panel-body">
