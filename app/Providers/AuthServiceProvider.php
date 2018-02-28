@@ -12,8 +12,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        \Misfits\Ticket::class => \Misfits\Policies\HelpdeskPolicy::class,
-        \Misfits\User::class   => \Misfits\Policies\UserPolicy::class,
+        \Misfits\Ticket::class  => \Misfits\Policies\HelpdeskPolicy::class,
+        \Misfits\User::class    => \Misfits\Policies\UserPolicy::class,
+        \Misfits\Comment::class => \Misfits\Policies\CommentPolicy::class,
     ];
 
     /**

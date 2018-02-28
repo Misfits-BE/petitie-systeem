@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Database model fàor the helpdesk tickets
@@ -75,6 +76,16 @@ class Ticket extends Model
                 <span class="text-muted">(none) - </span> 
                 <a href="'. route('admin.helpdesk.tickets.assign', ["slug" => $this->slug]) . '">Assign yourself</a>'
         ]);
+    }
+
+    /**
+     * Data relation for all the comments specified to the given ticket. 
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 
     /**

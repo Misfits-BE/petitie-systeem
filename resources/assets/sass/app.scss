@@ -12,19 +12,5 @@
 @import "images";
 @import "social";
 @import "margins";
-
-.ticket-info {
-    margin-bottom: 10px;
-}
-
-.comment-avatar {
-    margin-right: 5px; 
-    vertical-align: middle; 
-    border-radius: 50%;
-}
-
-.comments-border {
-    margin-top: 10px;
-    border-color: darken($body-bg, 10%);
-    margin-bottom: 10px;
-}
+@import "comments";
+@import "tickets";

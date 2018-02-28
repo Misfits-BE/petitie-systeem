@@ -18,34 +18,26 @@
                     </div>
 
                     <div class="panel-body">
-                        I've got some Laravel packages from @Cartalyst (I have a subscription). I've downloaded the packages as I can't currently install them via Composer for some reason.
+                        I've got some Laravel packages from Composer. I've downloaded the packages as I can't currently install them via Composer for some reason.
                         Is there a way I can integrate them into Laravel manually? I've put the relevant files into vendor/cartalyst but not sure what to do next.
                         Any suggestions would be appreciated. :)
                     </div>
                 </div> {{--//Ticket section--}}
 
-                <hr class="comments-border" /> {{-- Start comment listing --}}
-                    
-                    <div class="panel panel-default ticket-info"> {{-- Comment box --}}
-                        <div class="panel-heading">
-                            <img src="http://via.placeholder.com/20x20" class="comment-avatar">
-                            <strong>Tim Joosten</strong> <small class="text-muted">replied 2 years ago</small>
-
-                            <a href="" class="pull-right text-muted" data-toggle="tooltip" data-placement="bottom" title="Delete">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </div>
-
-                        <div class="panel-body">
-                            Edit composer.json, edit app.php in /config and then run composer update.
-                        </div>
-                    </div> {{-- // Comment box --}}
+                @foreach ($ticket->comments as $reaction) {{-- Loop through the ticket comments --}} 
+                    @include('shared.comments.helpdesk.listing', $reaction) {{-- Comment partial that will be outputted for each comment --}}
+                @endforeach {{-- /// Comments loop --}}
 
                 <hr class="comments-border" /> {{-- END comment listing --}}
 
-                <div class="panel panel-default panel-body">
-                    
-                </div>
+                <form class="form-horizontal" method="POST" action="{{ route('comment.store', ['slug' => $ticket->slug]) }}"> {{-- Reply form --}}
+                    {{ csrf_field() }} {{-- Form field protection --}}
+
+                    <textarea @input('comment') class="form-control wysiwyg" data-provide="markdown" rows="5">{{ old('comment') }}</textarea>
+                    @error('comment', '<span class="help-block text-danger"><span class="text-danger">:message</span></span>') {{-- Validation error view partial --}}
+
+                    <button type="submit" class="btn btn-sm btn-reply btn-success">Reply</button>
+                </form> {{-- // Reply form --}}
 
             </div> {{-- /End content --}}
 
@@ -94,7 +86,7 @@
                     <div class="panel panel-default panel-body"> {{-- Additional ticket data --}}
                         <div class="table-responsive">
                         
-                            <table class="table table-responsive">
+                            <table class="table table-condensed">
                                 <thead>
                                     <tr><th colspan="2"><span class="pull-right text-muted">Additional data</span></th></tr>
                                 </thead>
@@ -129,6 +121,11 @@
     </div>
 @endsection
 
+@push('stylesheets')
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-markdown.min.css') }}"></link>
+@endpush
+
 @push('scripts')
+    <script src="{{ asset('js/bootstrap-markdown.js') }}"></script>
     <script> $(function () { $('[data-toggle="tooltip"]').tooltip() }) </script> 
 @endpush
