@@ -17,16 +17,18 @@ class CreateTicketsTable extends Migration
             $table->increments('id');
             $table->integer('author_id')->unsigned()->nullable();
             $table->integer('assignee_id')->unsigned()->nullable();
-            $table->integer('category')->unsigned()->nullable()->comment('BelongsTo Relation');
+            $table->integer('category_id')->unsigned()->nullable()->comment('BelongsTo Relation');
             $table->boolean('is_open')->default('1');
+            $table->string('slug');
             $table->string('title');
             $table->text('description');
+            $table->date('closed_at')->nullable();
             $table->timestamps();
 
             // Foreign keys constraints
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('assignee_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('category')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('category_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

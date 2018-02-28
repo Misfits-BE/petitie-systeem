@@ -31,6 +31,11 @@ Route::get('helpdesk/nieuw', 'Frontend\HelpdeskController@create')->name('helpde
 Route::get('helpdesk/{ticket}', 'Frontend\HelpdeskController@show')->name('helpdesk.show');
 Route::post('helpdesk/store', 'Frontend\HelpdeskController@store')->name('helpdesk.store');
 
+Route::get('helpdesk/status/{slug}/{status}', 'Admin\Helpdesk\TicketController@close')->name('admin.helpdesk.tickets.status');
+
+// Comment routes
+Route::post('comment/{slug}/store', 'Shared\CommentController@store')->name('comment.store');
+
 // Admin helpdesk routes
 Route::get('admin/helpdesk', 'Admin\Helpdesk\IndexController@index')->name('admin.helpdesk.index');
 
@@ -42,9 +47,17 @@ Route::get('admin/helpdesk/categories/delete/{id}', 'Admin\Helpdesk\CategoryCont
 Route::post('admin/helpdesk/categories/store', 'Admin\Helpdesk\CategoryController@store')->name('admin.helpdesk.categories.store');
 Route::patch('admin/helpdesk/categories/update/{id}', 'Admin\Helpdesk\CategoryController@update')->name('admin.helpdesk.categories.update');
 
+// Admin helpdesk routes (Tickets)
+Route::get('admin/helpdesk/tickets', 'Admin\Helpdesk\TicketController@index')->name('admin.helpdesk.tickets');
+Route::get('admin/helpdesk/ticket/show/{slug}', 'Admin\Helpdesk\TicketController@show')->name('admin.helpdesk.tickets.show');
+Route::get('admin/helpdesk/tickets/assign/{slug}', 'Admin\Helpdesk\TicketController@assign')->name('admin.helpdesk.tickets.assign');
+
 // User ban routes 
 Route::get('admin/users/ban/{id}', 'Admin\Users\BanController@create')->name('admin.users.ban');
+Route::get('/admin/users/unban/{id}', 'Admin\Users\BanController@destroy')->name('admin.users.ban.revoke');
+Route::post('admin/users/ban/{id}', 'Admin\Users\BanController@store')->name('admin.users.ban.create');
 
 // User management console
 Route::get('admin/users', 'Admin\Users\IndexController@index')->name('admin.users.index');
+Route::get('admin/users/create', 'Admin\Users\IndexController@create')->name('admin.users.create');
 Route::get('admin/users/delete/{id}', 'Admin\Users\IndexController@destroy')->name('admin.users.delete');

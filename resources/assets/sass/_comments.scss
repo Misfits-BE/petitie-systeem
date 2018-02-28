@@ -1,0 +1,19 @@
+.comment-avatar {
+    margin-right: 5px; 
+    vertical-align: middle; 
+    border-radius: 50%;
+}
+
+.comments-border {
+    margin-top: 10px;
+    border-color: darken($body-bg, 10%);
+    margin-bottom: 10px;
+}
+
+.md-editor .wysiwyg, .md-preview {
+    padding: 10px;
+}
+
+.btn-reply {
+    margin-top: 10px;
+}

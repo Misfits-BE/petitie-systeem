@@ -36,7 +36,7 @@ class IndexController extends Controller
      */
     public function __construct(UserRepository $users, RoleRepository $roles)
     {
-        $this->middleware(['auth', 'role:admin']);
+        $this->middleware(['auth', 'role:admin', 'forbid-banned-user']);
 
         $this->users = $users;
         $this->roles = $roles;
@@ -44,8 +44,6 @@ class IndexController extends Controller
 
     /**
      * Get the index controller for the user management.
-     *
-     * @todo build up phpunit tests
      *
      * @return \Illuminate\View\View
      */
@@ -58,9 +56,6 @@ class IndexController extends Controller
 
     /**
      * Create view for a new user in the system.
-     *
-     * @todo register route
-     * @todo build up phpunit tests
      *
      * @return \Illuminate\View\View
      */
@@ -92,9 +87,6 @@ class IndexController extends Controller
 
     /**
      * Delete a user out off the system.
-     *
-     * @todo register route
-     * @todo build up phpunit tests
      *
      * @param  int $user    The unique identifier in the database storage
      * @return \Illuminate\Http\RedirectResponse

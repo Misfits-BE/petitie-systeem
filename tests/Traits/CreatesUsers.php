@@ -46,4 +46,15 @@ trait CreatesUsers
         return factory(User::class)->create()
             ->assignRole($this->createRole('admin'));
     }
+
+    /**
+     * Create an blocked user in the system.
+     * 
+     * @return \Misfits\User
+     */
+    public function createBlockedUser(): User
+    {
+        $user = factory(User::class)->create()->ban();
+        return User::find($user->id);
+    }
 }

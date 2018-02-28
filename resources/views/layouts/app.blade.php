@@ -11,6 +11,7 @@
 
     {{-- Styles --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('stylesheets') {{-- Page specific stylesheet stack --}}
 </head>
 <body>
     <div id="app" class="content-bottom">
@@ -161,5 +162,6 @@
 
     {{-- Scripts --}}
     <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts') {{-- page specific JavaScript Stack --}}
 </body>
 </html>

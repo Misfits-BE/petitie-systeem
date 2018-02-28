@@ -10,6 +10,8 @@ use Misfits\Http\Controllers\Controller;
  * ---
  * Admin side for the helpdesk module.
  *
+ * @todo Create forbid banned user testss
+ * 
  * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Tim Joosten and his contributors
  * @package     Misfits\Http\Controllers\Admin\Helpdesk
@@ -23,7 +25,7 @@ class IndexController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['role:admin']);
+        $this->middleware(['auth','role:admin', 'forbid-banned-user']);
     }
 
     /**

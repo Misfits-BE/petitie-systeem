@@ -20,7 +20,6 @@ try {
  */
 
 window.axios = require('axios');
-
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
@@ -36,6 +35,10 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+// 3th party libraries
+require('to-markdown');
+window.markdown = require('markdown').markdown;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

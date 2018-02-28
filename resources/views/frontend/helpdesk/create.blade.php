@@ -63,7 +63,7 @@
                                 </label>
 
                                 <div class="col-md-5">
-                                    <select @input('category') class="form-control">
+                                    <select @input('category_id') class="form-control">
                                         <option value="">-- Select your category --</option>
 
                                         @foreach ($categories as $category) {{-- Categories loop --}}
@@ -73,7 +73,7 @@
                                         @endforeach
                                     </select>
 
-                                    @error('category') {{-- Error message display --}}
+                                    @error('category_id') {{-- Error message display --}}
                                 </div>
                             </div>
 
