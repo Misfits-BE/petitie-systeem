@@ -9,7 +9,7 @@
         <small class="text-muted">replied {{ $reaction->created_at->diffForHumans() }}</small>
 
         @can ('delete', $reaction) {{-- The authencated user is the comment author and can delete the comment --}}
-            <a href="" class="pull-right text-muted" data-toggle="tooltip" data-placement="bottom" title="Delete">
+            <a href="{{ route('comment.delete', $reaction) }}" class="pull-right text-muted" data-toggle="tooltip" data-placement="bottom" title="Delete">
                 <i class="fa fa-trash"></i>
             </a> 
         @endcan

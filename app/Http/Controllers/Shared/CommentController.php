@@ -3,11 +3,13 @@
 namespace Misfits\Http\Controllers\Shared;
 
 use Gate;
+use Misfits\Comment;
 use Misfits\Http\Controllers\Controller;
 use Misfits\Repositories\CommentRepository;
 use Illuminate\Http\RedirectResponse;
 use Misfits\Http\Requests\Comment\CommentValidator;
 use Misfits\Repositories\TicketRepository;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class CommentController 
@@ -33,7 +35,7 @@ class CommentController extends Controller
      */
     public function __construct(CommentRepository $comments, TicketRepository $tickets) 
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth', 'forbid-banned-user']);
 
         $this->comments = $comments;
         $this->tickets  = $tickets;
@@ -41,6 +43,8 @@ class CommentController extends Controller
 
     /** 
      * Store a new comment in the database
+     * 
+     * @todo Implement phpunit tests
      * 
      * @param  CommentValidor $input The user given input (Validated).  
      * @param  string         $slug  The slug for the comment helpdesk ticket
@@ -55,5 +59,19 @@ class CommentController extends Controller
         }
 
         return redirect()->route('admin.helpdesk.tickets.show', ['slug' => $slug]);
+    }
+
+    /**
+     * Delete a comment in the database storage. 
+     * 
+     * @param  Comment $comment The database entity from the comment.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Comment $comment): RedirectResponse 
+    {
+        $this->authorize('delete', $comment);
+        $comment->delete(); 
+
+        return back(Response::HTTP_FOUND);
     }
 }
