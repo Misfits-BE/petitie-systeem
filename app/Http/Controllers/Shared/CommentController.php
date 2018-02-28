@@ -28,6 +28,7 @@ class CommentController extends Controller
      * CommentController constructor
      * 
      * @param  CommentRepository  $comments The abstraction layer between controller and database related logic.
+     * @param  TicketRepository   $tickets  The abstraction layer bewteen controller and database related logic.
      * @return void
      */
     public function __construct(CommentRepository $comments, TicketRepository $tickets) 

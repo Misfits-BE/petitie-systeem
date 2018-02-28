@@ -59,7 +59,7 @@ class TicketController extends Controller
      */
     public function show(string $slug): View 
     { 
-        $ticket = $this->tickets->findBy('slug', $slug);
+        $ticket = $this->tickets->with(['comments.author'])->findBy('slug', $slug);
 
         if (Gate::denies('view', $ticket)) { //! Authencated user is not permitted to view the helpdesk ticket.
             //! So throw some HTTP/1 404 - Not Found response all over the place. 

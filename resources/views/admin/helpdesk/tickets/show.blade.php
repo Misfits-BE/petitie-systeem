@@ -24,22 +24,9 @@
                     </div>
                 </div> {{--//Ticket section--}}
 
-                <hr class="comments-border" /> {{-- Start comment listing --}}
-                    
-                    <div class="panel panel-default ticket-info"> {{-- Comment box --}}
-                        <div class="panel-heading">
-                            <img src="http://via.placeholder.com/20x20" class="comment-avatar">
-                            <strong>Tim Joosten</strong> <small class="text-muted">replied 2 years ago</small>
-
-                            <a href="" class="pull-right text-muted" data-toggle="tooltip" data-placement="bottom" title="Delete">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </div>
-
-                        <div class="panel-body">
-                            Edit composer.json, edit app.php in /config and then run composer update.
-                        </div>
-                    </div> {{-- // Comment box --}}
+                @foreach ($ticket->comments as $reaction) {{-- Loop through the ticket comments --}} 
+                    @include('shared.comments.helpdesk.listing', $reaction) {{-- Comment partial that will be outputted for each comment --}}
+                @endforeach {{-- /// Comments loop --}}
 
                 <hr class="comments-border" /> {{-- END comment listing --}}
 
