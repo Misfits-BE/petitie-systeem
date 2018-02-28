@@ -14,6 +14,8 @@ use Misfits\Repositories\CategoryRepository;
  * ---
  * Admin side for the helpdesk categories
  *
+ * @todo create forbid banned user tests
+ * 
  * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Tim Joosten and his contributors
  * @package     Misfits\Http\Controllers\Admin\Helpdesk
@@ -31,7 +33,7 @@ class CategoryController extends Controller
      */
     public function __construct(CategoryRepository $categories)
     {
-        $this->middleware(['auth', 'role:admin']);
+        $this->middleware(['auth', 'role:admin', 'forbid-banned-user']);
         $this->categories = $categories;
     }
 

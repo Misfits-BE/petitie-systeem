@@ -29,7 +29,7 @@ class AccountSettingsController extends Controller
      */
     public function __construct(UserRepository $user)
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'forbid-banned-user']);
     }
 
     /**

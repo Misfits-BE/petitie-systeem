@@ -23,4 +23,15 @@ trait InputFakers
     {
         return ['name' => $name, 'color' => $color, 'description' => $description];
     }
+
+    /**
+     * Generate fake input for the ban reasons. 
+     * 
+     * @param  string $reason   A simple reason text for banning the user.
+     * @return array
+     */
+    protected function fakeBanInput(string $reason = 'Ban reason'): array 
+    {
+        return ['reason' => $reason];
+    }
 }
