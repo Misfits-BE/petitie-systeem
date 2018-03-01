@@ -20,6 +20,12 @@
                         </a>
                     </div>
                 </div>
+
+                <div class="list-group"> {{-- User delete button --}}
+                    <a href="{{ route('admin.users.delete', $user) }}" class="list-group-item list-group-item-danger">
+                        <i class="fa fa-fw fa-trash"></i> Delete your account
+                    </a>
+                </div> {{-- /// END user delete button --}}
             </div>
         
             <div class="col-md-9">

@@ -2,6 +2,7 @@
 
 namespace Misfits\Http\Controllers\Admin\Users;
 
+use Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -36,7 +37,8 @@ class IndexController extends Controller
      */
     public function __construct(UserRepository $users, RoleRepository $roles)
     {
-        $this->middleware(['auth', 'role:admin', 'forbid-banned-user']);
+        $this->middleware(['auth', 'role:admin'])->except(['destroy']);
+        $this->middleware(['forbid-banned-user']);
 
         $this->users = $users;
         $this->roles = $roles;
@@ -88,6 +90,8 @@ class IndexController extends Controller
     /**
      * Delete a user out off the system.
      *
+     * @todo Implement authorization gate.
+     * 
      * @param  int $user    The unique identifier in the database storage
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -95,8 +99,11 @@ class IndexController extends Controller
     {
         $user = $this->users->findOrFail($user);
 
-        if ($user->delete()) {
-            $this->logActivity($user, "Has removed {$user->name} in the application");
+        if (Gate::allows('delete', $user) && $user->delete()) {
+            if (auth()->user()->hasRole('admin')) { //! User = Admin so needs to be logged
+                $this->logActivity($user, "Has removed {$user->name} in the application");
+            }
+
             flash($user->name . ' is deleted in the application.')->success()->important();
         }
 
