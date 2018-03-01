@@ -34,4 +34,15 @@ trait InputFakers
     {
         return ['reason' => $reason];
     }
+    
+    /**
+     * Generate fake input for user comments.
+     * 
+     * @param  string $comment   A basic comment input. Defaults to 'user comment'
+     * @return array
+     */
+    protected function fakeCommentInput(string $comment = 'User comment'): array
+    {
+        return ['comment' => $comment];
+    }
 }
