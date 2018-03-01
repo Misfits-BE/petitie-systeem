@@ -18,9 +18,7 @@
                     </div>
 
                     <div class="panel-body">
-                        I've got some Laravel packages from Composer. I've downloaded the packages as I can't currently install them via Composer for some reason.
-                        Is there a way I can integrate them into Laravel manually? I've put the relevant files into vendor/cartalyst but not sure what to do next.
-                        Any suggestions would be appreciated. :)
+                        {!! markdown($ticket->description) !!}
                     </div>
                 </div> {{--//Ticket section--}}
 

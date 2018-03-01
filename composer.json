@@ -10,6 +10,7 @@
         "activismebe/laravel-form-helpers": "^1.2",
         "cybercog/laravel-ban": "^3.0",
         "fideloper/proxy": "~3.3",
+        "graham-campbell/markdown": "^10.0",
         "guzzlehttp/guzzle": "~6.0",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.5.*",
