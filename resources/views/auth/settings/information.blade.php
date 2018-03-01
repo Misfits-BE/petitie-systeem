@@ -4,7 +4,7 @@
     </div>
     
     <div class="panel-body">
-        <form action="" method="POST" class="form-horizontal">
+        <form action="{{ route('account.settings.info') }}" method="POST" class="form-horizontal">
             {{ csrf_field() }}              {{-- form field protection --}}
             {{ method_field('PATCH') }}     {{-- method spoofing --}}     
             @form($login)                   {{-- Mount database data to the form --}} 
@@ -22,11 +22,11 @@
                 <label class="col-md-3 control-label">Your name:</label>
 
                 <div class="col-md-4">
-                    <input type="text" class="form-control" placeholder="Firstname">
+                    <input type="text" @input('firstname') class="form-control" placeholder="Firstname">
                 </div>
 
                 <div class="col-md-5">
-                    <input type="text" class="form-control" placeholder="Lastname">
+                    <input type="text" @input('lastname') class="form-control" placeholder="Lastname">
                 </div>
             </div>
 
@@ -39,10 +39,12 @@
                 
                 <div class="col-md-5">
                     <select class="form-control" @input('country_id')>
-                        <option value="">-- Select your country --</option>
+                        <option value="" @if (is_null($login->country_id)) selected @endif>-- Select your country --</option>
 
                         @foreach ($countries as $country) 
-                            <option value="{{ $country->id}}">{{ $country->name }}</option>
+                            <option value="{{ $country->id}}" @if ($login->country_id === $country->id) selected @endif>
+                                {{ $country->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>

@@ -2,6 +2,8 @@
 
 @section('content')
     <div class="container">
+        @include('flash::message') {{-- Flash session view partial --}}
+
         <div class="row">
             
             <div class="col-md-3">
@@ -30,11 +32,11 @@
         
             <div class="col-md-9">
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active" id="information">
+                    <div role="tabpanel" class="tab-pane fade in {{ isActive('account-settings/informatie') }}" id="information">
                         @include('auth.settings.information')
                     </div>
 
-                    <div role="tabpanel" class="tab-pane fade in" id="security">
+                    <div role="tabpanel" class="tab-pane fade in {{ isActive('account-settings/security') }}" id="security">
                         @include('auth.settings.security')
                     </div>
                 </div>

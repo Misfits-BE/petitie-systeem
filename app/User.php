@@ -24,7 +24,16 @@ class User extends Authenticatable implements BannableContract
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * Method that encrypts the user password. 
+     *
+     * @param  string $password The newly given password from the user input. 
+     * @return void
+     */
+    public function setPasswordAttribute(string $password): void
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }

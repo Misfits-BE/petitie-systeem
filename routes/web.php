@@ -23,7 +23,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/disclaimer', 'Frontend\PolicyController@disclaimer')->name('policy.disclaimer');
 
 // Account settings
-Route::get('/account-settings', 'Auth\AccountSettingsController@index')->name('account.settings');
+Route::get('/account-settings/{type}', 'Auth\AccountSettingsController@index')->name('account.settings');
+Route::patch('/account-settings/info', 'Auth\AccountSettingsController@updateInformation')->name('account.settings.info');
+Route::patch('/account-settings/security', 'Auth\AccountSettingsController@updatePassword')->name('account.settings.security');
 
 // Helpdesk routes
 Route::get('helpdesk', 'Frontend\helpdeskController@index')->name('helpdesk.index');

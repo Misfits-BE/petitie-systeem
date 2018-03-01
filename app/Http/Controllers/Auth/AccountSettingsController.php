@@ -6,9 +6,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Misfits\Http\Controllers\Controller;
 use Misfits\Repositories\UserRepository;
-use Misfits\Requests\Auth\InformationValidator;
-use Misfits\Requests\Auth\PasswordValidator;
 use Misfits\Repositories\CountryRepository;
+use Misfits\Http\Requests\Auth\InformationValidator;
+use Misfits\Http\Requests\Auth\PasswordValidator;
 
 /**
  * Controller for the user his account settings
@@ -65,30 +65,29 @@ class AccountSettingsController extends Controller
      * @param. InformationValidator $input  The user given input (validated).
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateInformation(InformationValidator $input): RedirectResonse
+    public function updateInformation(InformationValidator $input): RedirectResponse
     {
-        if ($this->user->update($input->all(), auth()->user()->id)) {
+        if ($this->user->update($input->except('_token', '_method'), auth()->user()->id)) {
             flash('Your profile information has been updated.')->success()->important();
         }
 
-        return redirect()->route('account.settings');
+        return redirect()->route('account.settings', ['type' => 'informatie']);
     }
 
     /**
      * Update the password settings for the user in the database.
      *
      * @todo Implement phpunit tests
-     * @todo Build up the validator
      *
      * @param. PasswordValidator $input     The user given input (validated)
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updatePassword(PasswordValidator $input): RedirectResponse
     {
-        if ($this->user->update($input->all(), auth()->user()->id)) {
+        if ($this->user->update(['password' => bcrypt($input->password)], auth()->user()->id)) {
             flash('Your profile password has been updated.')->success()->important();
         }
 
-        return redirect()->route('account.settings');
+        return redirect()->route('account.settings', ['type' => 'security']);
     }
 }

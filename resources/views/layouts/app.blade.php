@@ -95,7 +95,7 @@
 
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ route('account.settings') }}">
+                                        <a href="{{ route('account.settings', ['type' => 'informatie']) }}">
                                             <i class="fa fa-fw fa-cogs"></i> Account settings
                                         </a>
                                     </li>
