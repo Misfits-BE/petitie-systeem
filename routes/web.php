@@ -52,6 +52,7 @@ Route::patch('admin/helpdesk/categories/update/{id}', 'Admin\Helpdesk\CategoryCo
 Route::get('admin/helpdesk/tickets', 'Admin\Helpdesk\TicketController@index')->name('admin.helpdesk.tickets');
 Route::get('admin/helpdesk/ticket/show/{slug}', 'Admin\Helpdesk\TicketController@show')->name('admin.helpdesk.tickets.show');
 Route::get('admin/helpdesk/tickets/assign/{slug}', 'Admin\Helpdesk\TicketController@assign')->name('admin.helpdesk.tickets.assign');
+Route::get('admin/tickets/assigned', 'Admin\Helpdesk\TicketController@userAssigned')->name('admin.helpdesk.tickets.assigned');
 
 // User ban routes 
 Route::get('admin/users/ban/{id}', 'Admin\Users\BanController@create')->name('admin.users.ban');

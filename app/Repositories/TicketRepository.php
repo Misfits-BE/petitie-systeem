@@ -4,6 +4,7 @@ namespace Misfits\Repositories;
 
 use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
 use Misfits\Ticket;
+use Misfits\User;
 use Illuminate\Pagination\Paginator;
 
 /**
@@ -57,6 +58,32 @@ class TicketRepository extends Repository
     }
 
     /**
+     * Get the all the ticket assigned to the authenticated user. 
+     * ---
+     * The query will be changed when the user gives a search term. 
+     * 
+     * @param  null|string  $term       The user given search term.
+     * @param  User         $user       Entity from the current authenticated user
+     * @param  int          $perPage    The amount of results u want to display per page. Defaults to 15
+     * @return \Illuminate\Pagination\Paginator
+     */
+    public function getAssignedTickets(?string $term, User $user, int $perPage = 15): Paginator 
+    {
+        $outputColumns = ['id', 'slug', 'title', 'author_id', 'created_at']; 
+        $baseQuery     = $this->model->where('is_open', true)->where('assignee_id', $user->id); 
+
+        switch ($term) {
+            case is_null($term): // There is a search term given.
+                return $baseQuery->simplePaginate($perPage, $outputColumns);
+
+            default: // No search term given so fallback on the normal DB query.
+                return $baseQuery->where('title', 'LIKE', "%{$term}%")->simplePaginate($perPage, $outputColumns);
+        }
+    }
+
+    /**
+     * Method for opening and closing a helpdesk ticket. 
+     * 
      * @param  \Misfits\Ticket  $ticket  The database entity form the ticket in the database.
      * @param  string           $status  The newly status form the ticket. Default to. be reopen or close.
      * @return bool

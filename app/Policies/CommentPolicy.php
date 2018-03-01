@@ -22,7 +22,7 @@ class CommentPolicy
      * Determine whether the user can delete the comment.
      *
      * @param  \Misfits\User     $user      Entity from the currently authenticated user.
-     * @param  \Misfits\Comment  $comment   Database entity from the comment in the storage.
+     * @param  \Misfits\Comment  $comment   from the comment in the storage.
      * @return mixed
      */
     public function delete(User $user, Comment $comment): bool

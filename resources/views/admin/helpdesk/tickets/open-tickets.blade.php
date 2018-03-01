@@ -60,7 +60,7 @@
 
             <div class="col-md-3"> {{-- Sidebar --}}
                 <div class="well well-sm"> {{-- Search box --}}
-                    <form method="GET" action="{{ route('admin.helpdesk.tickets') }}">
+                    <form method="GET" action="{{ $searchUrl }}">
                         <div class="input-group">
                             <input type="text" name="term" class="form-control" placeholder="Zoek ticket">
                             <span class="input-group-btn">
