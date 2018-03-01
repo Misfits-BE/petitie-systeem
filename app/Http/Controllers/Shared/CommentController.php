@@ -44,8 +44,6 @@ class CommentController extends Controller
     /** 
      * Store a new comment in the database
      * 
-     * @todo Implement phpunit tests
-     * 
      * @param  CommentValidor $input The user given input (Validated).  
      * @param  string         $slug  The slug for the comment helpdesk ticket
      * @return \Illuminate\Http\RedirectResponse
