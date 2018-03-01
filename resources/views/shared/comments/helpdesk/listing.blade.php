@@ -15,5 +15,5 @@
         @endcan
     </div>
 
-    <div class="panel-body">{!! markdown($reaction->comment) !!}</div>
+    <div class="panel-body markdown-correct">{!! markdown($reaction->comment) !!}</div>
 </div> {{-- // Comment box --}}

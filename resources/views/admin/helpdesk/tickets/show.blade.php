@@ -17,7 +17,7 @@
                         @endcan
                     </div>
 
-                    <div class="panel-body">
+                    <div class="panel-body markdown-correct">
                         {!! markdown($ticket->description) !!}
                     </div>
                 </div> {{--//Ticket section--}}
