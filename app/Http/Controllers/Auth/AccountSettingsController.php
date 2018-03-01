@@ -8,6 +8,7 @@ use Misfits\Http\Controllers\Controller;
 use Misfits\Repositories\UserRepository;
 use Misfits\Requests\Auth\InformationValidator;
 use Misfits\Requests\Auth\PasswordValidator;
+use Misfits\Repositories\CountryRepository;
 
 /**
  * Controller for the user his account settings
@@ -21,15 +22,22 @@ class AccountSettingsController extends Controller
     /** @var \Misfits\Repositories\UserRepository $user */
     private $user;
 
+    /** @var \Misfits\Repositories\CountryRepository $countries */
+    private $countries; 
+
     /**
      * AccountSettingsController Constructor
      *
-     * @param  UserRepository $user     Database ORM wrapper.
+     * @param  UserRepository       $user       Database ORM wrapper.
+     * @param  CountryRepository    $countries  Database ORM wrapper.
      * @return void
      */
-    public function __construct(UserRepository $user)
+    public function __construct(UserRepository $user, CountryRepository $countries)
     {
         $this->middleware(['auth', 'forbid-banned-user']);
+
+        $this->user      = $user;
+        $this->countries = $countries;
     }
 
     /**
@@ -39,7 +47,12 @@ class AccountSettingsController extends Controller
      */
     public function index(): View
     {
-        return view('auth.settings');
+        $user = auth()->user();
+
+        return view('auth.settings', [
+            'countries' => $this->countries->all(['id', 'name']),
+            'login'     => $this->user->findOrFail($user->id, ['name', 'email', 'country_id'])
+        ]);
     }
 
     /**

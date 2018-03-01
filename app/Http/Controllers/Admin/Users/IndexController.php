@@ -89,8 +89,6 @@ class IndexController extends Controller
 
     /**
      * Delete a user out off the system.
-     *
-     * @todo Implement authorization gate.
      * 
      * @param  int $user    The unique identifier in the database storage
      * @return \Illuminate\Http\RedirectResponse
@@ -99,7 +97,7 @@ class IndexController extends Controller
     {
         $user = $this->users->findOrFail($user);
 
-        if (Gate::allows('delete', $user) && $user->delete()) {
+        if (Gate::allows('delete', $user) && $user->delete()) { //! Returns true when user is deleted and authorized to perform delete
             if (auth()->user()->hasRole('admin')) { //! User = Admin so needs to be logged
                 $this->logActivity($user, "Has removed {$user->name} in the application");
             }
