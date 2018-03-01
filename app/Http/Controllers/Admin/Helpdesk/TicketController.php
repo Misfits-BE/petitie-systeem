@@ -53,8 +53,6 @@ class TicketController extends Controller
     /**
      * Get all the assigned tickets to the authenticated user. 
      * 
-     * @todo Implement phpunit tests
-     * 
      * @param  Request $input The user given input (Notvalidated.)
      * @return \Illuminate\View\View
      */

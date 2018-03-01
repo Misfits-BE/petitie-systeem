@@ -18,10 +18,6 @@
                         <a href="#security" aria-controls="security" role="tab" data-toggle="tab" class="list-group-item">
                             <i class="fa fa-fw fa-key"></i> Security
                         </a>
-
-                        <a href="" class="list-group-item">
-                            <i class="fa fa-fw fa-pencil"></i> Petition data
-                        </a>
                     </div>
                 </div>
             </div>
