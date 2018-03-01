@@ -64,9 +64,17 @@
                                         @endif
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr @if ($ticket->author->isBanned()) class="danger" @endif>
                                     <td><strong>Creator</strong></td>
-                                    <td><span class="pull-right">{{ $ticket->author->name }}</span></td>
+                                    <td>
+                                        <span class="pull-right">
+                                            @if ($ticket->author->isBanned())
+                                                <i data-toggle="tooltip" data-placement="bottom" title="Blocked user" class="text-danger fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> 
+                                            @endif 
+                                            
+                                            {{ $ticket->author->name }}
+                                        </span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Category</strong></td>
