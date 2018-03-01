@@ -43,6 +43,8 @@ class AccountSettingsController extends Controller
     /**
      * Account settings view.
      *
+     * @todo Implement phpunit tests
+     * 
      * @return \Illuminate\View\View
      */
     public function index(): View
@@ -58,6 +60,8 @@ class AccountSettingsController extends Controller
     /**
      * Update the account information in the datebase.
      *
+     * @todo Implement phpunit tests
+     * 
      * @param. InformationValidator $input  The user given input (validated).
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -73,6 +77,7 @@ class AccountSettingsController extends Controller
     /**
      * Update the password settings for the user in the database.
      *
+     * @todo Implement phpunit tests
      * @todo Build up the validator
      *
      * @param. PasswordValidator $input     The user given input (validated)

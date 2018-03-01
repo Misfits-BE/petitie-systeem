@@ -17,7 +17,7 @@ class User extends Authenticatable implements BannableContract
      *
      * @var array
      */
-    protected $fillable = ['country_id', 'name', 'firstname', 'lastname', 'email', 'password'];
+    protected $fillable = ['country_id', 'city', 'name', 'firstname', 'lastname', 'email', 'password'];
 
     /**
      * The attributes that should be hidden for arrays.

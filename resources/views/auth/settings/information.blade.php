@@ -19,7 +19,7 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-3 control-label">Your name: <span class="text-danger">*</span></label>
+                <label class="col-md-3 control-label">Your name:</label>
 
                 <div class="col-md-4">
                     <input type="text" class="form-control" placeholder="Firstname">
@@ -31,10 +31,10 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-3 control-label">Location: <span class="text-danger">*</span></label>
+                <label class="col-md-3 control-label">Location:</label>
 
                 <div class="col-md-4">
-                    <input type="text" class="form-control" placeholder="Name city">
+                    <input type="text" @input('city') class="form-control" placeholder="Name city">
                 </div>
                 
                 <div class="col-md-5">
