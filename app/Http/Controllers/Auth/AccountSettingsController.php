@@ -71,6 +71,7 @@ class AccountSettingsController extends Controller
 
         if ($user->update($input->except('_token', '_method', 'avatar'))) {
             if (! is_null($input->avatar)) { //! New user profile image is given. 
+                $user->clearMediaCollection('images');  //! Clear the previous media directory. 
                 $user->addMedia($input->file('avatar'))->toMediaCollection('images');
             }
 
