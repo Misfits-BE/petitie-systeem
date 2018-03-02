@@ -32,5 +32,6 @@ class DatabaseSeeder extends Seeder
         // Execute other database seeders
         $this->call(UserTableSeeder::class); //! Covers also roles and permissions database table.
         $this->call(CountryTableSeeder::class);
+        $this->call(CategoryTableSeeder::class);
     }
 }
