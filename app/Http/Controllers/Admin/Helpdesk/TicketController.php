@@ -46,7 +46,7 @@ class TicketController extends Controller
     {
         return view('admin.helpdesk.tickets.open-tickets', [
             'tickets'    => $this->tickets->getOpenTickets($input->term), 
-            'searchTerm' => route('admin.helpdesk.tickets')
+            'searchUrl' => route('admin.helpdesk.tickets')
         ]);
     }
 
