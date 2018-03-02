@@ -67,7 +67,13 @@ class AccountSettingsController extends Controller
      */
     public function updateInformation(InformationValidator $input): RedirectResponse
     {
-        if ($this->user->update($input->except('_token', '_method'), auth()->user()->id)) {
+        $user = $this->user->findOrFail(auth()->user()->id);
+
+        if ($user->update($input->except('_token', '_method', 'avatar'))) {
+            if (! is_null($input->avatar)) { //! New user profile image is given. 
+                $user->addMedia($input->file('avatar'))->toMediaCollection('images');
+            }
+
             flash('Your profile information has been updated.')->success()->important();
         }
 

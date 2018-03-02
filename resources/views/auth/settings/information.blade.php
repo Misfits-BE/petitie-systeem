@@ -4,7 +4,7 @@
     </div>
     
     <div class="panel-body">
-        <form action="{{ route('account.settings.info') }}" method="POST" class="form-horizontal">
+        <form action="{{ route('account.settings.info') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
             {{ csrf_field() }}              {{-- form field protection --}}
             {{ method_field('PATCH') }}     {{-- method spoofing --}}     
             @form($login)                   {{-- Mount database data to the form --}} 
@@ -15,6 +15,14 @@
                 <div class="col-md-9">
                     <input type="text" class="form-control" @input('name') placeholder="Your username">
                     @error('name')
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Profile image:</label>
+
+                <div class="col-md-9">
+                    <input class="form-control" type="file" @input('avatar')>
                 </div>
             </div>
 

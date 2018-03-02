@@ -4,7 +4,7 @@
                     
 <div class="panel panel-default ticket-info"> {{-- Comment box --}}
     <div class="panel-heading">
-        <img src="http://via.placeholder.com/20x20" class="comment-avatar" alt="{{ $reaction->author->name }} - avatar">
+        <img src="{{ $reaction->author->getMedia('images')->first()->getUrl('thumb-comment') }}" class="comment-avatar" alt="{{ $reaction->author->name }} - avatar">
         <strong><a href="">{{ $reaction->author->name }}</a></strong> 
         <small class="text-muted">replied {{ $reaction->created_at->diffForHumans() }}</small>
 
