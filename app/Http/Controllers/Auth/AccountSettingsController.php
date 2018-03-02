@@ -53,7 +53,7 @@ class AccountSettingsController extends Controller
 
         return view('auth.settings', [
             'countries' => $this->countries->all(['id', 'name']),
-            'login'     => $this->user->findOrFail($user->id, ['name', 'email', 'country_id'])
+            'login'     => $this->user->findOrFail($user->id, ['name', 'email', 'city', 'lastname', 'firstname', 'country_id'])
         ]);
     }
 
