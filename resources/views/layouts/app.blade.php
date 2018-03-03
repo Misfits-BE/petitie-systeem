@@ -77,7 +77,7 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href=""><i class="fa fa-fw fa-plus"></i> New petition</a></li>
+                                    <li><a href="{{ route('petitions.create') }}"><i class="fa fa-fw fa-plus"></i> New petition</a></li>
                                     <li><a href="{{ route('helpdesk.create') }}"><i class="fa fa-fw fa-plus"></i> New support ticket</a></li>
                                 </ul>
                             </li>

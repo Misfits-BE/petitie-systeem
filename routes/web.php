@@ -22,6 +22,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Policies
 Route::get('/disclaimer', 'Frontend\PolicyController@disclaimer')->name('policy.disclaimer');
 
+// Petition routes 
+Route::get('/petitions-create', 'Shared\PetitionController@create')->name('petitions.create');
+Route::get('/petitions/{slug}', 'Shared\PetitionController@show')->name('petitions.show');
+Route::post('/petitions-create', 'Shared\PetitionController@store')->name('petitions.store');
+
 // Account settings
 Route::get('/account-settings/{type}', 'Auth\AccountSettingsController@index')->name('account.settings');
 Route::patch('/account-settings/info', 'Auth\AccountSettingsController@updateInformation')->name('account.settings.info');
