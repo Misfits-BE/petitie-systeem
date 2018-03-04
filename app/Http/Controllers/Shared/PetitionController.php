@@ -57,7 +57,8 @@ class PetitionController extends Controller
     {
         return view('shared.petitions.show', [
             'petition'       => $this->petitions->findPetition($slug),
-            'signatureCount' => $this->petitions->signatureCount($slug)
+            'signatureCount' => $this->petitions->signatureCount($slug), 
+            'share'          => $this->petitions->getSocialMediaLinks($slug)
         ]);
     } 
 
