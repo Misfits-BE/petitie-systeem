@@ -45,4 +45,25 @@ trait InputFakers
     {
         return ['comment' => $comment];
     }
+
+    /**
+     * Generate fake input for a uqser signature. 
+     * 
+     * @param  int     $country_id      The unique identifier for the country in the database
+     * @param  string  $city            The name of the city where the user lives
+     * @param  string  $email           The email adress for the user
+     * @param  string  $lastname        The lastname from the user
+     * @param  string  $firstname       The firstname from the user
+     * @return array
+     */
+    protected function fakeSignatureInput(
+        int    $country_id = 200,
+        string $city = 'name', 
+        string $email = 'example@domain.tld',
+        string $lastname = 'Doe',
+        string $firstname  = 'john'
+    ): array 
+    {
+        return ['city' => $city, 'email' => $email, 'lastname' => $lastname, 'firstname' => $firstname, 'country_id' => $country_id];
+    }
 }

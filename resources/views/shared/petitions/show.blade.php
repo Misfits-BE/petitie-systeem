@@ -73,7 +73,7 @@
                                                         <option value="">-- Select your country</option>
 
                                                         @foreach ($countries as $country) {{-- Loop through countries --}}
-                                                            <option name="{{ $country->id }}" @if (optional(auth()->user())->country_id === $country->id) selected @endif>
+                                                            <option value="{{ $country->id }}" @if (optional(auth()->user())->country_id === $country->id) selected @endif>
                                                                 {{ $country->name }}
                                                             </option>
                                                         @endforeach

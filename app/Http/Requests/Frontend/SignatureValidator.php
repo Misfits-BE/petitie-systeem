@@ -26,6 +26,11 @@ class SignatureValidator extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
+     * @todo Implement unique rule (based on email) so a user can sign 
+     *       a petition one time with the given address. 
+     * 
+     * @todo Implement phpunit test for unique email address
+     * 
      * @return array
      */
     public function rules(): array
