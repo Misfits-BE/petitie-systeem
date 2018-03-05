@@ -9,7 +9,7 @@ use Tests\Traits\InputFakers;
 use Misfits\Petition;
 
 /**
- * Class StroeTest 
+ * Class StoreTest 
  * --- 
  * PHPUnit testsuite vor testing the signature store method. 
  * 
