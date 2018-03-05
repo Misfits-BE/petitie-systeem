@@ -42,7 +42,7 @@ class SignatureController extends Controller
      * Store a new signature in the database. 
      * 
      * @todo Implement phpunit test 
-     * @todo Register phpunit test 
+     * @todo Build up validator class
      * @todo Register validation class
      * 
      * @param  SignatureValidator $input The given user input (validated)
@@ -51,6 +51,8 @@ class SignatureController extends Controller
      */
     public function store(SignatureValidator $input, string $slug): RedirectResponse 
     {
+        // TODO: Implement store logic (HasMany) -> Repository
+        
         if ($this->signature->store($input->all(), $petition)) {
             flash('You have signed the petitions.')->success();
         }

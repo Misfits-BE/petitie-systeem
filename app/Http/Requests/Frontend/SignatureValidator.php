@@ -4,6 +4,13 @@ namespace Misfits\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class SignatureValidator 
+ * 
+ * @author      Tim Joosten <tim@activisme.be>
+ * @copyright   2018 Tim Joosten and his contributors
+ * @package     Misfits\Http\Requests\Frontend
+ */
 class SignatureValidator extends FormRequest
 {
     /**
@@ -11,9 +18,9 @@ class SignatureValidator extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +28,14 @@ class SignatureValidator extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'firstname'  => 'required', 
+            'lastname'   => 'required', 
+            'country_id' => 'required',
+            'city'       => 'required', 
+            'email'      => 'required'  
         ];
     }
 }

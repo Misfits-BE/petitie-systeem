@@ -38,42 +38,44 @@
                                         
                                         <hr> 
                                         
-                                        <form method="POST" action="" class="form-horizontal">
+                                        <form method="POST" action="{{ route('petition.sign', ['slug' => $petition->slug]) }}" class="form-horizontal">
                                             {{ csrf_field() }} {{-- Form field protection --}}
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Your name: <span class="text-danger">*</span></label>
 
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control" placeholder="Firstname">
+                                                <div class="col-md-4 @error('firstname', 'has-error')">
+                                                    <input type="text" class="form-control" @input('firstname', optional(auth()->user())->firstname) placeholder="Firstname">
                                                 </div>
 
-                                                <div class="col-md-5">
-                                                    <input type="text" class="form-control" placeholder="Lastname">
+                                                <div class="col-md-5 @error('lastname', 'has-error')">
+                                                    <input type="text" class="form-control" @input('lastname', optional(auth()->user())->lastname) placeholder="Lastname">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Your email address: <span class="text-danger">*</span></label>
 
-                                                <div class="col-md-9">
-                                                    <input type="email" class="form-control" placeholder="Your email address">
+                                                <div class="col-md-9 @error('email', 'has-error')">
+                                                    <input type="email" class="form-control" @input('email', optional(auth()->user())->email) placeholder="Your email address">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="control-label col-md-3">Your location: <span class="text-danger">*</span></label>
 
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control" placeholder="Postal - City">
+                                                <div class="col-md-4 @error('city', 'has-error')">
+                                                    <input type="text" class="form-control" @input('city', optional(auth()->user())->city) placeholder="Postal - City">
                                                 </div>
 
-                                                <div class="col-md-5">
-                                                    <select class="form-control">
+                                                <div class="col-md-5 @error('country_id', 'has-error')">
+                                                    <select class="form-control" @input('country_id')>
                                                         <option value="">-- Select your country</option>
 
                                                         @foreach ($countries as $country) {{-- Loop through countries --}}
-                                                            <option name="{{ $country->id }}">{{ $country->name }}</option>
+                                                            <option name="{{ $country->id }}" @if (optional(auth()->user())->country_id === $country->id) selected @endif>
+                                                                {{ $country->name }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>

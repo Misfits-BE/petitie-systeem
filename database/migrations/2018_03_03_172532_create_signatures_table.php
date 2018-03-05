@@ -22,10 +22,16 @@ class CreateSignaturesTable extends Migration
         Schema::create('signatures', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('petition_id')->unsigned(); 
+            $table->integer('country_id')->nullable()->unsigned();
+            $table->string('firstname'); 
+            $table->string('lastname'); 
+            $table->string('city');
+            $table->string('email');
             $table->timestamps();
 
             // Foreign key constraints 
             $table->foreign('petition_id')->references('id')->on('petitions')->onDelete('cascade');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('set null');
         });
     }
 

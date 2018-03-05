@@ -70,3 +70,6 @@ Route::post('admin/users/ban/{id}', 'Admin\Users\BanController@store')->name('ad
 Route::get('admin/users', 'Admin\Users\IndexController@index')->name('admin.users.index');
 Route::get('admin/users/create', 'Admin\Users\IndexController@create')->name('admin.users.create');
 Route::get('admin/users/delete/{id}', 'Admin\Users\IndexController@destroy')->name('admin.users.delete');
+
+// Signature routes 
+Route::post('sign/{slug}', 'Frontend\SignatureController@store')->name('petition.sign');
