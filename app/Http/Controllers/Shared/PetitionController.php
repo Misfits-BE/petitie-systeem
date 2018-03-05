@@ -55,8 +55,6 @@ class PetitionController extends Controller
     /**
      * Show a specific petition in the system. 
      * 
-     * @todo Implement phpunit tests
-     * 
      * @param  string $slug The unique identifier form the petition in the system. 
      * @return \Illuminate\View\View 
      */
