@@ -35,13 +35,31 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <ul class="nav navbar-nav"> {{-- Left Side Of Navbar --}}
-                        <li>
-                            <a href="">
-                                <i class="fa fa-file-text-o"></i> Petitions
-                            </a>
-                        </li>
+                        @if (auth()->check()) {{-- user is authenticated --}}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    <i class="fa fa-file-text-o"></i> Petitions
+                                </a>
 
-                        @if (auth()->check())
+                                <ul class="dropdown-menu">
+                                    <li><a href=""><i class="fa fa-fw fa-wpexplorer"></i> Discover petitions</a></li>
+                                    <li><a href=""><i class="fa fa-fw fa-list"></i> My Petitions</a></li>
+
+                                    @if ($user->hasRole('admin')) {{-- Authenticated user is an admin and needs more functions --}}
+                                        <li class="divider"></li>
+                                        <li><a href="#"><i class="text-danger fa fa-fw fa-exclamation-triangle"></i> Petition reports</a></li>
+                                    @endif {{-- // END admin check --}}
+                                </ul>
+                            </li>
+                        @else {{-- User is not authenticated--}}
+                            <li>
+                                <a href="">
+                                    <i class="fa fa-file-text-o"></i> Petitions
+                                </a>
+                            </li>
+                        @endif
+
+                        @if (auth()->check()) {{-- User is authenticated --}}
                             <li>
                                 <a href="{{ $helpdeskUrl  }}">
                                     <i class="fa fa-bug"></i> Helpdesk
