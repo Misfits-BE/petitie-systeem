@@ -6,6 +6,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Traits\CreatesUsers;
+use Misfits\Petition;
+use Misfits\Country;
 
 /**
  * Class CreatePetitionTest 
@@ -33,11 +35,16 @@ class CreatePetitionTest extends TestCase
 
     /**
      * @test
-     * @testdox
+     * @testdox Test is a blocked user can't access the petition create page.
      */
     public function bannedUser(): void 
     {
-        //
+        $user = $this->createBlockedUser();
+
+        $this->actingAs($user)
+            ->get(route('petitions.create'))
+            ->assertStatus(302)
+            ->assertSessionHasErrors(['login' => 'This account is blocked.']);
     }
 
     /**
@@ -46,6 +53,13 @@ class CreatePetitionTest extends TestCase
      */
     public function success(): void 
     {
-        //
+        factory(Country::class)->create(); // No variable assignment because it's not needed in params.
+        
+        $user       = $this->createNormalUser();
+        $petition   = factory(Petition::class)->create();
+
+        $this->actingAs($user)
+            ->get(route('petitions.create'))
+            ->assertStatus(200);
     }
 }

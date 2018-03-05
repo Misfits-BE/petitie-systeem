@@ -43,8 +43,6 @@ class PetitionController extends Controller
     /**
      * Create view for an new petition.
      * 
-     * @todo Implement phpunit tests
-     * 
      * @return \Illuminate\View\View
      */
     public function create(): View
