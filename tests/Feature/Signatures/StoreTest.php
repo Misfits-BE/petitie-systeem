@@ -54,7 +54,7 @@ class StoreTest extends TestCase
             ->assertRedirect(route('petitions.show', ['slug' => $petition->slug]))
             ->assertSessionHas([
                 $this->flashSession . '.level' => 'success', 
-                $this->flashSession . '.message' => 'You have signed the petitions.'
+                $this->flashSession . '.message' => 'You have signed the petition.'
             ]);
 
         $this->assertDatabasehas('signatures', $input);

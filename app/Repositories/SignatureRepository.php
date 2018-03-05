@@ -25,6 +25,13 @@ class SignatureRepository extends Repository
         return Signature::class;
     }
 
+    /**
+     * Store the signature data for the petition that is found based by the slug. 
+     * 
+     * @param  SignatureValidator   $input     The user given input. (Validated)
+     * @param  Petition             $petition  De petiution entity from the database storage
+     * @return \Misfits\Signature
+     */
     public function store(SignatureValidator $input, Petition $petition): Signature
     {
         $signature             = new Signature;

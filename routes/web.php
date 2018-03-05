@@ -11,12 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
+// Home routes 
+Route::get('/', 'Frontend\IndexController@index')->name('baseurl');
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Policies
@@ -73,3 +73,4 @@ Route::get('admin/users/delete/{id}', 'Admin\Users\IndexController@destroy')->na
 
 // Signature routes 
 Route::post('sign/{slug}', 'Frontend\SignatureController@store')->name('petition.sign');
+Route::get('signatures/{slug}', 'Frontend\SignatureController@index')->name('petition.signatures');

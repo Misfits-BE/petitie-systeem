@@ -9,6 +9,7 @@ use Misfits\Repositories\SignatureRepository;
 use Misfits\Http\Requests\Frontend\SignatureValidator;
 use Symfony\Component\HttpFoundation\Response;
 use Misfits\Repositories\PetitionRepository;
+use Illuminate\View\View;
 
 /**
  * Class SignatureController 
@@ -36,6 +37,23 @@ class SignatureController extends Controller
     {
         $this->signature = $signature; 
         $this->petition  = $petition;
+    }
+
+    /**
+     * Get all the signatures for a given petition. 
+     * 
+     * @todo Register route
+     * @todo Phpunit tests
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function index(string $slug): View
+    {
+        $petition       = $this->petition->findPetition($slug);
+        $signatures     = $petition->signatures()->paginate(20);
+        $signatureCount = $this->petition->signatureCount($slug);
+
+        return view('frontend.signatures.index', compact('petition', 'signatures', 'signatureCount'));
     }
 
     /**

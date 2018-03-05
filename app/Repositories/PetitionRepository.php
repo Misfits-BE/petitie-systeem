@@ -6,6 +6,7 @@ use Share;
 use Misfits\Petition;
 use ActivismeBE\DatabaseLayering\Repositories\Contracts\RepositoryInterface;
 use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class PetitionRepository
@@ -58,5 +59,15 @@ class PetitionRepository extends Repository
 
         return Share::load(route('petitions.show', ['slug' => $petition->slug]), $petition->title)
             ->services('facebook', 'twitter');
+    }
+
+    /**
+     * Get the 6 latest petitions in the application for the frontpage. 
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection 
+     */
+    public function getPetitionsFrontPage(): Collection
+    {
+        return $this->entity()->orderBy('created_at', 'DESC')->take(6)->get();        
     }
 }
