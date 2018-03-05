@@ -71,6 +71,10 @@
                                                 <div class="col-md-5">
                                                     <select class="form-control">
                                                         <option value="">-- Select your country</option>
+
+                                                        @foreach ($countries as $country) {{-- Loop through countries --}}
+                                                            <option name="{{ $country->id }}">{{ $country->name }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
