@@ -30,7 +30,7 @@
                             <div role="tabpanel" id="home" class="tab-pane petition-margin-top fade in active">
                                 <div class="row">
                                     <div class="col-md-9">
-                                        <h3>{{ $petition->title }}</h3> 
+                                        <h3>{{ ucfirst($petition->title) }}</h3> 
 
                                         <p><strong>This petition will be deliverd to {{ $petition->decision_maker }}</strong></p>
                                         
