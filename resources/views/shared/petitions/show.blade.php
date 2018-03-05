@@ -39,7 +39,54 @@
                                         <hr> 
                                         
                                         <form method="POST" action="" class="form-horizontal">
-                                            
+                                            {{ csrf_field() }} {{-- Form field protection --}}
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Your name: <span class="text-danger">*</span></label>
+
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" placeholder="Firstname">
+                                                </div>
+
+                                                <div class="col-md-5">
+                                                    <input type="text" class="form-control" placeholder="Lastname">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Your email address: <span class="text-danger">*</span></label>
+
+                                                <div class="col-md-9">
+                                                    <input type="email" class="form-control" placeholder="Your email address">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Your location: <span class="text-danger">*</span></label>
+
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" placeholder="Postal - City">
+                                                </div>
+
+                                                <div class="col-md-5">
+                                                    <select class="form-control">
+                                                        <option value="">-- Select your country</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-3 col-md-9">
+                                                    <button type="submit" class="btn btn-sm btn-success">
+                                                        <i class="fa fa-fw fa-pencil"></i> Sign
+                                                    </button>
+
+                                                    <button type="reset" class="btn btn-sm btn-danger">
+                                                        <i class="fa fa-fw fa-undo"></i> Reset
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                         
@@ -48,18 +95,18 @@
                                             <div class="panel panel-default counter-panel">
                                                 <div class="panel-body counter-margin-body">
                                                     <h4 class="counter-title"><strong>{{ $signatureCount }}</strong></h4> 
-                                                    <span class="text-muted">Handtekeningen</span>
+                                                    <span class="text-muted">Signatures</span>
                                                 </div>
                                             </div> 
 
                                             <hr class="petition-hr-seperator"> 
                                             
                                             <a href="{{ $share['facebook'] }}" class="btn btn-block btn-social btn-facebook">
-                                                <span class="fa fa-facebook"></span> Deel op facebook
+                                                <span class="fa fa-facebook"></span> Share on facebook
                                             </a> 
                                             
                                             <a href="{{ $share['twitter'] }}" class="btn btn-block btn-social btn-twitter">
-                                                <span class="fa fa-twitter"></span> Deel op Twitter
+                                                <span class="fa fa-twitter"></span> Share on Twitter
                                             </a>
                                         </div>
                                     </div>
