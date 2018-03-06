@@ -25,6 +25,43 @@
 
                                         <hr>
 
+                                        <form method="POST" action="" class="form-horizontal">
+                                            {{ csrf_field() }} {{-- Form field protection --}}
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3"> Your name and email: <span class="text-danger">*</span></label>
+                                                
+                                                <div class="col-md-4">
+                                                    <input type="text" placeholder="Your name" class="form-control">
+                                                </div>
+
+                                                <div class="col-md-5">
+                                                    <input type="text" placeholder="Your email adddress" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3">Subject: <span class="text-danger">*</span></label>
+
+                                                <div class="col-md-3">
+                                                    <select class="form-control">
+                                                        <option value="">-- Category --</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                     <input type="text" placeholder="Subject" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-3 col-md-9">
+                                                    <button type="submit" class="btn btn-sm btn-success">
+                                                        <i class="fa fa-fw fa-send"></i> Send
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
 
                                     </div>
 
