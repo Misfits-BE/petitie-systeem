@@ -14,4 +14,12 @@
             <i class="fa fa-envelope"></i> Contact creator
         </a>
     </li>
+    
+    @if ($user->can('report-petition', $petition)) 
+        <li>
+            <a href="">
+                <i class="fa fa-exclamation-triangle"></i> Report petition
+            </a>
+        </li>
+    @endif
 </ul>
