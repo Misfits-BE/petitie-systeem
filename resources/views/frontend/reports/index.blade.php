@@ -25,32 +25,42 @@
 
                                         <hr>
 
-                                        <form method="POST" action="" class="form-horizontal">
+                                        <form method="POST" action="{{ route('petition.report.store', ['slug' => $petition->slug]) }}" class="form-horizontal">
                                             {{ csrf_field() }} {{-- Form field protection --}}
 
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3"> Your name and email: <span class="text-danger">*</span></label>
-                                                
-                                                <div class="col-md-4">
-                                                    <input type="text" placeholder="Your name" class="form-control">
-                                                </div>
+                                            <div class="form-group @error('subject', 'has-error')">
+                                                <label class="control-label col-md-3">Subject: <span class="text-danger">*</span></label>
 
-                                                <div class="col-md-5">
-                                                    <input type="text" placeholder="Your email adddress" class="form-control">
+                                                <div class="col-md-7">
+                                                     <input type="text" @input('subject', 'Abuse report: ' . $petition->title ) placeholder="Subject" class="form-control">
+                                                     @error('subject')
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label class="control-label col-md-3">Subject: <span class="text-danger">*</span></label>
+                                            <div class="form-group  @error('category', 'has-error')">
+                                                <label class="control-label col-md-3">Category: <span class="text-danger">*</span></label>
 
-                                                <div class="col-md-3">
-                                                    <select class="form-control">
+                                                <div class="col-md-7">
+                                                    <select @input('category') class="form-control">
                                                         <option value="">-- Category --</option>
-                                                    </select>
-                                                </div>
 
-                                                <div class="col-md-6">
-                                                     <input type="text" placeholder="Subject" class="form-control">
+                                                        @foreach ($categories as $category)
+                                                            <option name="{{ $category->name }}" @if (old('category') === $category->name)) selected @endif>
+                                                                {{ $category->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    @error('category')
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group @error('description', 'has-error')">
+                                                <label class="control-label col-md-3">What u like to report: <span class="text-danger">*</span></label>
+
+                                                <div class="col-md-9">
+                                                    <textarea @input('description') class="form-control wysiwyg" data-provide="markdown" rows="8">{{ old('description') }}</textarea>
+                                                    @error('description')
                                                 </div>
                                             </div>
 
@@ -77,7 +87,7 @@
                                                         <span class="fa fa-fw fa-question"></span> Privacy concerns
                                                     </a>
 
-                                                    <a href="" class="list-group-item {{ isActive('petition/report*') }}">
+                                                    <a href="{{ route('petition.report', ['slug' => $petition->slug])}}" class="list-group-item {{ isActive('petition/report*') }}">
                                                         <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> Report abuse
                                                     </a>
                                                 </div>
@@ -93,3 +103,12 @@
         </div>
     </div>
 @endsection
+
+@push('stylesheets')
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-markdown.min.css') }}"></link>
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('js/bootstrap-markdown.js') }}"></script>
+    <script> $(function () { $('[data-toggle="tooltip"]').tooltip() }) </script> 
+@endpush
