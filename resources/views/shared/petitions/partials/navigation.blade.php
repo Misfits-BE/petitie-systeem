@@ -16,8 +16,8 @@
     </li>
     
     @if ($user->can('report-petition', $petition)) 
-        <li>
-            <a href="">
+        <li class="{{ isActive('petition/report*') }}">
+            <a href="{{ route('petition.report', ['slug' => $petition->slug]) }}">
                 <i class="fa fa-exclamation-triangle"></i> Report petition
             </a>
         </li>

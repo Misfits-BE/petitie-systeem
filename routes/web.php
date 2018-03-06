@@ -27,6 +27,9 @@ Route::get('/petitions-create', 'Shared\PetitionController@create')->name('petit
 Route::get('/petitions/{slug}', 'Shared\PetitionController@show')->name('petitions.show');
 Route::post('/petitions-create', 'Shared\PetitionController@store')->name('petitions.store');
 
+// Report route (frontend)
+Route::get('petition/report/{slug}', 'Frontend\ReportController@create')->name('petition.report');
+
 // Account settings
 Route::get('/account-settings/{type}', 'Auth\AccountSettingsController@index')->name('account.settings');
 Route::patch('/account-settings/info', 'Auth\AccountSettingsController@updateInformation')->name('account.settings.info');
