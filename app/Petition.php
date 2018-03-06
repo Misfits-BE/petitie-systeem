@@ -4,6 +4,8 @@ namespace Misfits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Misfits\Reportable\Contracts\Reportable;
+use Misfits\Reportable\Traits\Reportable as ReportableTrait;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Sluggable\HasSlug;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -17,9 +19,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @copyright   2018 Tim Joosten
  * @package     Misfits
  */
-class Petition extends Model
+class Petition extends Model implements Reportable
 {
-    use HasSlug; 
+    use HasSlug, ReportableTrait; 
 
     /**
      * Mass-assign fields for the database table. 
