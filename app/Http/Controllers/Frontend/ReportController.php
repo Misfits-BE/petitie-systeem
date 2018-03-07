@@ -10,6 +10,8 @@ use Misfits\Http\Controllers\Controller;
 use Misfits\Repositories\PetitionRepository;
 use Misfits\Http\Requests\Frontend\ReportValidator;
 use Misfits\Repositories\CategoryRepository;
+use Misfits\Repositories\UserRepository;
+use Misfits\Notifications\PetitionReported;
 
 /**
  * Class ReportController 
@@ -22,11 +24,9 @@ use Misfits\Repositories\CategoryRepository;
  */
 class ReportController extends Controller
 {
-    /** @var \Misifts\Repositories\PetitionRepository $petitions */
-    private $petitions; 
-
-    /** @var \Misfits\Repositories\CategoryRepository $categories */
-    private $categories; 
+    private $petitions;  /** @var \Misifts\Repositories\PetitionRepository $petitions */
+    private $categories; /** @var \Misfits\Repositories\CategoryRepository $categories */
+    private $users;      /** @var \Misfits\Repositories\UserRepository     $users */
 
     /**
      * ReportController constructor 
@@ -35,12 +35,13 @@ class ReportController extends Controller
      * @param  CategoryRepository $categories  DB wrapper for the categories
      * @return void
      */
-    public function __construct(PetitionRepository $petitions, CategoryRepository $categories) 
+    public function __construct(PetitionRepository $petitions, CategoryRepository $categories, UserRepository $users) 
     {
         $this->middleware(['auth', 'forbid-banned-user']);
 
         $this->petitions    = $petitions;
         $this->categories   = $categories;
+        $this->users        = $users;
     }
 
     /**
@@ -63,7 +64,7 @@ class ReportController extends Controller
     /**
      * Store a new petition report in the database. 
      * 
-     * @todo Implement phpunit tests (validation errors, not authentcated, banned user, success, petition owner)
+     * @todo Implement phpunit tests (validation errors, not banned user, success, petition owner)
      * 
      * @param  ReportValidator $input  The user given input. (Validated)
      * @param  string          $slug   The unique identifier from the petition in the database storage. 
@@ -72,12 +73,14 @@ class ReportController extends Controller
     public function store(ReportValidator $input, string $slug): RedirectResponse 
     {
         $petition   = $this->petitions->findPetition($slug);
-        
-        // Report meta data for filling the ticket in the backend overview.
         $reportMeta = ['category' => $input->category, 'description' => $input->description];
 
-        if (Gate::allows('report-petition', $petition)) { //! Authenticated user is permitted to perform the action.
-            if ($petition->report(['reason' => $input->subject, 'meta' => $reportMeta], auth()->user())) { //! The petition is reported
+        if (Gate::allows('report-petition', $petition)) {
+            if ($petition->report(['reason' => $input->subject, 'meta' => $reportMeta], auth()->user())) {
+                foreach ($this->users->getByRole('admin') as $user) {
+                    $user->notify((new PetitionReported($petition))->delay(now()->addMinute()));
+                }
+
                 flash("Your report on the petition has been saved.")->success()->important();
             }
         }

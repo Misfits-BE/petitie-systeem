@@ -52,7 +52,7 @@ class CreateViewTest extends TestCase
 
     /**
      * @test 
-     * @testdox
+     * @testdox Test if an authenticated can display the petition report page without errors.
      */
     public function noErrors() 
     {
