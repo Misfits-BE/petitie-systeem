@@ -18,7 +18,7 @@ class NotificationController extends Controller
     private $notifications; /** @var \Misfits\Repositories\NotificationRepository $notifications */
 
     /**
-     * NotificationController COnstructor 
+     * NotificationController Constructor 
      * 
      * @return void
      */
