@@ -11,16 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
+// Home routes 
+Route::get('/', 'Frontend\IndexController@index')->name('baseurl');
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Policies
 Route::get('/disclaimer', 'Frontend\PolicyController@disclaimer')->name('policy.disclaimer');
+
+// Petition routes 
+Route::get('/petitions-create', 'Shared\PetitionController@create')->name('petitions.create');
+Route::get('/petitions/{slug}', 'Shared\PetitionController@show')->name('petitions.show');
+Route::post('/petitions-create', 'Shared\PetitionController@store')->name('petitions.store');
+
+// Report route (frontend)
+Route::get('petition/report/{slug}', 'Frontend\ReportController@create')->name('petition.report');
+Route::post('petition/report/{slug}', 'Frontend\ReportController@store')->name('petition.report.store');
 
 // Account settings
 Route::get('/account-settings/{type}', 'Auth\AccountSettingsController@index')->name('account.settings');
@@ -65,3 +74,7 @@ Route::post('admin/users/ban/{id}', 'Admin\Users\BanController@store')->name('ad
 Route::get('admin/users', 'Admin\Users\IndexController@index')->name('admin.users.index');
 Route::get('admin/users/create', 'Admin\Users\IndexController@create')->name('admin.users.create');
 Route::get('admin/users/delete/{id}', 'Admin\Users\IndexController@destroy')->name('admin.users.delete');
+
+// Signature routes 
+Route::post('sign/{slug}', 'Frontend\SignatureController@store')->name('petition.sign');
+Route::get('signatures/{slug}', 'Frontend\SignatureController@index')->name('petition.signatures');

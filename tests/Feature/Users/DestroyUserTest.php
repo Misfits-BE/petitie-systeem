@@ -44,7 +44,7 @@ class DestroyUserTest extends TestCase
 
         $this->actingAs($login)
             ->get(route('admin.users.delete', $user))
-            ->assertStatus(403);
+            ->assertStatus(302);
     }
 
     /**

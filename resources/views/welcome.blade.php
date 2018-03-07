@@ -13,29 +13,37 @@
         <div class="row">
             <div class="col-md-8">
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-file-text-o" style="padding-right: 5px;"></i> Trending in <a href="">#test</a>
+                @foreach ($petitions as $petition)
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-file-text-o" style="padding-right: 5px;"></i> Trending in <a href="">#test</a>
 
-                        <span class="pull-right">
-                            1.000.000 signatures
-                        </span>
-                    </div>
+                            <span class="pull-right">
+                                {{ $petition->signatures->count() }} signatures
+                            </span>
+                        </div>
 
-                    <div class="panel-body">
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="#">
-                                    <img class="media-object img-rounded" src="http://via.placeholder.com/100x100" alt="...">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading"><strong>Media heading</strong></h4>
-                                Media bottom
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="{{ route('petitions.show', ['petition' => $petition->slug]) }}">
+                                        <img class="media-object img-rounded" src="http://via.placeholder.com/100x100" alt="{{ $petition->title}}">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><strong>{{ $petition->title }}</strong></h4>
+                                        {{ str_limit(strip_tags(markdown($petition->text)), 100) }}
+
+                                        @if (strlen(strip_tags(markdown($petition->text))) > 100)
+                                            ... <a href="{{ route('petitions.show', ['slug' => $petition->slug]) }}">
+                                                    Read More
+                                                </a>
+                                        @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div> 
+                @endforeach
 
                 <a href="" class="btn btn-primary btn-lg btn-block">
                     <i class="fa fa-fw fa-wpexplorer"></i> Explore more petitions

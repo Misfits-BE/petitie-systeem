@@ -6,6 +6,7 @@ use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
 use Illuminate\Pagination\Paginator;
 use Misfits\User;
 use Spatie\Permission\Models\Role;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class UserRepository
@@ -52,5 +53,16 @@ class UserRepository extends Repository
     public function getUsers(int $perPage): Paginator
     {
         return $this->model->simplePaginate($perPage);
+    }
+
+    /**
+     * Get all the users by a give role. 
+     * 
+     * @param  string $roleName The permission role in the application.
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getByRole(string $roleName): Collection
+    {
+        return $this->entity()->role($roleName)->get();
     }
 }
