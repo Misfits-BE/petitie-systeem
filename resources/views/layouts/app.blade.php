@@ -102,7 +102,11 @@
 
                             <li>
                                 <a href="">
-                                    <i class="fa fa-bell-o"></i>
+                                    <i class="fa fa-bell-o"></i> 
+
+                                    @if (count($user->unreadNotifications) > 0)
+                                        <span class="badge">{{ count($user->unreadNotifications) }}</span>                                   
+                                    @endif
                                 </a>
                             </li>
 

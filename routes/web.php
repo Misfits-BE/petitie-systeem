@@ -29,6 +29,7 @@ Route::post('/petitions-create', 'Shared\PetitionController@store')->name('petit
 
 // Report route (frontend)
 Route::get('petition/report/{slug}', 'Frontend\ReportController@create')->name('petition.report');
+Route::post('petition/report/{slug}', 'Frontend\ReportController@store')->name('petition.report.store');
 
 // Account settings
 Route::get('/account-settings/{type}', 'Auth\AccountSettingsController@index')->name('account.settings');

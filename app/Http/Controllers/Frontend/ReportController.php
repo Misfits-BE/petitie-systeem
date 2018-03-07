@@ -5,8 +5,13 @@ namespace Misfits\Http\Controllers\Frontend;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Misfits\Http\Controllers\Controller;
 use Misfits\Repositories\PetitionRepository;
+use Misfits\Http\Requests\Frontend\ReportValidator;
+use Misfits\Repositories\CategoryRepository;
+use Misfits\Repositories\UserRepository;
+use Misfits\Notifications\PetitionReported;
 
 /**
  * Class ReportController 
@@ -19,26 +24,29 @@ use Misfits\Repositories\PetitionRepository;
  */
 class ReportController extends Controller
 {
-    /** @var \Misifts\Repositories\PetitionRepository $petitions */
-    private $petitions; 
+    private $petitions;  /** @var \Misifts\Repositories\PetitionRepository $petitions */
+    private $categories; /** @var \Misfits\Repositories\CategoryRepository $categories */
+    private $users;      /** @var \Misfits\Repositories\UserRepository     $users */
 
     /**
      * ReportController constructor 
      * 
-     * @param  PetitionRepository $petitions DB wrapper for the petitions
+     * @param  PetitionRepository $petitions   DB wrapper for the petitions
+     * @param  CategoryRepository $categories  DB wrapper for the categories
      * @return void
      */
-    public function __construct(PetitionRepository $petitions) 
+    public function __construct(PetitionRepository $petitions, CategoryRepository $categories, UserRepository $users) 
     {
         $this->middleware(['auth', 'forbid-banned-user']);
-        $this->petitions = $petitions;
+
+        $this->petitions    = $petitions;
+        $this->categories   = $categories;
+        $this->users        = $users;
     }
 
     /**
      * View for reporiting a petition in the system. 
-     * 
-     * @todo Implement phpunit tests (not authenticated, banned user, success)
-     * 
+     *  
      * @param  string $slug  The unique identifier from the petition in the database
      * @return \Illuminate\View\View
      */
@@ -46,9 +54,37 @@ class ReportController extends Controller
     {
         $petition       = $this->petitions->findPetition($slug);
         $signatureCount = $petition->signatures->count(); 
+        $categories     = $this->categories->whereIn('module', ['reporting'], ['name']);
 
         $this->authorize('report-petition', $petition);
 
-        return view('frontend.reports.index', compact('petition', 'signatureCount'));
+        return view('frontend.reports.index', compact('petition', 'signatureCount', 'categories'));
     } 
+
+    /**
+     * Store a new petition report in the database. 
+     * 
+     * @todo Implement phpunit tests (validation errors, not banned user, success, petition owner)
+     * 
+     * @param  ReportValidator $input  The user given input. (Validated)
+     * @param  string          $slug   The unique identifier from the petition in the database storage. 
+     * @return \Illuminate\Http\RedirectResponse 
+     */
+    public function store(ReportValidator $input, string $slug): RedirectResponse 
+    {
+        $petition   = $this->petitions->findPetition($slug);
+        $reportMeta = ['category' => $input->category, 'description' => $input->description];
+
+        if (Gate::allows('report-petition', $petition)) {
+            if ($petition->report(['reason' => $input->subject, 'meta' => $reportMeta], auth()->user())) {
+                foreach ($this->users->getByRole('admin') as $user) {
+                    $user->notify((new PetitionReported($petition))->delay(now()->addMinute()));
+                }
+
+                flash("Your report on the petition has been saved.")->success()->important();
+            }
+        }
+
+        return redirect()->route('petitions.show', ['slug' => $petition->slug]);
+    }
 }
