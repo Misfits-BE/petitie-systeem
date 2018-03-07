@@ -45,10 +45,7 @@ class ReportController extends Controller
 
     /**
      * View for reporiting a petition in the system. 
-     * 
-     * @todo Implement phpunit tests (not authenticated, banned user, success, petition owner)
-     * @todo Implement categories
-     * 
+     *  
      * @param  string $slug  The unique identifier from the petition in the database
      * @return \Illuminate\View\View
      */
@@ -66,8 +63,6 @@ class ReportController extends Controller
     /**
      * Store a new petition report in the database. 
      * 
-     * @todo Build up the validator 
-     * @todo Register route 
      * @todo Implement phpunit tests (validation errors, not authentcated, banned user, success, petition owner)
      * 
      * @param  ReportValidator $input  The user given input. (Validated)
