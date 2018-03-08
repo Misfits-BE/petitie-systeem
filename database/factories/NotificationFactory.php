@@ -12,6 +12,5 @@ $factory->define(DatabaseNotification::class, function (Faker $faker) {
         'notifiable_id' => factory(User::class)->create()->id,
         'notifiable_type' => '\Misfits\User',
         'data' => json_encode(['a' => '2', 'b' => '4']),
-        'read_at' => Carbon::now()
     ];
 });

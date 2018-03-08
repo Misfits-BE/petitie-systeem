@@ -3,9 +3,8 @@
 namespace Misfits\Http\Controllers\Shared;
 
 use Illuminate\View\View;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Misfits\Http\Controllers\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Misfits\Repositories\NotificationRepository;
 
 /**
@@ -34,8 +33,6 @@ class NotificationController extends Controller
     /**
      * Get the index page for the notifications.
      *
-     * @todo Convert inline styles to external css
-     * 
      * @return \Illuminate\View\View
      */
     public function index(): View 
@@ -43,5 +40,18 @@ class NotificationController extends Controller
         return view('shared.notifications.index', [
             'notifications' => $this->notifications->getUserNotifications('simple', 10)
         ]);
+    }
+
+    /**
+     * Mark all the unread notifications from the user as read.
+     *
+     * @todo Implement phpunit tests (not authenticated, blocked user, success)
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function markAll(): RedirectResponse
+    {
+        auth()->user()->unreadNotifications->markAsRead();
+        return redirect()->route('notifications.index');
     }
 }
