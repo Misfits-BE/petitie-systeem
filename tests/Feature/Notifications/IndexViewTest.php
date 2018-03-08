@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Notifications;
 
+use Illuminate\Notifications\DatabaseNotification;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,7 +27,7 @@ class IndexViewTest extends TestCase
      */
     public function successNoData(): void 
     {
-
+        factory(DatabaseNotification::class)->create();
     }
 
     /**
