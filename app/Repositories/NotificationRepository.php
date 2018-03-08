@@ -37,9 +37,7 @@ class NotificationRepository extends Repository
 
         switch ($type) {
             case 'simple':   return $notifications->simplePaginate($perPage);
-            case 'default':  return $notifications->paginate($perPage);
-            
-            default: return $notifications->paginate($perPage);
+            default:         return $notifications->paginate($perPage);
         }
     }
 }
