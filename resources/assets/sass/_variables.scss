@@ -16,6 +16,7 @@ $gray:                   #777 !default; // #555
 $gray-light:             #AEA79F !default;   // #999
 $gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
 
+$brand-white:           #FFFFFF !default;
 $brand-primary:         #E95420 !default;
 $brand-success:         #38B44A !default;
 $brand-info:            #772953 !default;
@@ -869,3 +870,12 @@ $dl-horizontal-offset:        $component-offset-horizontal !default;
 $dl-horizontal-breakpoint:    $grid-float-breakpoint !default;
 //** Horizontal line color.
 $hr-border:                   $gray-lighter !default;
+
+//== Blankslate
+//
+// ##
+
+$blankslate-background:   #fafbfc;
+$blankslate-border:       #e1e4e8;
+$blankslate-border-code:  #eaecef;
+$blankslate-icon-color:   #a3aab1;

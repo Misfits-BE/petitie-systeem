@@ -35,8 +35,7 @@ class NotificationController extends Controller
      * Get the index page for the notifications.
      * 
      * @todo phpunit unit test (Not authenticated, success, banned user) -> In progress
-     * @todo Convert inline styles to external css 
-     * @todo Clean up the _blankslate.scss
+     * @todo Convert inline styles to external css
      * 
      * @return \Illuminate\View\View
      */
