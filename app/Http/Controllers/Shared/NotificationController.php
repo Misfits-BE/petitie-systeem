@@ -5,6 +5,7 @@ namespace Misfits\Http\Controllers\Shared;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Misfits\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class NotificationController 
@@ -28,10 +29,22 @@ class NotificationController extends Controller
     }
 
     /**
+     * Get the index page for the notifications.
+     * 
      * @return \Illuminate\View\View
      */
     public function index(): View 
     {
         return view();
+    }
+
+    public function markOne(): RedirectResponse
+    {
+
+    }
+
+    public function markAll(): RedirectReponse 
+    {
+        
     }
 }
