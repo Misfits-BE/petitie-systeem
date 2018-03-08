@@ -51,6 +51,9 @@ Route::get('comment/delete/{comment}', 'Shared\CommentController@destroy')->name
 // Admin helpdesk routes
 Route::get('admin/helpdesk', 'Admin\Helpdesk\IndexController@index')->name('admin.helpdesk.index');
 
+// Contact routes 
+Route::get('/contact', 'Frontend\ContactController@index')->name('contact.index');
+
 // Admin helpdesk routes (categories)
 Route::get('admin/helpdesk/categories', 'Admin\Helpdesk\CategoryController@index')->name('admin.helpdesk.categories.index');
 Route::get('admin/helpdesk/categories/edit/{id}', 'Admin\Helpdesk\CategoryController@edit')->name('admin.helpdesk.categories.edit');

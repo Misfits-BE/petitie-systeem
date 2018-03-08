@@ -77,7 +77,7 @@
 
                         @if (! auth()->check() || $user->hasRole('user'))
                             <li>
-                                <a href="">
+                                <a href="{{ route('contact.index') }}">
                                     <i class="fa fa-envelope"></i> Contact
                                 </a>
                             </li> 
