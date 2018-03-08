@@ -35,7 +35,7 @@ class PasswordValidator extends FormRequest
      */
     public function rules(): array
     {
-        return ['password' => 'required|string|min:6|confirmed'];
+        return ['password' => 'required|pwned|string|min:6|confirmed'];
     }
 
     /**

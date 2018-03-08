@@ -21,7 +21,8 @@
         "spatie/laravel-medialibrary": "6.0.0",
         "spatie/laravel-permission": "^2.8",
         "spatie/laravel-sluggable": "^2.1",
-        "spatie/laravel-tail": "^3.0"
+        "spatie/laravel-tail": "^3.0",
+        "valorin/pwned-validator": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
