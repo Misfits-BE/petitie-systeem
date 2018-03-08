@@ -101,7 +101,7 @@
                             </li>
 
                             <li>
-                                <a href="">
+                                <a href="{{ route('notifications.index') }}">
                                     <i class="fa fa-bell-o"></i> 
 
                                     @if (count($user->unreadNotifications) > 0)
