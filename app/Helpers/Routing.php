@@ -11,7 +11,5 @@ use Illuminate\Support\Facades\Route;
  */
 function isActive(string $route, string $class = 'active'): string
 {
-    return request()->is($route)
-        ? $class
-        : '';
+    return request()->is($route) ? $class : '';
 }

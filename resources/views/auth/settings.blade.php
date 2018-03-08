@@ -2,6 +2,8 @@
 
 @section('content')
     <div class="container">
+        @include('flash::message') {{-- Flash session view partial --}}
+
         <div class="row">
             
             <div class="col-md-3">
@@ -18,21 +20,23 @@
                         <a href="#security" aria-controls="security" role="tab" data-toggle="tab" class="list-group-item">
                             <i class="fa fa-fw fa-key"></i> Security
                         </a>
-
-                        <a href="" class="list-group-item">
-                            <i class="fa fa-fw fa-pencil"></i> Petition data
-                        </a>
                     </div>
                 </div>
+
+                <div class="list-group"> {{-- User delete button --}}
+                    <a href="{{ route('admin.users.delete', $user) }}" class="list-group-item list-group-item-danger">
+                        <i class="fa fa-fw fa-trash"></i> Delete your account
+                    </a>
+                </div> {{-- /// END user delete button --}}
             </div>
         
             <div class="col-md-9">
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade in active" id="information">
+                    <div role="tabpanel" class="tab-pane fade in {{ isActive('account-settings/informatie') }}" id="information">
                         @include('auth.settings.information')
                     </div>
 
-                    <div role="tabpanel" class="tab-pane fade in" id="security">
+                    <div role="tabpanel" class="tab-pane fade in {{ isActive('account-settings/security') }}" id="security">
                         @include('auth.settings.security')
                     </div>
                 </div>

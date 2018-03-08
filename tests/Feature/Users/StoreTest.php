@@ -21,7 +21,7 @@ class StoreTest extends TestCase
      */
     public function unauthenticated(): void
     {
-        //
+        $this->markTestIncomplete('TODO: Build up the phpunit test');
     }
 
     /**
@@ -30,7 +30,7 @@ class StoreTest extends TestCase
      */
     public function incorrectRole(): void
     {
-
+        $this->markTestIncomplete('TODO: Build up the phpunit test');
     }
 
     /**
@@ -39,7 +39,7 @@ class StoreTest extends TestCase
      */
     public function correctRoleSuccess(): void
     {
-
+        $this->markTestIncomplete('TODO: Build up the phpunit test');
     }
 
     /**
@@ -48,6 +48,6 @@ class StoreTest extends TestCase
      */
     public function correctRoleValidationErrors(): void
     {
-
+        $this->markTestIncomplete('TODO: Build up the phpunit test');
     }
 }

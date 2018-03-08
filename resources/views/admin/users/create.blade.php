@@ -51,6 +51,16 @@
                                 <label class="control-label col-md-3">
                                     Access role <span class="text-danger">*</span>
                                 </label>
+
+                                <div class="col-md-7">
+                                    <select class="form-control">
+                                        <option value="">-- Select user access role --</option>
+
+                                        @foreach ($roles as $role) {{-- Loop trough the user access role --}}
+                                            <option value="{{ $role->name }}"> {{ ucfirst($role->name) }} </option>
+                                        @endforeach {{-- // END loop--}}
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-group">

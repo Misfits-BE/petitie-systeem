@@ -39,4 +39,16 @@ class UserPolicy
     {
         return $user->id !== $model->id && $user->hasRole('admin') && $model->isBanned();
     }
+
+    /**
+     * Authorization checker if the authenticated user is permitted to delete a user. 
+     * 
+     * @param  \Misfits\User $user      User entity form the auth session guard.
+     * @param  \Misfits\User $model     User entity from the database storage
+     * @return bool
+     */
+    public function delete(User $user, User $model): bool 
+    {
+        return auth()->check() && $user->id === $model->id || $user->hasRole('admin');
+    }
 }

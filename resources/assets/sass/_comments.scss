@@ -2,6 +2,8 @@
     margin-right: 5px; 
     vertical-align: middle; 
     border-radius: 50%;
+    height: 20px; 
+    width: 20px;
 }
 
 .comments-border {
@@ -16,4 +18,17 @@
 
 .btn-reply {
     margin-top: 10px;
+}
+
+.markdown-correct {
+    padding-bottom: 5px;
+}
+
+.markdown-correct > blockquote, 
+.md-preview > blockquote {
+    padding: 5px 10px;
+
+    > p {
+        font-size: 14px;
+    }
 }

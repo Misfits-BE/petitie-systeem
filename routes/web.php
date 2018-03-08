@@ -11,19 +11,30 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
+// Home routes 
+Route::get('/', 'Frontend\IndexController@index')->name('baseurl');
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Policies
 Route::get('/disclaimer', 'Frontend\PolicyController@disclaimer')->name('policy.disclaimer');
 
+// Petition routes 
+Route::get('/petitions-create', 'Shared\PetitionController@create')->name('petitions.create');
+Route::get('/petitions/{slug}', 'Shared\PetitionController@show')->name('petitions.show');
+Route::post('/petitions-create', 'Shared\PetitionController@store')->name('petitions.store');
+
+// Report route (frontend)
+Route::get('petition/report/{slug}', 'Frontend\ReportController@create')->name('petition.report');
+Route::post('petition/report/{slug}', 'Frontend\ReportController@store')->name('petition.report.store');
+
 // Account settings
-Route::get('/account-settings', 'Auth\AccountSettingsController@index')->name('account.settings');
+Route::get('/account-settings/{type}', 'Auth\AccountSettingsController@index')->name('account.settings');
+Route::patch('/account-settings/info', 'Auth\AccountSettingsController@updateInformation')->name('account.settings.info');
+Route::patch('/account-settings/security', 'Auth\AccountSettingsController@updatePassword')->name('account.settings.security');
 
 // Helpdesk routes
 Route::get('helpdesk', 'Frontend\helpdeskController@index')->name('helpdesk.index');
@@ -35,9 +46,13 @@ Route::get('helpdesk/status/{slug}/{status}', 'Admin\Helpdesk\TicketController@c
 
 // Comment routes
 Route::post('comment/{slug}/store', 'Shared\CommentController@store')->name('comment.store');
+Route::get('comment/delete/{comment}', 'Shared\CommentController@destroy')->name('comment.delete');
 
 // Admin helpdesk routes
 Route::get('admin/helpdesk', 'Admin\Helpdesk\IndexController@index')->name('admin.helpdesk.index');
+
+// Contact routes 
+Route::get('/contact', 'Frontend\ContactController@index')->name('contact.index');
 
 // Admin helpdesk routes (categories)
 Route::get('admin/helpdesk/categories', 'Admin\Helpdesk\CategoryController@index')->name('admin.helpdesk.categories.index');
@@ -51,6 +66,7 @@ Route::patch('admin/helpdesk/categories/update/{id}', 'Admin\Helpdesk\CategoryCo
 Route::get('admin/helpdesk/tickets', 'Admin\Helpdesk\TicketController@index')->name('admin.helpdesk.tickets');
 Route::get('admin/helpdesk/ticket/show/{slug}', 'Admin\Helpdesk\TicketController@show')->name('admin.helpdesk.tickets.show');
 Route::get('admin/helpdesk/tickets/assign/{slug}', 'Admin\Helpdesk\TicketController@assign')->name('admin.helpdesk.tickets.assign');
+Route::get('admin/tickets/assigned', 'Admin\Helpdesk\TicketController@userAssigned')->name('admin.helpdesk.tickets.assigned');
 
 // User ban routes 
 Route::get('admin/users/ban/{id}', 'Admin\Users\BanController@create')->name('admin.users.ban');
@@ -61,3 +77,7 @@ Route::post('admin/users/ban/{id}', 'Admin\Users\BanController@store')->name('ad
 Route::get('admin/users', 'Admin\Users\IndexController@index')->name('admin.users.index');
 Route::get('admin/users/create', 'Admin\Users\IndexController@create')->name('admin.users.create');
 Route::get('admin/users/delete/{id}', 'Admin\Users\IndexController@destroy')->name('admin.users.delete');
+
+// Signature routes 
+Route::post('sign/{slug}', 'Frontend\SignatureController@store')->name('petition.sign');
+Route::get('signatures/{slug}', 'Frontend\SignatureController@index')->name('petition.signatures');

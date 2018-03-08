@@ -17,10 +17,8 @@
                         @endcan
                     </div>
 
-                    <div class="panel-body">
-                        I've got some Laravel packages from Composer. I've downloaded the packages as I can't currently install them via Composer for some reason.
-                        Is there a way I can integrate them into Laravel manually? I've put the relevant files into vendor/cartalyst but not sure what to do next.
-                        Any suggestions would be appreciated. :)
+                    <div class="panel-body markdown-correct">
+                        {!! markdown($ticket->description) !!}
                     </div>
                 </div> {{--//Ticket section--}}
 
@@ -64,9 +62,17 @@
                                         @endif
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr @if ($ticket->author->isBanned()) class="danger" @endif>
                                     <td><strong>Creator</strong></td>
-                                    <td><span class="pull-right">{{ $ticket->author->name }}</span></td>
+                                    <td>
+                                        <span class="pull-right">
+                                            @if ($ticket->author->isBanned())
+                                                <i data-toggle="tooltip" data-placement="bottom" title="Blocked user" class="text-danger fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> 
+                                            @endif 
+                                            
+                                            {{ $ticket->author->name }}
+                                        </span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Category</strong></td>

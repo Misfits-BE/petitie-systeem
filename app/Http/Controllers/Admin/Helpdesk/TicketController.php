@@ -30,7 +30,7 @@ class TicketController extends Controller
      */
     public function __construct(TicketRepository $tickets)
     {
-        $this->middleware(['auth', 'role:admin', 'forbid-banned-user'])->except(['show', 'close']); 
+        $this->middleware(['auth', 'forbid-banned-user', 'role:admin'])->except(['show', 'close']); 
         $this->tickets = $tickets;
     }
 
@@ -45,8 +45,25 @@ class TicketController extends Controller
     public function index(Request $input): View 
     {
         return view('admin.helpdesk.tickets.open-tickets', [
-            'tickets' => $this->tickets->getOpenTickets($input->term) // TODO: Build up the function
+            'tickets'    => $this->tickets->getOpenTickets($input->term), 
+            'searchUrl' => route('admin.helpdesk.tickets')
         ]);
+    }
+
+    /**
+     * Get all the assigned tickets to the authenticated user. 
+     * 
+     * @param  Request $input The user given input (Notvalidated.)
+     * @return \Illuminate\View\View
+     */
+    public function userAssigned(Request $input): View
+    {
+        $user = auth()->user();
+
+        return view('admin.helpdesk.tickets.open-tickets', [
+            'tickets'   => $this->tickets->getAssignedTickets($input->term, $user),
+            'searchUrl' => route('admin.helpdesk.tickets.assigned')
+        ]); 
     }
 
     /**
