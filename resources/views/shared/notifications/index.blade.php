@@ -12,7 +12,7 @@
                     </a>
 
                     @if ($user->unreadNotifications->count() > 0)
-                        <a href="" class="list-group-item">
+                        <a href="{{ route('notifications.markAll') }}" class="list-group-item">
                             <span class="fa fa-fw fa-check"></span> Mark all as read
                         </a> 
                     @endif

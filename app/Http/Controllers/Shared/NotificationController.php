@@ -45,8 +45,6 @@ class NotificationController extends Controller
     /**
      * Mark all the unread notifications from the user as read.
      *
-     * @todo Implement phpunit tests (not authenticated, blocked user, success)
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function markAll(): RedirectResponse
