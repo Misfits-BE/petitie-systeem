@@ -85,3 +85,4 @@ Route::get('signatures/{slug}', 'Frontend\SignatureController@index')->name('pet
 // Notification routes 
 Route::get('/notifications', 'Shared\NotificationController@index')->name('notifications.index');
 Route::get('/notifications/mark-all', 'Shared\NotificationController@markAll')->name('notifications.markAll');
+Route::get('/notifications/mark-one/{id}', 'Shared\NotificationController@markOne')->name('notifications.markOne');

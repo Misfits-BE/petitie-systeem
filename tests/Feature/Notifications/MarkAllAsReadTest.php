@@ -56,5 +56,15 @@ class MarkAllAsReadTest extends TestCase
         factory(DatabaseNotification::class)->create([
             'notifiable_id' => $user->id, 'notifiable_type' => 'Misfits\User'
         ]);
+
+        $this->actingAs($user)
+            ->get(route('notifications.markAll'))
+            ->assertStatus(302)
+            ->assertRedirect(route('notifications.index'))
+            ->assertSessionHas([
+                $this->flashSession . '.message'    => "You've read all your notifications.", 
+                $this->flashSession . '.level'      => 'success', 
+                $this->flashSession . '.important'  => true
+            ]);
     }
 }

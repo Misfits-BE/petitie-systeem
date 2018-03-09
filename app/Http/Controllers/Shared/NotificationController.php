@@ -43,6 +43,25 @@ class NotificationController extends Controller
     }
 
     /**
+     * Mark a specific notification as read. 
+     * 
+     * @todo Implement phpunit tests
+     * 
+     * @param  string $notification     The UUID indentification in the database storage. 
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function markOne(string $notification): RedirectResponse 
+    {
+        $notification = $this->notifications->findOrFail($notification); 
+
+        if ($notification->update(['read_at' => now()])) {
+            flash("You've marked the notification as read.")->success();
+        }
+
+        return redirect()->to($notification->data['url']);
+    }
+
+    /**
      * Mark all the unread notifications from the user as read.
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -50,6 +69,8 @@ class NotificationController extends Controller
     public function markAll(): RedirectResponse
     {
         auth()->user()->unreadNotifications->markAsRead();
+        flash("You've read all your notifications.")->important()->success();
+
         return redirect()->route('notifications.index');
     }
 }

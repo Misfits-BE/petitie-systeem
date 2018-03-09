@@ -27,7 +27,7 @@
     </div>
 
     {{-- Pagination view instantie --}}
-    {{ $notifications->render('vendor.pagination.simple-default') }}
+    {{ $notifications->render() }}
 @else {{-- De gebruiker heeft geen ongelezen notificaties --}}
     <div class="blankslate">
         <span class="mega-octicon octicon-bell blankslate-icon"></span>
