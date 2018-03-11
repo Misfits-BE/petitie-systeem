@@ -22,6 +22,7 @@ class CreatePetitionsTable extends Migration
         Schema::create('petitions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('author_id')->unsigned();
+            $table->integer('category_id')->unsigned();
             $table->string('slug');
             $table->string('title'); 
             $table->string('decision_maker');
@@ -30,6 +31,7 @@ class CreatePetitionsTable extends Migration
 
             // Foreign keys
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

@@ -9,6 +9,7 @@ use Illuminate\View\View;
 use Misfits\Http\Requests\Shared\Petition\CreateValidator;
 use Misfits\Repositories\PetitionRepository;
 use Misfits\Repositories\CountryRepository;
+use Misfits\Repositories\CategoryRepository;
 
 /**
  * Class PetitionController 
@@ -43,11 +44,14 @@ class PetitionController extends Controller
     /**
      * Create view for an new petition.
      * 
+     * @param  CategoryRepository $categories The DB wrapper for the petition categories.
      * @return \Illuminate\View\View
      */
-    public function create(): View
+    public function create(CategoryRepository $categories): View
     {
-        return view('shared.petitions.create');
+        return view('shared.petitions.create', [
+            'categories' => $categories->entity()->where('module', 'petition')->get(['id', 'name'])
+        ]);
     }
 
     /**
@@ -70,7 +74,7 @@ class PetitionController extends Controller
      * Create a petition in the database. 
      * 
      * @todo Implement phpunit tests
-     * 
+     *  
      * @param  CreateValidator $input The user given input. 
      * @return \Illuminate\Http\RedirectResponse 
      */

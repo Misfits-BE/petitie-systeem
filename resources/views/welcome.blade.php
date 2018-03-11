@@ -63,6 +63,13 @@
                     </div>
 
                     <div class="panel-body">
+                        @if (count($categories) > 0) {{-- Categories found --}}
+                            @foreach ($categories as $category) {{-- Loop categories --}}
+                                <a href="" class="label label-default">{{ $category->name }}</a>
+                            @endforeach {{-- End category loop --}}
+                        @else {{-- No categories found --}}
+                            <i class="text-muted">No categories found</i>
+                        @endif
                     </div>
                 </div>
             </div>

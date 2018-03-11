@@ -33,6 +33,7 @@ class CreateValidator extends FormRequest
         return [
             'title'          => 'required',
             'decision_maker' => 'required|string', 
+            'category_id'    => 'required',
             'image'          => 'required', 
             'text'           => 'required|string'
         ];

@@ -31,6 +31,24 @@
                                 </div>
                             </div>
 
+                            <div class="form-group @error('category_id', 'has_error')">
+                                <label class="col-md-3 control-label">Petition category: <span class="text-danger">*</span></label>
+
+                                <div class="col-md-9">
+                                    <select class="form-control" @input('category_id')>
+                                        <option value="">-- Select the petition category --</option>
+
+                                        @foreach ($categories as $category) {{-- Loop through the petition categories --}}
+                                            <option value="{{ $category->id }}" @if (old('category_id') === $category->id) selected @endif>
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach {{-- End category loop --}}
+                                    </select>
+
+                                    @error('category_id')
+                                </div>
+                            </div>
+
                             <div class="form-group @error('title', 'has-error')">
                                 <label class="col-md-3 control-label">What is the petition image: <span class="text-danger">*</span></label>
                             

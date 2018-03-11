@@ -28,7 +28,7 @@ class Petition extends Model implements Reportable
      * 
      * @var array
      */
-    protected $fillable = ['title', 'author_id', 'decision_maker', 'text'];
+    protected $fillable = ['title', 'author_id', 'category_id', 'decision_maker', 'text'];
 
     /**
      * Database relation for the author data. 
@@ -38,6 +38,17 @@ class Petition extends Model implements Reportable
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    /**
+     * Data relation for the petition category. 
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id')
+            ->withDefault(['name' => 'No category']);
     }
 
     /**

@@ -33,5 +33,9 @@ class CategoryTableSeeder extends Seeder
         Category::create(['module' => 'reporting', 'color' => '#000', 'name' => 'Off-Topic', 'description' => 'Used to indicate petitions that are Off-topic.']);
         Category::create(['module' => 'reporting', 'color' => '#000', 'name' => 'Abuse', 'description' => 'Used to indicate petitions that contains abusive content.']);
         Category::create(['module' => 'reporting', 'color' => '#000', 'name' => 'Other', 'description' => 'Used to indicate petitions that are has other voilations.']);
+
+        // Insert petition categories in the table. 
+        Category::create(['module' => 'petition', 'color' => '#000', 'name' => 'Open democracy', 'description' => 'Used to indicate petitions for an open democracy.']);
+        Category::create(['module' => 'petition', 'color' => '#000', 'name' => 'Refugees', 'description' => 'Used to indicate petitions for as subject refugees']);
     }
 }
