@@ -20,14 +20,13 @@ class ContactController extends Controller
 {
     /**
      * Get the contact page for the guest user.
-     *
-     * @todo implementatie phpunit tests
      * 
      * @return \Illuminate\View\View
      */
     public function index(): View
     {
-        if (auth()->check()) { // User is authencated so they need more contact options (sidenav)
+        if (auth()->check() && auth()->user()->isNotBanned()) { 
+            // User is authencated and not banned so they need more contact options (sidenav)
             return view('frontend.contact.authenticated-user'); 
         } 
 
