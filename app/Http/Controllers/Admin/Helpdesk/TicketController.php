@@ -30,7 +30,9 @@ class TicketController extends Controller
      */
     public function __construct(TicketRepository $tickets)
     {
-        $this->middleware(['auth', 'forbid-banned-user', 'role:admin'])->except(['show', 'close']); 
+        $this->middleware(['auth', 'forbid-banned-user']);
+        $this->middleware(['role:admin'])->except(['show', 'close']);
+         
         $this->tickets = $tickets;
     }
 
@@ -68,8 +70,6 @@ class TicketController extends Controller
 
     /**
      * Show a specific helpdesk ticket in the application. 
-     *  
-     * @todo Implement phpunit tests
      * 
      * @param  string  $slug  The unique identifier in the database storage
      * @return \Illuminate\View\View
