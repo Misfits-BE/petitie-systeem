@@ -19,18 +19,26 @@ class IndexViewTest extends TestCase
 {
     /**
      * @test
-     * @te-stdox
+     * @testdox
      */
     public function notAuthenticated(): void 
     {
 
     }
 
+    /**
+     * @test 
+     * @testdox
+     */
     public function blockedUser(): void 
     {
 
     }
 
+    /**
+     * @test 
+     * @testdox
+     */
     public function authenticated(): void 
     {
 
