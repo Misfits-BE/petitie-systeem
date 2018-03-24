@@ -33,7 +33,7 @@ class AppLayoutComposer
     /**
      * Bind the data to the view.
      *
-     * @param  View  $view The view contract form laravel.
+     * @param  View  $view The view contract from laravel.
      * @return void
      */
     public function compose(View $view): void
