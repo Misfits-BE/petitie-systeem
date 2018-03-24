@@ -30,7 +30,7 @@ class CountryTableSeeder extends Seeder
         $request = $client->request('GET', 'https://restcountries.eu/rest/v2/all');
 
         foreach (json_decode($request->getBody()) as $country) { // Loop through the API output
-            $countries->create(['name' => $country->name]);
+            $countries->create(['name' => $country->name, 'iso_2_code' => strtolower($country->alpha2Code)]);
         } // End loop
     }
 }

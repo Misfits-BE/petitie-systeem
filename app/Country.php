@@ -20,5 +20,5 @@ class Country extends Model
      * 
      * @return array
      */
-    protected $fillable = ['id', 'name'];
+    protected $fillable = ['id', 'name', 'iso_2_code'];
 }
