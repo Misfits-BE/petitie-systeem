@@ -16,8 +16,8 @@ trait ActivityLog
     /**
      * Write an activity log to the database
      *
-     * @param  mixed  $model
-     * @param  string $message
+     * @param  mixed  $model    The model instance where the action happend on
+     * @param  string $message  The message that needs to be logged
      * @return void
      */
     public function logActivity($model, string $message): void
