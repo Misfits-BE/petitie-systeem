@@ -58,11 +58,9 @@ class AccountSettingsController extends Controller
     }
 
     /**
-     * Update the account information in the datebase.
-     *
-     * @todo Implement phpunit tests
+     * Update the account information in the database.
      * 
-     * @param. InformationValidator $input  The user given input (validated).
+     * @param  InformationValidator $input  The user given input (validated).
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updateInformation(InformationValidator $input): RedirectResponse
@@ -84,9 +82,7 @@ class AccountSettingsController extends Controller
     /**
      * Update the password settings for the user in the database.
      *
-     * @todo Implement phpunit tests
-     *
-     * @param. PasswordValidator $input     The user given input (validated)
+     * @param  PasswordValidator $input     The user given input (validated)
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updatePassword(PasswordValidator $input): RedirectResponse
