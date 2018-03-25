@@ -31,9 +31,15 @@
                                                             <tr>
                                                                 <td><strong>#{{ $signature->id }}</strong></td>
                                                                 <td>{{ $signature->firstname }} {{ $signature->lastname }}</td>
+                                                                <td>{{ $signature->country->name}}</td>
+                                                                <td>{{ $signature->city }}</td>
+                                                                <td>{{ $signature->created_at->format('m/d/Y H:i')}}</td>
                                                             </tr>   
                                                         @endforeach {{-- /// End signature loop --}}                                                 
                                                     @else {{-- No signatures are found  --}}
+                                                        <tr>
+                                                            <td colspan="5"><span class="text-muted">There are no signatures for this petition.</span></td>
+                                                        </tr>
                                                     @endif
                                                 </tbody>
                                             </table>
