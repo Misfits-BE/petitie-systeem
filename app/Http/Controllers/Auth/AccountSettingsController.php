@@ -58,9 +58,7 @@ class AccountSettingsController extends Controller
     }
 
     /**
-     * Update the account information in the datebase.
-     *
-     * @todo Implement phpunit tests
+     * Update the account information in the database.
      * 
      * @param  InformationValidator $input  The user given input (validated).
      * @return \Illuminate\Http\RedirectResponse
