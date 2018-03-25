@@ -71,7 +71,7 @@ class IndexController extends Controller
     /**
      * Store the new user in the database storage
      *
-     * @todo register route
+     * ! @todo Build up the validation 
      * @todo build up phpunit tests
      *
      * @param  CreateValidator $input   The user given input. (validated)
