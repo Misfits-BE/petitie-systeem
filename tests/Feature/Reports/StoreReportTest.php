@@ -40,7 +40,7 @@ class StoreReportTest extends TestCase
      */
     public function bannedUser(): void 
     {
-       
+        $this->markTestIncomplete('TODO: Write phpunit test');
     }
 
     /**
@@ -49,7 +49,7 @@ class StoreReportTest extends TestCase
      */
     public function validationErrors(): void 
     {
-
+        $this->markTestIncomplete('TODO: Write phpunit test');
     }
 
     /**
@@ -58,6 +58,6 @@ class StoreReportTest extends TestCase
      */
     public function success()
     {
-
+        $this->markTestIncomplete('TODO: Write phpunit test');
     }
 }

@@ -42,8 +42,6 @@ class AccountSettingsController extends Controller
 
     /**
      * Account settings view.
-     *
-     * @todo Implement phpunit tests
      * 
      * @return \Illuminate\View\View
      */
