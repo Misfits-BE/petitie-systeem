@@ -42,7 +42,7 @@ class IndexViewTest extends TestCase
         $this->actingAs($user)
             ->get(route('account.settings', ['type' => 'informatie']))
             ->assertStatus(302)
-            ->assertSessionHasErrors(['login' => 'This account is blocked.']);;
+            ->assertSessionHasErrors(['login' => 'This account is blocked.']);
     }
 
     /**
