@@ -5,11 +5,11 @@ namespace Misfits\Http\Requests\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class PasswordValidator 
- * 
+ * Class PasswordValidator
+ *
  * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Tim Joosten and his contributors
- * @package     Misfits\Http^\Requests\Auth
+ * @package     Misfits\Http\Requests\Auth
  */
 class PasswordValidator extends FormRequest
 {
