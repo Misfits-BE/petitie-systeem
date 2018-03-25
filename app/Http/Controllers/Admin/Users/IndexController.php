@@ -63,15 +63,12 @@ class IndexController extends Controller
      */
     public function create(): View
     {
-        return view('admin.users.create', [
-            'roles' => $this->roles->all(['name'])
-        ]);
+        return view('admin.users.create', ['roles' => $this->roles->all(['name'])]);
     }
 
     /**
      * Store the new user in the database storage
      *
-     * ! @todo Build up the validation 
      * @todo build up phpunit tests
      *
      * @param  CreateValidator $input   The user given input. (validated)
