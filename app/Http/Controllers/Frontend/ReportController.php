@@ -24,7 +24,7 @@ use Misfits\Notifications\PetitionReported;
  */
 class ReportController extends Controller
 {
-    private $petitions;  /** @var \Misifts\Repositories\PetitionRepository $petitions */
+    private $petitions;  /** @var \Misfits\Repositories\PetitionRepository $petitions */
     private $categories; /** @var \Misfits\Repositories\CategoryRepository $categories */
     private $users;      /** @var \Misfits\Repositories\UserRepository     $users */
 
@@ -45,10 +45,12 @@ class ReportController extends Controller
     }
 
     /**
-     * View for reporiting a petition in the system. 
-     *  
-     * @param  string $slug  The unique identifier from the petition in the database
+     * View for reporiting a petition in the system.
+     *
+     * @param  string $slug The unique identifier from the petition in the database
      * @return \Illuminate\View\View
+     *
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create(string $slug): View 
     {
