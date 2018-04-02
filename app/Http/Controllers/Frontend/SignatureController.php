@@ -44,7 +44,8 @@ class SignatureController extends Controller
      * 
      * @todo Register route
      * @todo Phpunit tests
-     * 
+     *
+     * @param  string $slug The uniqie slug for the petition in the system.
      * @return \Illuminate\View\View
      */
     public function index(string $slug): View
