@@ -1,10 +1,16 @@
 <?php
 
-namespace App\Providers;
+namespace Misfits\Providers;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+/**
+ * Class AuthServiceProvider 
+ * 
+ * @author      Tim Joosten <tim@activisme.be>
+ * @copyright   2018 Tim Joosten and his contributors 
+ * @package     Misfits\Providers
+ */
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +19,10 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        \Misfits\Ticket::class      => \Misfits\Policies\HelpdeskPolicy::class,
+        \Misfits\User::class        => \Misfits\Policies\UserPolicy::class,
+        \Misfits\Comment::class     => \Misfits\Policies\CommentPolicy::class,
+        \Misfits\Petition::class    => \Misfits\Policies\PetitionPolicy::class,
     ];
 
     /**
@@ -21,10 +30,8 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
-
-        //
     }
 }

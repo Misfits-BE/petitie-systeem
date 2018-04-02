@@ -1,0 +1,16 @@
+<div class="panel panel-default panel-body">
+    <ul class="nav nav-pills">
+        <li role="presentation" class="{{ isActive('admin/helpdesk') }}">
+            <a href="{{ route('admin.helpdesk.index') }}">Dashboard</a>
+        </li>
+        <li role="presentation" class="{{ isActive('admin/tickets/assigned') }}">
+            <a href="{{ route('admin.helpdesk.tickets.assigned') }}">Assigned tickets <span class="badge">{{ $assignedTickets }}</span></a>
+        </li>
+        <li role="presentation" class="{{ isActive('admin/helpdesk/tickets') }}">
+            <a href="{{ route('admin.helpdesk.tickets') }}">Open tickets <span class="badge">{{ $openTickets}}</span></a>
+        </li>
+        <li role="presentation" class="{{ isActive('admin/helpdesk/categories*') }}">
+            <a href="{{ route('admin.helpdesk.categories.index') }}">Categories</a>
+        </li>
+    </ul>
+</div>

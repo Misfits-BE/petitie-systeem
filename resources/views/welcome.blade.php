@@ -1,95 +1,78 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('content')
+    <div class="jumbotron margin-top-minus-20">
+        <div class="container">
+            <h1>{{ config('app.name' )}} - Petitions</h1>
+            <p>
+                Change isn’t a product exclusively manufactured by the industrial leaders or governments. <br>
+                That’s something that’s in everybody.
+            </p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Discover petitions »</a></p>
+        </div>
+    </div>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+                @foreach ($petitions as $petition)
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-file-text-o" style="padding-right: 5px;"></i> Trending in <a href="">#test</a>
 
-            .full-height {
-                height: 100vh;
-            }
+                            <span class="pull-right">
+                                {{ $petition->signatures->count() }} signatures
+                            </span>
+                        </div>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+                        <div class="panel-body">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="{{ route('petitions.show', ['petition' => $petition->slug]) }}">
+                                        <img class="media-object img-rounded" src="http://via.placeholder.com/100x100" alt="{{ $petition->title}}">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><strong>{{ $petition->title }}</strong></h4>
+                                        {{ str_limit(strip_tags(markdown($petition->text)), 100) }}
 
-            .position-ref {
-                position: relative;
-            }
+                                        @if (strlen(strip_tags(markdown($petition->text))) > 100)
+                                            ... <a href="{{ route('petitions.show', ['slug' => $petition->slug]) }}">
+                                                    Read More
+                                                </a>
+                                        @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                @endforeach
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+                <a href="" class="btn btn-primary btn-lg btn-block">
+                    <i class="fa fa-fw fa-wpexplorer"></i> Explore more petitions
+                </a>
 
-            .content {
-                text-align: center;
-            }
+            </div>
 
-            .title {
-                font-size: 84px;
-            }
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="panel-title">
+                            <i class="fa fa-tags"></i> Topics
+                        </span>
+                    </div>
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <div class="panel-body">
+                        @if (count($categories) > 0) {{-- Categories found --}}
+                            @foreach ($categories as $category) {{-- Loop categories --}}
+                                <a href="" class="label label-default">{{ $category->name }}</a>
+                            @endforeach {{-- End category loop --}}
+                        @else {{-- No categories found --}}
+                            <i class="text-muted">No categories found</i>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+@endsection

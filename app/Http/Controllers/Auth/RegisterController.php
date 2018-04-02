@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Misfits\Http\Controllers\Auth;
 
-use App\User;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Validator;
+use Misfits\Http\Controllers\Controller;
+use Misfits\User;
 
 class RegisterController extends Controller
 {
@@ -47,18 +47,21 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = ['TermsOfService.required' => 'You need to accept the terms.'];
+
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+            'password' => 'required|string|pwned|min:6|confirmed',
+            'TermsOfService' => 'required',
+        ], $messages);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \Misfits\User
      */
     protected function create(array $data)
     {
@@ -66,6 +69,6 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-        ]);
+        ])->assignRole('user');
     }
 }

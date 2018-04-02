@@ -167,15 +167,17 @@ return [
         /*
          * Package Service Providers...
          */
+        Chencha\Share\ShareServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Misfits\Providers\AppServiceProvider::class,
+        Misfits\Providers\AuthServiceProvider::class,
+        // Misfits\Providers\BroadcastServiceProvider::class,
+        Misfits\Providers\EventServiceProvider::class,
+        Misfits\Providers\RouteServiceProvider::class,
+        Misfits\Providers\HelperServiceProvider::class,
 
     ],
 
@@ -225,6 +227,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Share' => Chencha\Share\ShareFacade::class,
 
     ],
 

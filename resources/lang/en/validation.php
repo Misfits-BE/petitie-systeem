@@ -87,6 +87,7 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
+    'pwned'                => 'Your password is already seen to much in data breaches! Please use a new one!',
 
     /*
     |--------------------------------------------------------------------------
