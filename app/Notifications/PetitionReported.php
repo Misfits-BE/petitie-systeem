@@ -54,7 +54,8 @@ class PetitionReported extends Notification implements ShouldQueue
     public function toArray($notifiable): array
     {
         return [
-            'text' => 'Er is een petitie (' . ucfirst($this->petition->title) . ') is gerappporteerd gerapporteerd.'
+            'message' => 'Er is een petitie (' . ucfirst($this->petition->title) . ') is gerappporteerd gerapporteerd.',
+            'url'     => '', 
         ];
     }
 }

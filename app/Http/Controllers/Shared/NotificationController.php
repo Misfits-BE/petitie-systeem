@@ -3,9 +3,9 @@
 namespace Misfits\Http\Controllers\Shared;
 
 use Illuminate\View\View;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Misfits\Http\Controllers\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Misfits\Repositories\NotificationRepository;
 
 /**
  * Class NotificationController 
@@ -21,30 +21,56 @@ class NotificationController extends Controller
     /**
      * NotificationController Constructor 
      * 
+     * @param  NotificationRepository $notifications DB Wrapper for the notifications in the database. 
      * @return void
      */
-    public function __construct()
+    public function __construct(NotificationRepository $notifications)
     {
         $this->middleware(['auth', 'forbid-banned-user']);
+        $this->notifications = $notifications;
     }
 
     /**
      * Get the index page for the notifications.
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function index(): View 
     {
-        return view();
+        return view('shared.notifications.index', [
+            'notifications' => $this->notifications->getUserNotifications('simple', 10)
+        ]);
     }
 
-    public function markOne(): RedirectResponse
+    /**
+     * Mark a specific notification as read. 
+     * 
+     * @todo Implement phpunit tests
+     * 
+     * @param  string $notification     The UUID indentification in the database storage. 
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function markOne(string $notification): RedirectResponse 
     {
+        $notification = $this->notifications->findOrFail($notification); 
 
+        if ($notification->update(['read_at' => now()])) {
+            flash("You've marked the notification as read.")->success();
+        }
+
+        return redirect()->to($notification->data['url']);
     }
 
-    public function markAll(): RedirectReponse 
+    /**
+     * Mark all the unread notifications from the user as read.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function markAll(): RedirectResponse
     {
-        
+        auth()->user()->unreadNotifications->markAsRead();
+        flash("You've read all your notifications.")->important()->success();
+
+        return redirect()->route('notifications.index');
     }
 }

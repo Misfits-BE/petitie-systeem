@@ -82,3 +82,8 @@ Route::get('admin/users/delete/{id}', 'Admin\Users\IndexController@destroy')->na
 // Signature routes 
 Route::post('sign/{slug}', 'Frontend\SignatureController@store')->name('petition.sign');
 Route::get('signatures/{slug}', 'Frontend\SignatureController@index')->name('petition.signatures');
+
+// Notification routes 
+Route::get('/notifications', 'Shared\NotificationController@index')->name('notifications.index');
+Route::get('/notifications/mark-all', 'Shared\NotificationController@markAll')->name('notifications.markAll');
+Route::get('/notifications/mark-one/{id}', 'Shared\NotificationController@markOne')->name('notifications.markOne');
