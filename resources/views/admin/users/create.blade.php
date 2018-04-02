@@ -10,16 +10,17 @@
                     </div>
 
                     <div class="panel-body">
-                        <form method="POST" action="" class="form-horizontal">
+                        <form method="POST" action="{{ route('admin.users.store') }}" class="form-horizontal">
                             {{ csrf_field() }} {{-- Form field protection --}}
 
-                            <div class="form-group">
+                            <div class="form-group @error('name', 'has-error')">
                                 <label class="control-label col-md-3">
                                     Username <span class="text-danger">*</span>
                                 </label>
 
                                 <div class="col-md-7">
-                                    <input type="text" placeholder="The username" class="form-control">
+                                    <input type="text" placeholder="The username" @input('name') class="form-control">
+                                    @error('name')
                                 </div>
                             </div>
 
@@ -28,38 +29,41 @@
                                     Person name <span class="text-danger">*</span>
                                 </label>
 
-                                <div class="col-md-3">
-                                    <input type="text" class="form-control" placeholder="Firstname">
+                                <div class="col-md-3 @error('firstname', 'has-error')">
+                                    <input type="text" class="form-control" @input('firstname') placeholder="Firstname">
                                 </div>
 
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" placeholder="Lastname">
+                                <div class="col-md-4 @error('lastname', 'has-error')">
+                                    <input type="text" class="form-control" @input('lastname') placeholder="Lastname">
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group @error('email', 'has-error')">
                                 <label class="control-label col-md-3">
                                     Email address <span class="text-danger">*</span>
                                 </label>
 
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" placeholder="Account e-mail address">
+                                    <input type="text" class="form-control" @input('email') placeholder="Account e-mail address">
+                                    @error('email')
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group @error('role', 'has-error')">
                                 <label class="control-label col-md-3">
                                     Access role <span class="text-danger">*</span>
                                 </label>
 
-                                <div class="col-md-7">
-                                    <select class="form-control">
+                                <div class="col-md-7 @error('role', 'has-error')">
+                                    <select @input('role') class="form-control">
                                         <option value="">-- Select user access role --</option>
 
                                         @foreach ($roles as $role) {{-- Loop trough the user access role --}}
                                             <option value="{{ $role->name }}"> {{ ucfirst($role->name) }} </option>
                                         @endforeach {{-- // END loop--}}
                                     </select>
+
+                                     @error('role')
                                 </div>
                             </div>
 

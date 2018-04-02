@@ -4,6 +4,15 @@ namespace Misfits\Http\Requests\Admin\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class CreateValidator 
+ * ---- 
+ * Validation class for creating an ew user
+ * 
+ * @author      Tim Joosten <tim@activisme.be>
+ * @copyright   2018 Tim Joosten and his contributo)rs 
+ * @package     Misfits\Http\Requests\Admin\Users
+ */
 class CreateValidator extends FormRequest
 {
     /**
@@ -11,9 +20,9 @@ class CreateValidator extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return auth()->user()->hasRole('admin');
     }
 
     /**
@@ -21,10 +30,14 @@ class CreateValidator extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'name'      => 'required|string|max:255',
+            'email'     => 'required|string|email|max:255|unique:users',
+            'firstname' => 'required|string|max:190', 
+            'lastname'  => 'required|string|max:120',
+            'role'      => 'required',
         ];
     }
 }

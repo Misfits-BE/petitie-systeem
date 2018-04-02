@@ -76,6 +76,7 @@ Route::post('admin/users/ban/{id}', 'Admin\Users\BanController@store')->name('ad
 // User management console
 Route::get('admin/users', 'Admin\Users\IndexController@index')->name('admin.users.index');
 Route::get('admin/users/create', 'Admin\Users\IndexController@create')->name('admin.users.create');
+Route::post('admin/users/store', 'Admin\Users\IndexController@store')->name('admin.users.store');
 Route::get('admin/users/delete/{id}', 'Admin\Users\IndexController@destroy')->name('admin.users.delete');
 
 // Signature routes 
