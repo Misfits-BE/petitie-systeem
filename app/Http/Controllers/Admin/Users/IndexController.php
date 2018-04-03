@@ -10,6 +10,7 @@ use Misfits\Http\Controllers\Controller;
 use Misfits\Http\Requests\Admin\Users\CreateValidator;
 use Misfits\Repositories\RoleRepository;
 use Misfits\Repositories\UserRepository;
+use Misfits\Notifications\NewUser;
 
 /**
  * Class IndexController
@@ -37,8 +38,8 @@ class IndexController extends Controller
      */
     public function __construct(UserRepository $users, RoleRepository $roles)
     {
-        $this->middleware(['role:admin'])->except(['destroy']);
         $this->middleware(['auth', 'forbid-banned-user']);
+        $this->middleware(['role:admin'])->except(['destroy']);
 
         $this->users = $users;
         $this->roles = $roles;
@@ -51,9 +52,7 @@ class IndexController extends Controller
      */
     public function index(): View
     {
-        return view('admin.users.index', [
-            'users' => $this->users->getUsers(15)
-        ]);
+        return view('admin.users.index', ['users' => $this->users->getUsers(15)]);
     }
 
     /**
@@ -69,14 +68,20 @@ class IndexController extends Controller
     /**
      * Store the new user in the database storage
      *
-     * @todo build up phpunit tests
+     * @todo build up phpunit tests (no auth, auth, blocked user, success, validation errors)
      *
      * @param  CreateValidator $input   The user given input. (validated)
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateValidator $input): RedirectResponse
     {
-        if ($user = $this->users->createUser($input)) {
+        $password = str_random(16);
+        $input = $input->merge(['password' => $password]);
+
+        if ($user = $this->users->create($input->all())) {
+            $user->assignRole($input->role);
+            $user->notify((new NewUser($user, $password))->delay(now()->addMinute(1)));
+
             $this->logActivity($user, "Has created a login for {$user->name}");
             flash("Has created a login for {$user->name} in the application.")->success()->important();
         }

@@ -39,6 +39,17 @@ class User extends Authenticatable implements BannableContract, HasMediaConversi
     protected $hidden = ['password', 'remember_token'];
 
     /**
+     * Method for encrypting the user password in the database.
+     *
+     * @param  string $password The given user password
+     * @return void
+     */
+    public function setPasswordAttribute(string $password): void
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+    /**
      * The media conversions for the user avatar 
      * 
      * @param  Media $media Defaults to null

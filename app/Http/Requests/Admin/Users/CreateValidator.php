@@ -33,11 +33,11 @@ class CreateValidator extends FormRequest
     public function rules(): array
     {
         return [
-            'name'      => 'required|string|max:255',
-            'email'     => 'required|string|email|max:255|unique:users',
-            'firstname' => 'required|string|max:190', 
-            'lastname'  => 'required|string|max:120',
-            'role'      => 'required',
+            'name'      => 'required|string|max:255',                    
+            'email'     => 'required|string|email|max:255|unique:users',   
+            'firstname' => 'required|string|max:190',                      
+            'lastname'  => 'required|string|max:120',                      
+            'role'      => 'required',                                   
         ];
     }
 }
