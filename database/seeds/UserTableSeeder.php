@@ -43,7 +43,7 @@ class UserTableSeeder extends Seeder
                 $userRepository->seedCreateUser($role, $command);
             } // END foreach
 
-            $command->info('Roles' . $inputRoles . ' added successfully to the system.');
+            $command->info('Roles ' . $inputRoles . ' added successfully to the system.');
         } else { // Just add new users without the acl permission and role stuff.
             $roleRepository->firstOrCreate(['name' => 'user']);
             $command->info('Add only default user role.');
